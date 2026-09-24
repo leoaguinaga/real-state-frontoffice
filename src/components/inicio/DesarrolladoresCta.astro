@@ -1,0 +1,43 @@
+---
+const benefits = [
+	{ icon: 'campaign', text: 'Comercialización integral y estrategia de lanzamiento' },
+	{ icon: 'view_in_ar', text: 'Showroom digital inmersivo para tu proyecto' },
+	{ icon: 'groups', text: 'Calificación y gestión profesional de leads' },
+];
+---
+
+<section class="w-full bg-white pb-3xl" id="b2b-desarrolladores">
+	<div class="container-page">
+		<div class="flex flex-col items-start gap-lg rounded-card border border-outline bg-surface-tinted p-8 md:flex-row md:items-center md:justify-between md:p-12">
+			<div class="max-w-[36rem]">
+				<span class="font-caption text-caption font-semibold uppercase tracking-wider text-accent">
+					Para Desarrolladores
+				</span>
+				<h2 class="mt-2 font-headline-md text-headline-md font-bold text-primary">
+					¿Tienes un proyecto y buscas un canal de venta confiable?
+				</h2>
+				<p class="mt-3 font-body-md text-body-md leading-relaxed text-text-muted">
+					Súmate a nuestro portafolio de aliados y comercializa con tecnología, curaduría legal y
+					un equipo comercial especializado en el norte del país.
+				</p>
+				<ul class="mt-5 flex flex-col gap-2.5">
+					{
+						benefits.map((b) => (
+							<li class="flex items-center gap-2 font-body-sm text-body-sm text-text">
+								<span class="material-symbols-outlined text-[18px] text-accent">{b.icon}</span>
+								{b.text}
+							</li>
+						))
+					}
+				</ul>
+			</div>
+			<a
+				href="/para-desarrolladores"
+				class="inline-flex shrink-0 items-center gap-2 rounded-input bg-primary px-6 py-4 font-title-md text-title-md font-bold text-white shadow-level-1 transition-all hover:bg-primary-elevated"
+			>
+				<span>Agendar reunión B2B</span>
+				<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+			</a>
+		</div>
+	</div>
+</section>

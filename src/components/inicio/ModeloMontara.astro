@@ -1,0 +1,109 @@
+---
+const pillars = [
+	{
+		icon: 'handshake',
+		iconStyle: 'dark',
+		title: 'Proyectos Aliados Seleccionados',
+		text: 'Filtramos a los mejores promotores inmobiliarios del norte. No admitimos proyectos en nuestro portafolio sin saneamiento físico-legal, licencias urbanas aprobadas y solvencia corporativa comprobada.',
+		tag: 'Títulos y habilitación en regla',
+		tagIcon: 'policy',
+		span: 'lg:col-span-5',
+		bg: 'bg-surface-tinted',
+	},
+	{
+		icon: 'domain_add',
+		iconStyle: 'light',
+		title: 'Desarrollos Propios de Alta Plusvalía',
+		text: 'Concebidos desde cero por nuestro equipo multidisciplinario. Arquitectura bioclimática, masterplans que revalorizan el suelo y ubicaciones clave en Chiclayo, Pimentel y Reque.',
+		tag: 'Alta proyección de plusvalía',
+		tagIcon: 'trending_up',
+		span: 'lg:col-span-4',
+		bg: 'bg-surface',
+	},
+	{
+		icon: 'payments',
+		iconStyle: 'light',
+		title: 'Cero Comisiones para el Comprador',
+		text: 'Compras al precio oficial de lista del promotor. Sin sobreprecios, sin gastos de intermediación inmobiliaria tradicional y con total honestidad en las listas de precios.',
+		tag: 'Precio oficial garantizado',
+		tagIcon: 'check_circle',
+		span: 'lg:col-span-4',
+		bg: 'bg-surface',
+	},
+	{
+		icon: 'support_agent',
+		iconStyle: 'dark',
+		title: 'Acompañamiento Patrimonial Personalizado',
+		text: 'Asesoría imparcial y experta desde la primera consulta, visitas de campo coordinadas y asistencia en minutas de compraventa hasta la firma en notaría.',
+		tag: 'Asesoría legal y financiera incluida',
+		tagIcon: 'security',
+		span: 'lg:col-span-4',
+		bg: 'bg-surface-tinted',
+	},
+];
+---
+
+<section class="w-full border-b border-outline bg-surface py-2xl md:py-3xl" id="modelo-montara">
+	<div class="container-page">
+		<div class="mx-auto mb-10 max-w-[48rem] text-center md:mb-14">
+			<h2 class="font-headline-lg text-headline-lg md:text-[40px] font-bold leading-tight text-primary">
+				Un nuevo estándar: Curaduría rigurosa y tecnología comercial
+			</h2>
+			<p class="mt-3 font-body-md text-body-md leading-relaxed text-text-muted">
+				No somos una agencia tradicional ni un portal inmobiliario saturado. Comercializamos
+				proyectos auditados legalmente con showrooms digitales interactivos y trato directo sin
+				comisiones ocultas.
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 items-stretch gap-lg md:grid-cols-12">
+			<div class="group relative flex flex-col justify-between overflow-hidden rounded-card border border-white/10 bg-gradient-to-br from-primary via-primary-elevated to-[#041411] p-7 text-white shadow-level-3 md:col-span-12 md:p-10 lg:col-span-7">
+				<div class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-accent/20 blur-[90px]"></div>
+				<div class="relative z-10">
+					<h3 class="mb-3 font-headline-md text-headline-md md:text-[32px] font-bold leading-tight text-white">
+						Vitrina Digitales Interactivos vs. Portales Saturados
+					</h3>
+					<p class="max-w-[36rem] font-body-md text-body-md leading-relaxed text-white/85">
+						Reemplazamos folletos desactualizados y listas con datos falsos. Cada proyecto en
+						Montara cuenta con un gemelo digital: disponibilidad en vivo, medidas perimétricas,
+						orientación solar y estado de independización legal.
+					</p>
+				</div>
+				<div class="relative z-10 mt-6 flex items-center justify-between border-t border-white/10 pt-6">
+					<a
+						href="#showroom-demo"
+						class="flex items-center gap-1 text-xs font-semibold text-accent transition-colors hover:text-white"
+					>
+						Conocer cómo funciona <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+					</a>
+				</div>
+			</div>
+
+			{
+				pillars.map((pillar) => (
+					<div
+						class={`group flex flex-col justify-between rounded-card border border-outline p-7 transition-all duration-300 hover:border-accent hover:shadow-level-2 md:col-span-12 md:p-8 ${pillar.span} ${pillar.bg}`}
+					>
+						<div class="mb-4 flex items-start justify-between">
+							<div
+								class={`flex h-14 w-14 items-center justify-center rounded-card shadow-level-1 transition-transform group-hover:scale-105 ${
+									pillar.iconStyle === 'dark' ? 'bg-primary text-accent' : 'bg-accent/15 text-accent'
+								}`}
+							>
+								<span class="material-symbols-outlined text-[28px]">{pillar.icon}</span>
+							</div>
+						</div>
+						<div class="my-1">
+							<h3 class="mb-2 font-title-lg text-title-lg font-bold text-primary">{pillar.title}</h3>
+							<p class="font-body-sm text-body-sm leading-relaxed text-text-muted">{pillar.text}</p>
+						</div>
+						<div class="mt-4 flex items-center gap-1 border-t border-outline pt-4 text-[12px] font-semibold text-accent">
+							<span class="material-symbols-outlined text-[15px]">{pillar.tagIcon}</span>
+							{pillar.tag}
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

@@ -1,11 +1,34 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Header from '../components/layout/Header.tsx';
+import Footer from '../components/layout/Footer.astro';
+import WhatsAppButton from '../components/layout/WhatsAppButton.astro';
+import Hero from '../components/inicio/Hero.astro';
+import ModeloMontara from '../components/inicio/ModeloMontara.astro';
+import ProjectTypes from '../components/inicio/ProjectTypes.astro';
+import Ubicaciones from '../components/inicio/Ubicaciones.astro';
+import ProyectosDestacados from '../components/inicio/ProyectosDestacados.astro';
+import ShowroomDemo from '../components/inicio/ShowroomDemo.astro';
+import Confianza from '../components/inicio/Confianza.astro';
+import HowItWorks from '../components/inicio/HowItWorks.astro';
+import CtaFinal from '../components/inicio/CtaFinal.astro';
+import DesarrolladoresCta from '../components/inicio/DesarrolladoresCta.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<Header client:load />
+	<main class="w-full bg-background">
+		<Hero />
+		<ModeloMontara />
+		<ProjectTypes />
+		<Ubicaciones />
+		<ProyectosDestacados />
+		<ShowroomDemo />
+		<Confianza />
+		<HowItWorks />
+		<CtaFinal />
+		<!-- <DesarrolladoresCta /> -->
+	</main>
+	<WhatsAppButton />
+	<Footer />
 </Layout>

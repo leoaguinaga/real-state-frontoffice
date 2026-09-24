@@ -1,0 +1,50 @@
+---
+const steps = [
+	{
+		n: '01',
+		icon: 'travel_explore',
+		title: 'Explora y Filtra',
+		text: 'Navega el showroom digital, compara metrajes, planos y precios de lista oficiales. Revisa disponibilidad en tiempo real sin presiones.',
+	},
+	{
+		n: '02',
+		icon: 'event_available',
+		title: 'Agenda tu Visita Guiada',
+		text: 'Coordina un recorrido presencial en campo con traslado o una videollamada interactiva guiada por un asesor senior con el masterplan en mano.',
+	},
+	{
+		n: '03',
+		icon: 'verified',
+		title: 'Recibe Asesoría y Elige Seguro',
+		text: 'Te acompañamos en la estructura de pago, financiamiento directo o bancario, y firma de contrato con total auditoría legal de la partida.',
+	},
+];
+---
+
+<section class="w-full bg-surface-tinted py-3xl">
+	<div class="container-page">
+		<div class="mx-auto mb-2xl max-w-[42rem] text-center">
+			<h2 class="mt-1 font-headline-lg text-headline-lg text-text">Cómo comprar con respaldo total</h2>
+			<p class="mt-2 font-body-md text-body-md text-text-muted">
+				Acompañamiento personalizado desde el primer clic hasta la firma de tu escritura pública.
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 gap-xl md:grid-cols-3">
+			{
+				steps.map((step) => (
+					<div class="relative rounded-card border border-outline bg-surface p-8 shadow-level-1">
+						<span class="absolute right-6 top-5 font-display text-5xl font-extrabold text-primary/10">
+							{step.n}
+						</span>
+						<div class="mb-5 flex h-12 w-12 items-center justify-center rounded-input bg-accent/15 text-lg font-bold text-accent">
+							<span class="material-symbols-outlined text-[24px]">{step.icon}</span>
+						</div>
+						<h3 class="mb-2 font-title-lg text-title-lg font-bold text-text">{step.title}</h3>
+						<p class="font-body-md text-body-md leading-relaxed text-text-muted">{step.text}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

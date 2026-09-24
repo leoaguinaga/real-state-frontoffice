@@ -1,0 +1,27 @@
+---
+interface Props {
+	phone?: string;
+	message?: string;
+}
+
+const { phone = '', message = 'Hola, quisiera más información sobre los proyectos de Montara.' } = Astro.props;
+const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+---
+
+<aside class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+	<div
+		class="hidden sm:flex items-center gap-2 rounded-pill border border-outline bg-surface px-4 py-2.5 font-label-sm text-label-sm font-semibold text-primary shadow-level-3 animate-bounce"
+	>
+		<span>💬 ¿Dudas sobre algún proyecto? Escríbenos</span>
+	</div>
+	<a
+		aria-label="Contactar por WhatsApp a Montara Inmobiliaria"
+		href={href}
+		target="_blank"
+		rel="noopener noreferrer"
+		class="relative flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-cta-hover transition-all duration-300 hover:scale-110 hover:bg-accent-hover"
+	>
+		<span class="material-symbols-outlined text-[32px]">chat</span>
+		<span class="absolute top-0 right-0 h-4 w-4 rounded-full border-2 border-white bg-emerald-300"></span>
+	</a>
+</aside>
