@@ -1,0 +1,129 @@
+---
+const projects = [
+	{
+		name: 'Finca Sevilla',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuCJgxIqbA4HBCwl7tUG8WcSJjcLeTkPRHbeqvv6XZ_pPhh72KgToVRnY4M8YRCXZZQ9cTyMLcy0XWCeXBCwtjpXtKqaBf-Yb-wTMCI9HiJkaXDudVbMPC75JmhgILyYvx0bi25N-LdwCH_rx_A8Sp6bCjFIIaPb-r_TQvlnz2I3pgt285pC2kny3nG16lNrg3Vs4np-6gbXCsrVkQCGxqZdJVhP_mwiJOPlsb6TAB2z0KtnqtTDWoq_jw',
+		badge: 'Lotes desde 500 m²',
+		text: 'Lotes campestres exclusivos concebidos para casas de retiro, recreación familiar y alta rentabilidad por m².',
+		chips: [
+			{ icon: 'pool', label: 'Club House' },
+			{ icon: 'lock', label: 'Seguridad 24/7' },
+			{ icon: 'bolt', label: 'Red Eléctrica' },
+		],
+		price: '$38,000 USD',
+		href: '#showroom-demo',
+	},
+	{
+		name: 'Altos del Bosque',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuA3YWp2Ya01OBxeWWj349rGmRpt9HGjr5XhiRWUAIp1u3J5LXd0awD6H9u2RS4qY_waqwaRxfrpLJLesmtNMwU167r0J5grGFCvfe7tbGaHPDLz61mldiUPJRRabur-XKtrcMrchGxZPaT7E1qLG8RIGoLtvMmOWNg-SEdT6U8EuT7wa6kEV0oiLrBoUVvpc8CNqXUQRaJ-ND7sEzu7_uTMlrihS70oUY5mHDR85BDXq9oQge5Geq7lQA',
+		badge: '85 m² a 140 m²',
+		text: 'Departamentos boutique con acabados en cuarzo y madera estructurada, vistas a parque y eficiencia energética.',
+		chips: [
+			{ icon: 'deck', label: 'Rooftop Lounge' },
+			{ icon: 'local_parking', label: 'Cocheras' },
+			{ icon: 'fitness_center', label: 'Gimnasio' },
+		],
+		price: '$115,000 USD',
+		href: '#',
+	},
+	{
+		name: 'Praderas del Sol',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuBQAgKzqVr5uB63bBiaRszXolAajA2RjbqHc31cplng5f1kAmvT3WNMznIwG8InIbK2UCjFryf-iirtkzTY-Ew-ybE6hDGE5-UOocjCA25-PNYMbOG1PyiodC6jbaVyu4f6PCzQXg7W9TiZfUhUgErpUH4uHn0vlODYnzpxi1-sBwn3NhP6ir1D_p90S-nbiycu51jLc9fR077jSEvpVhTMXhL61HI8-5C13f6KxtE-QLUGjYWFddHrJQ',
+		badge: 'Lotes y Casas de Playa',
+		text: 'Condominio cerrado de casas de campo y playa. Armonía entre paisajismo costero y amenidades deportivas.',
+		chips: [
+			{ icon: 'sports_tennis', label: 'Canchas Pádel' },
+			{ icon: 'beach_access', label: 'Club Náutico' },
+			{ icon: 'solar_power', label: 'Eco-Sostenible' },
+		],
+		price: '$55,000 USD',
+		href: '#',
+	},
+];
+---
+
+<section class="w-full bg-background py-3xl" id="proyectos-destacados">
+	<div class="container-page">
+		<div class="mb-2xl flex flex-col justify-between gap-4 md:flex-row md:items-end">
+			<div class="max-w-[42rem]">
+				<h2 class="mt-1 font-headline-lg text-headline-lg text-text">
+					Oportunidades en Comercialización Activa
+				</h2>
+				<p class="mt-2 font-body-md text-body-md text-text-muted">
+					Proyectos propios y de desarrolladores aliados con estándares arquitectónicos y
+					viabilidad legal verificada.
+				</p>
+			</div>
+			<div class="flex items-center gap-2">
+				<button
+					type="button"
+					aria-label="Proyecto anterior"
+					class="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-text shadow-level-1 transition-all hover:shadow-level-2"
+				>
+					<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+				</button>
+				<button
+					type="button"
+					aria-label="Siguiente proyecto"
+					class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow-level-1 transition-all hover:bg-accent hover:shadow-level-2"
+				>
+					<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+				</button>
+			</div>
+		</div>
+
+		<div class="grid grid-cols-1 gap-lg md:grid-cols-2 lg:grid-cols-3">
+			{
+				projects.map((project) => (
+					<article class="group flex flex-col overflow-hidden rounded-card border border-outline bg-surface shadow-level-1 transition-all duration-300 hover:shadow-level-3">
+						<div class="relative h-64 w-full overflow-hidden bg-primary">
+							<img
+								src={project.image}
+								alt={project.name}
+								class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+							/>
+							<div class="absolute bottom-3 left-3 rounded-input bg-primary/80 px-2.5 py-1 font-caption text-caption text-white backdrop-blur-md">
+								{project.badge}
+							</div>
+						</div>
+
+						<div class="flex flex-1 flex-col justify-between gap-md p-lg">
+							<div>
+								<h3 class="font-title-lg text-title-lg font-semibold text-text transition-colors group-hover:text-accent">
+									{project.name}
+								</h3>
+								<p class="mt-1 font-body-sm text-body-sm text-text-muted">{project.text}</p>
+
+								<div class="mt-md flex flex-wrap gap-2">
+									{project.chips.map((chip) => (
+										<span class="inline-flex items-center gap-1 rounded-input bg-surface-tinted px-2.5 py-1 font-caption text-caption text-text-muted">
+											<span class="material-symbols-outlined text-[14px]">{chip.icon}</span>
+											{chip.label}
+										</span>
+									))}
+								</div>
+							</div>
+
+							<div class="flex items-center justify-between gap-2 border-t border-outline pt-md">
+								<div>
+									<span class="block font-caption text-caption text-outline">Inversión desde</span>
+									<span class="font-title-lg text-title-lg font-bold text-accent">{project.price}</span>
+								</div>
+								<a
+									href={project.href}
+									class="inline-flex items-center gap-1 rounded-input bg-primary px-4 py-2.5 font-label-md text-label-md text-white transition-colors hover:bg-accent"
+								>
+									<span>Ver Showroom</span>
+									<span class="material-symbols-outlined text-[16px]">visibility</span>
+								</a>
+							</div>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

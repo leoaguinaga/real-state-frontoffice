@@ -1,0 +1,74 @@
+---
+const metrics = [
+	{ value: '+$18M', label: 'USD en portafolio', text: 'Valor auditado en proyectos comercializados' },
+	{ value: '100%', label: 'Títulos auditados', text: 'Partidas registrales y licencias vigentes' },
+	{ value: '+450', label: 'Familias & Inversores', text: 'Asesorados con éxito sin fricciones' },
+	{ value: '+8 Años', label: 'En el mercado norte', text: 'Trayectoria comercial y solvencia técnica' },
+];
+
+const partners = [
+	{ icon: 'corporate_fare', name: 'Desarrolladora Del Norte' },
+	{ icon: 'foundation', name: 'Inversiones Los Andes' },
+	{ icon: 'domain', name: 'Grupo Hábitat Perú' },
+	{ icon: 'apartment', name: 'Arquitectura Viva' },
+	{ icon: 'real_estate_agent', name: 'Costa Norte Capital' },
+];
+---
+
+<section class="w-full border-b border-outline bg-surface py-3xl">
+	<div class="container-page">
+		<div class="mb-14 rounded-card border border-outline bg-surface-tinted p-8 md:p-12">
+			<div class="mb-10 flex flex-col justify-between gap-8 border-b border-outline pb-8 lg:flex-row lg:items-center">
+				<div class="max-w-[36rem]">
+					<h2 class="font-headline-md text-headline-md font-bold text-primary">
+						Auditoría Legal y Técnica Montara
+					</h2>
+					<p class="mt-2 font-body-md text-body-md text-text-muted">
+						No publicamos proyectos sin verificación exhaustiva de partidas registrales, licencias
+						de habilitación urbana y antecedentes del promotor.
+					</p>
+				</div>
+				<div class="flex items-center gap-4 rounded-card border border-accent/30 bg-surface px-5 py-4 shadow-level-1">
+					<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
+						<span class="material-symbols-outlined text-[28px]">gavel</span>
+					</span>
+					<div>
+						<span class="block text-sm font-bold text-text">100% Verificación Legal</span>
+						<span class="text-xs text-text-muted">Títulos limpios y factibilidad en Sunarp</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="grid grid-cols-2 gap-lg text-center md:grid-cols-4 md:text-left">
+				{
+					metrics.map((metric, i) => (
+						<div class={i < metrics.length - 1 ? 'border-r border-outline pr-4 last:border-0' : 'pr-4'}>
+							<span class="block font-display text-[36px] font-bold tracking-tight text-primary md:text-[44px]">
+								{metric.value}
+							</span>
+							<span class="mt-1 block text-xs font-semibold uppercase tracking-wider text-accent">
+								{metric.label}
+							</span>
+							<p class="mt-1 text-xs text-text-muted">{metric.text}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="text-center">
+			<p class="mb-6 font-caption text-caption font-semibold uppercase tracking-wider text-outline">
+				Desarrolladores y promotores inmobiliarios aliados que confían en Montara
+			</p>
+			<div class="flex flex-wrap items-center justify-center gap-8 opacity-75 grayscale transition-all duration-300 hover:grayscale-0 md:gap-14">
+				{
+					partners.map((partner) => (
+						<div class="flex items-center gap-2 font-display text-lg font-bold tracking-tight text-text">
+							<span class="material-symbols-outlined text-accent">{partner.icon}</span> {partner.name}
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>

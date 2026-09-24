@@ -1,0 +1,104 @@
+---
+const propertyTypes = [
+	{ value: 'terrenos', label: 'Terrenos y Lotes Campestres' },
+	{ value: 'departamentos', label: 'Departamentos Urbanos' },
+	{ value: 'casas', label: 'Casas & Residencias' },
+	{ value: 'playa', label: 'Proyectos de Playa' },
+	{ value: 'todos', label: 'Todos los inmuebles' },
+];
+
+const locations = [
+	{ value: 'pimentel', label: 'Pimentel / Balneario' },
+	{ value: 'chiclayo', label: 'Chiclayo Urbano & Moderno' },
+	{ value: 'reque', label: 'Reque / Valles Campestres' },
+	{ value: 'monsefu', label: 'Monsefú / Lambayeque' },
+	{ value: 'norte', label: 'Todo el Norte' },
+];
+
+const budgets = [
+	{ value: 'rango-1', label: '$30,000 - $80,000 USD' },
+	{ value: 'rango-2', label: '$80,000 - $140,000 USD' },
+	{ value: 'rango-3', label: '$140,000 USD a más' },
+	{ value: 'rango-todos', label: 'Cualquier presupuesto' },
+];
+---
+
+<section class="relative flex min-h-screen w-full flex-col justify-between overflow-hidden bg-primary">
+	<img
+		src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJgxIqbA4HBCwl7tUG8WcSJjcLeTkPRHbeqvv6XZ_pPhh72KgToVRnY4M8YRCXZZQ9cTyMLcy0XWCeXBCwtjpXtKqaBf-Yb-wTMCI9HiJkaXDudVbMPC75JmhgILyYvx0bi25N-LdwCH_rx_A8Sp6bCjFIIaPb-r_TQvlnz2I3pgt285pC2kny3nG16lNrg3Vs4np-6gbXCsrVkQCGxqZdJVhP_mwiJOPlsb6TAB2z0KtnqtTDWoq_jw"
+		alt=""
+		class="absolute inset-0 h-full w-full object-cover"
+	/>
+	<div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent"></div>
+	<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40"></div>
+
+	<div class="container-page relative z-10 flex flex-1 flex-col justify-center pt-36 md:pt-40 lg:pt-44">
+		<div class="flex max-w-4xl flex-col items-start gap-5">
+			<h1 class="font-display-mobile md:font-display text-display-mobile md:text-[54px] md:leading-[62px] font-bold tracking-tight text-white">
+				Encuentra el espacio para tu próxima etapa
+			</h1>
+			<p class="max-w-[36rem] font-body-lg text-body-lg leading-relaxed text-white/85">
+				Explora terrenos, casas, departamentos y proyectos inmobiliarios seleccionados en
+				Chiclayo, Pimentel y el norte del Perú con viabilidad técnica certificada.
+			</p>
+			<div class="flex flex-wrap items-center gap-4 pt-2">
+				<a
+					href="#proyectos-destacados"
+					class="group inline-flex items-center gap-3 rounded-input bg-surface py-2.5 pl-6 pr-2.5 text-primary shadow-level-3 transition-all duration-200 hover:shadow-cta-hover"
+				>
+					<span class="font-title-md text-title-md font-semibold tracking-tight">
+						Explorar Proyectos
+					</span>
+					<span
+						class="flex h-10 w-10 items-center justify-center rounded-input bg-primary text-white transition-colors group-hover:bg-accent"
+					>
+						<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+					</span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-page relative z-20 pb-8 pt-10 md:pb-12">
+		<div class="w-full rounded-2xl border border-white/60 bg-surface p-4 shadow-level-3 backdrop-blur-md md:rounded-3xl md:p-5">
+			<form class="grid grid-cols-1 items-center gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-12">
+				<div class="flex flex-col justify-center rounded-input border-b border-outline/30 px-4 py-2.5 transition-colors hover:bg-surface-tinted sm:border-b-0 sm:border-r lg:col-span-3">
+					<label class="mb-0.5 font-caption text-caption font-semibold uppercase tracking-wider text-outline">
+						Tipo de Inmueble
+					</label>
+					<select class="w-full cursor-pointer appearance-none border-0 bg-transparent p-0 font-title-md text-title-md font-semibold text-text focus:outline-none">
+						{propertyTypes.map((opt) => <option value={opt.value}>{opt.label}</option>)}
+					</select>
+				</div>
+
+				<div class="flex flex-col justify-center rounded-input border-b border-outline/30 px-4 py-2.5 transition-colors hover:bg-surface-tinted sm:border-b-0 lg:col-span-3 lg:border-r">
+					<label class="mb-0.5 font-caption text-caption font-semibold uppercase tracking-wider text-outline">
+						Ubicación
+					</label>
+					<select class="w-full cursor-pointer appearance-none border-0 bg-transparent p-0 font-title-md text-title-md font-semibold text-text focus:outline-none">
+						{locations.map((opt) => <option value={opt.value}>{opt.label}</option>)}
+					</select>
+				</div>
+
+				<div class="flex flex-col justify-center rounded-input px-4 py-2.5 transition-colors hover:bg-surface-tinted lg:col-span-3">
+					<label class="mb-0.5 font-caption text-caption font-semibold uppercase tracking-wider text-outline">
+						Rango de Inversión
+					</label>
+					<select class="w-full cursor-pointer appearance-none border-0 bg-transparent p-0 font-title-md text-title-md font-semibold text-text focus:outline-none">
+						{budgets.map((opt) => <option value={opt.value}>{opt.label}</option>)}
+					</select>
+				</div>
+
+				<div class="flex items-center lg:col-span-3">
+					<button
+						type="submit"
+						class="flex h-14 w-full items-center justify-center gap-2.5 rounded-input bg-primary font-label-md text-label-md font-semibold text-white shadow-level-1 transition-all duration-200 hover:bg-primary-elevated"
+					>
+						<span class="material-symbols-outlined text-[20px]">search</span>
+						<span>Buscar Oportunidades</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
