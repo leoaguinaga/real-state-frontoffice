@@ -85,8 +85,12 @@ const projects = [
 								alt={project.name}
 								class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 							/>
-							<div class="absolute bottom-3 left-3 rounded-input bg-primary/80 px-2.5 py-1 font-caption text-caption text-white backdrop-blur-md">
-								{project.badge}
+							<div class="absolute bottom-3 left-3 flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white p-2 shadow-lg backdrop-blur-md border border-white/40 transition-transform duration-300 group-hover:scale-110">
+								<img
+									src={(project as any).logo || '/img/logo_montara.png'}
+									alt={`Logo Montara - ${project.name}`}
+									class="h-full w-full object-contain rounded-full"
+								/>
 							</div>
 						</div>
 
