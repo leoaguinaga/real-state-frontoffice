@@ -1,28 +1,40 @@
 ---
 const locations = [
 	{
+		id: 'pimentel',
 		name: 'Pimentel',
+		lat: -6.8367,
+		lng: -79.9342,
 		activeTag: '3 Proyectos Activos',
 		text: 'El balneario residencial por excelencia. Brisa marina, malecón histórico y constante valorización por alta demanda residencial y casas de playa.',
 		project: 'Mirador de la Costa',
 		status: 'En venta',
 	},
 	{
+		id: 'chiclayo',
 		name: 'Chiclayo Urbano',
+		lat: -6.7714,
+		lng: -79.8409,
 		activeTag: '4 Proyectos Activos',
 		text: 'Conectividad total, cercanía a centros comerciales, colegios y clínicas de prestigio. Edificios residenciales de alta valorización y confort urbano.',
 		project: 'Altos del Bosque · Los Álamos',
 		status: 'Departamentos',
 	},
 	{
+		id: 'reque',
 		name: 'Reque & Eje Sur',
+		lat: -6.8656,
+		lng: -79.8178,
 		activeTag: '2 Proyectos Activos',
 		text: 'Tranquilidad campestre, sol todo el año y microclima cálido. La mejor zona para casas de campo, huertos y quintas familiares con masterplan.',
 		project: 'Finca Sevilla (En Comercialización)',
 		status: 'Campo',
 	},
 	{
+		id: 'monsefu',
 		name: 'Monsefú / Lambayeque',
+		lat: -6.8783,
+		lng: -79.8697,
 		activeTag: '2 Proyectos Activos',
 		text: 'Corredores de crecimiento planificado, amplios lotes y proyectos agro-residenciales con titulación verificada y proyección de plusvalía.',
 		project: 'Condominio El Roble',
@@ -49,14 +61,24 @@ const locations = [
 			{
 				locations.map((loc) => (
 					<div class="group flex flex-col justify-between overflow-hidden rounded-card border border-outline bg-surface transition-all duration-300 hover:border-accent hover:shadow-level-2">
-						<div class="relative h-40 w-full overflow-hidden bg-primary">
-							<div class="absolute inset-0 bg-gradient-to-br from-primary-elevated via-primary to-[#08201b] opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
-							<div class="absolute top-3 left-3 right-3 flex items-center justify-between">
-								<span class="rounded-pill bg-accent/90 px-2 py-0.5 font-caption text-[11px] font-semibold text-white shadow-sm">
+						<div class="relative h-44 w-full overflow-hidden bg-slate-100">
+							<div
+								id={`map-${loc.id}`}
+								class="location-map absolute inset-0 z-0 h-full w-full"
+								data-lat={loc.lat}
+								data-lng={loc.lng}
+								data-title={loc.name}
+								data-project={loc.project}
+							/>
+							<div class="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
+							
+							<div class="pointer-events-none absolute top-3 left-3 right-3 z-20 flex items-center justify-between">
+								<span class="rounded-pill bg-accent/90 px-2 py-0.5 font-caption text-[11px] font-semibold text-white shadow-sm backdrop-blur-sm">
 									{loc.activeTag}
 								</span>
 							</div>
-							<div class="absolute bottom-3 left-3 flex items-center gap-1.5">
+
+							<div class="pointer-events-none absolute bottom-3 left-3 z-20 flex items-center gap-1.5">
 								<span class="relative flex h-3 w-3">
 									<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
 									<span class="relative inline-flex h-3 w-3 rounded-full border-2 border-white bg-accent" />
@@ -101,3 +123,75 @@ const locations = [
 		</div>
 	</div>
 </section>
+
+<script>
+	import L from 'leaflet';
+
+	const initMaps = () => {
+		const mapElements = document.querySelectorAll<HTMLElement>('.location-map');
+
+		mapElements.forEach((el) => {
+			if (el.dataset.initialized) return;
+			el.dataset.initialized = 'true';
+
+			const lat = parseFloat(el.dataset.lat || '0');
+			const lng = parseFloat(el.dataset.lng || '0');
+			const title = el.dataset.title || '';
+			const project = el.dataset.project || '';
+
+			if (!lat || !lng) return;
+
+			const map = L.map(el, {
+				center: [lat, lng],
+				zoom: 14.5,
+				zoomControl: false,
+				attributionControl: false,
+				dragging: false,
+				scrollWheelZoom: false,
+				doubleClickZoom: false,
+				boxZoom: false,
+				keyboard: false,
+				touchZoom: false,
+			});
+
+			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				maxZoom: 19,
+				attribution: '&copy; OpenStreetMap',
+			}).addTo(map);
+
+			const customIcon = L.divIcon({
+				className: 'custom-leaflet-marker',
+				html: `
+					<div class="relative flex items-center justify-center">
+						<span class="absolute inline-flex h-9 w-9 animate-ping rounded-full bg-[#10b981]/50 opacity-75"></span>
+						<span class="relative flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-[#059669] shadow-xl">
+							<span class="h-2 w-2 rounded-full bg-white"></span>
+						</span>
+					</div>
+				`,
+				iconSize: [36, 36],
+				iconAnchor: [18, 18],
+			});
+
+			const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+			marker.bindPopup(`<strong>${title}</strong><br/>${project}`);
+		});
+	};
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initMaps);
+	} else {
+		initMaps();
+	}
+</script>
+
+<style is:global>
+	.leaflet-container {
+		background-color: #f8fafc !important;
+		font-family: inherit;
+	}
+	.custom-leaflet-marker {
+		background: transparent !important;
+		border: none !important;
+	}
+</style>
