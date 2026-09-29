@@ -1,0 +1,255 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+
+const statusBadgeClasses = {
+	available: 'bg-status-available-bg text-status-available-text border border-status-available-border',
+	upcoming: 'bg-status-upcoming-bg text-status-upcoming-text border border-status-upcoming-border',
+	sold: 'bg-status-sold-bg text-status-sold-text border border-status-sold-border',
+}[project.statusVariant];
+---
+
+{
+	project.featured ? (
+		<article
+			class="project-card group lg:col-span-2 flex flex-col justify-between overflow-hidden rounded-card border border-outline bg-surface shadow-level-1 transition-all duration-300 hover:border-outline-accent hover:shadow-level-2"
+			data-type={project.type}
+			data-status={project.status}
+			data-location={project.location}
+			data-budget={project.budget}
+			data-developer={project.developer}
+		>
+			<div class="flex h-full flex-col lg:flex-row">
+				<!-- Visual Architectural Image -->
+				<div class="relative h-72 w-full overflow-hidden bg-primary lg:h-full lg:w-3/5">
+					<img
+						src={project.image}
+						alt={project.imageAlt}
+						class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+						loading="lazy"
+					/>
+					<!-- Badges overlay -->
+					<div class="absolute left-4 top-4 flex flex-wrap items-center gap-2">
+						<span
+							class={`inline-flex items-center gap-1.5 rounded-pill px-3 py-1 font-caption text-caption font-semibold uppercase tracking-wider shadow-sm ${statusBadgeClasses}`}
+						>
+							<span class="h-2 w-2 rounded-full bg-accent animate-pulse" />
+							{project.statusLabel}
+						</span>
+						<span class="inline-flex items-center rounded-pill bg-primary/80 px-3 py-1 font-caption text-caption font-semibold text-white backdrop-blur-md">
+							{project.developerLabel}
+						</span>
+					</div>
+
+					<!-- Favorite toggle -->
+					<button
+						type="button"
+						aria-label="Guardar favorito"
+						class="favorite-btn absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-text shadow-sm backdrop-blur-md transition-all hover:bg-white hover:text-accent"
+					>
+						<span class="material-symbols-outlined text-[20px]">favorite_border</span>
+					</button>
+
+					<!-- Availability Flag -->
+					{project.badgeExtra && (
+						<div class="absolute bottom-4 left-4 flex items-center gap-2 rounded-input bg-white/95 px-3 py-1.5 shadow-sm backdrop-blur-md">
+							<span class="h-2.5 w-2.5 rounded-full bg-accent" />
+							<span class="font-caption text-caption font-semibold text-primary">
+								{project.badgeExtra}
+							</span>
+						</div>
+					)}
+				</div>
+
+				<!-- Card Content Body -->
+				<div class="flex flex-col justify-between bg-surface p-6 lg:w-2/5 lg:p-8">
+					<div>
+						<div class="mb-1 flex items-center gap-1 font-caption text-caption font-semibold uppercase tracking-wider text-accent">
+							<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+							{project.locationDetail}
+						</div>
+						<h2 class="font-headline-sm text-headline-sm font-bold tracking-tight text-primary transition-colors group-hover:text-accent">
+							{project.title}
+						</h2>
+						<p class="mt-2 line-clamp-2 font-body-sm text-body-sm text-text-muted">
+							{project.description}
+						</p>
+
+						<!-- Key Specs -->
+						<div class="my-4 grid grid-cols-2 gap-2 rounded-xl bg-surface-tinted p-3">
+							{project.specs.map((spec) => (
+								<div>
+									<span class="block font-caption text-caption text-text-muted">{spec.label}</span>
+									<span
+										class={`font-title-md text-title-md font-semibold ${
+											spec.highlight ? 'font-bold text-accent' : 'text-text'
+										}`}
+									>
+										{spec.value}
+									</span>
+								</div>
+							))}
+							{project.priceBadge && (
+								<div class="col-span-2 pt-1 border-t border-outline/50">
+									<span class="flex items-center gap-1 font-caption text-caption font-medium text-accent">
+										<span class="material-symbols-outlined text-[14px]">verified_user</span>
+										{project.priceBadge}
+									</span>
+								</div>
+							)}
+						</div>
+
+						<!-- Amenidades Grid -->
+						<div class="mb-4 space-y-1">
+							<span class="mb-1 block font-caption text-caption uppercase tracking-wider text-text-muted">
+								Amenidades del proyecto
+							</span>
+							<div class="grid grid-cols-2 gap-2 font-body-sm text-body-sm text-text-muted">
+								{project.amenities.map((amenity) => (
+									<div class="flex items-center gap-1.5">
+										<span class="material-symbols-outlined text-[18px] text-accent">
+											{amenity.icon}
+										</span>
+										{amenity.label}
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+
+					<!-- Card Bottom Action -->
+					<div class="pt-2">
+						<a
+							class="inline-flex w-full items-center justify-center gap-2 rounded-input bg-accent px-6 py-3 font-label-md text-label-md font-semibold text-white shadow-level-1 transition-all duration-200 hover:bg-accent-hover hover:shadow-cta-hover"
+							href={project.ctaLink}
+						>
+							<span>{project.ctaText}</span>
+							<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</article>
+	) : (
+		<article
+			class={`project-card group flex flex-col justify-between overflow-hidden rounded-card border border-outline bg-surface shadow-level-1 transition-all duration-300 hover:border-outline-accent hover:shadow-level-2 ${
+				project.soldOut ? 'opacity-90 bg-surface-tinted/40' : ''
+			}`}
+			data-type={project.type}
+			data-status={project.status}
+			data-location={project.location}
+			data-budget={project.budget}
+			data-developer={project.developer}
+		>
+			<div>
+				<!-- Visual Media -->
+				<div class="relative h-56 w-full overflow-hidden bg-primary">
+					<img
+						src={project.image}
+						alt={project.imageAlt}
+						class={`h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${
+							project.soldOut ? 'filter grayscale contrast-125 opacity-80' : ''
+						}`}
+						loading="lazy"
+					/>
+					<div class="absolute left-3 top-3 flex flex-wrap gap-1.5">
+						<span
+							class={`inline-flex items-center gap-1 rounded-pill px-2.5 py-0.5 font-caption text-caption font-semibold ${statusBadgeClasses}`}
+						>
+							{project.soldOut && (
+								<span class="material-symbols-outlined text-[14px]">check_circle</span>
+							)}
+							{project.statusLabel}
+						</span>
+						<span class="inline-flex items-center rounded-pill bg-primary/80 px-2.5 py-0.5 font-caption text-caption font-semibold text-white backdrop-blur-md">
+							{project.developerLabel}
+						</span>
+					</div>
+
+					{project.soldOut && (
+						<div class="absolute inset-0 flex items-center justify-center bg-primary/30 backdrop-blur-[1px]">
+							<div class="rounded-pill bg-white/95 px-4 py-1.5 text-center shadow-sm">
+								<span class="font-caption text-caption font-bold uppercase tracking-wider text-primary">
+									100% Vendido
+								</span>
+							</div>
+						</div>
+					)}
+
+					<button
+						type="button"
+						aria-label="Guardar favorito"
+						class="favorite-btn absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-text shadow-sm backdrop-blur-md transition-all hover:bg-white hover:text-accent"
+					>
+						<span class="material-symbols-outlined text-[18px]">favorite_border</span>
+					</button>
+				</div>
+
+				<!-- Content Body -->
+				<div class="p-6">
+					<div class="mb-1 flex items-center gap-1 font-caption text-caption font-semibold uppercase tracking-wider text-text-muted">
+						<span class="material-symbols-outlined text-[14px] text-accent">location_on</span>
+						{project.locationDetail}
+					</div>
+					<h3 class="font-title-lg text-title-lg font-bold tracking-tight text-primary transition-colors group-hover:text-accent">
+						{project.title}
+					</h3>
+					<p class="mt-1 line-clamp-2 font-body-sm text-body-sm text-text-muted">
+						{project.description}
+					</p>
+
+					<div class="mt-4 flex items-center justify-between rounded-xl bg-surface-tinted p-3">
+						{project.specs.map((spec) => (
+							<div class={spec.highlight ? 'text-right' : ''}>
+								<span class="block font-caption text-caption text-text-muted">{spec.label}</span>
+								<span
+									class={`font-title-md text-title-md font-semibold ${
+										spec.highlight ? 'font-bold text-accent' : 'text-text'
+									}`}
+								>
+									{spec.value}
+								</span>
+								{spec.sub && (
+									<span class="block font-caption text-caption text-text-muted">{spec.sub}</span>
+								)}
+							</div>
+						))}
+					</div>
+
+					<!-- Mini Amenidades -->
+					<div class="mt-4 flex items-center gap-3 font-caption text-caption text-text-muted">
+						{project.amenities.map((amenity) => (
+							<span class="inline-flex items-center gap-1">
+								<span class="material-symbols-outlined text-[16px] text-accent">
+									{amenity.icon}
+								</span>
+								{amenity.label}
+							</span>
+						))}
+					</div>
+				</div>
+			</div>
+
+			<div class="p-6 pt-0">
+				<a
+					class={`inline-flex w-full items-center justify-center gap-1.5 rounded-input px-4 py-2.5 font-label-md text-label-md font-semibold transition-all ${
+						project.soldOut
+							? 'bg-surface-tinted text-text hover:bg-outline'
+							: 'bg-primary text-white hover:bg-accent'
+					}`}
+					href={project.ctaLink}
+				>
+					<span>{project.ctaText}</span>
+					<span class="material-symbols-outlined text-[16px]">
+						{project.soldOut ? 'visibility' : 'arrow_forward'}
+					</span>
+				</a>
+			</div>
+		</article>
+	)
+}

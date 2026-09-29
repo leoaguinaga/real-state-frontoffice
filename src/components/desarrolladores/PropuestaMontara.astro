@@ -1,0 +1,88 @@
+---
+const pillars = [
+	{
+		number: '01 / ARQUITECTURA',
+		icon: 'view_in_ar',
+		title: 'Showroom Digital Inmersivo',
+		text: 'Creamos una landing experiencial y bespoke para tu desarrollo: masterplan con croquis interactivo de lotes o departamentos, visualización 3D, tipologías detalladas y especificaciones claras de cada unidad.',
+		tag: 'Planos vectoriales interactivos + renders inmersivos',
+	},
+	{
+		number: '02 / CALIFICACIÓN',
+		icon: 'filter_alt',
+		title: 'Filtro y Calificación de Prospectos',
+		text: 'Nuestro funnel interactivo valida la solvencia, presupuesto estimado, modalidad de pago deseada y horizonte de compra antes de transferir la conversación a tu equipo de ventas o cerradores asignados.',
+		tag: '0% llamadas frías: solo prospectos con interés comprobado',
+	},
+	{
+		number: '03 / DISTRIBUCIÓN',
+		icon: 'campaign',
+		title: 'Comercialización Multicanal Activa',
+		text: 'Posicionamiento selectivo dentro del catálogo curado de Montara, activaciones de pauta de alta precisión dirigidas a inversionistas de capital privado y redes de compradores precalificados en Lima y provincias.',
+		tag: 'Presencia en el marketplace de alta gama Montara',
+	},
+	{
+		number: '04 / TRAZABILIDAD',
+		icon: 'analytics',
+		title: 'Reportes y Métricas en Tiempo Real',
+		text: 'Métricas transparentes de comportamiento: qué tipologías reciben mayor volumen de clics, tasa de retención por sección, origen geográfico del inversionista y ritmo de colocación de unidades semana a semana.',
+		tag: 'Dashboard comercial con feedback de absorción',
+	},
+];
+---
+
+<section class="relative w-full overflow-hidden bg-primary py-16 md:py-24 text-white">
+	<div class="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-accent/20 blur-3xl"></div>
+	<div class="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-accent/10 blur-3xl"></div>
+
+	<div class="container-page relative z-10">
+		<!-- Section Header -->
+		<div class="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+			<div class="max-w-[38rem]">
+				<span class="mb-2 inline-block font-caption text-caption font-semibold uppercase tracking-wider text-accent">
+					La Solución Integral
+				</span>
+				<h2 class="font-headline-lg text-headline-lg font-bold tracking-tight text-white">
+					Diseñamos el ecosistema comercial que tu desarrollo necesita
+				</h2>
+			</div>
+			<p class="max-w-[28rem] font-body-md text-body-md text-white/80 leading-relaxed">
+				Unificamos tecnología interactiva, inteligencia de prospectos y marketing inmobiliario de alto perfil en un solo motor de colocación.
+			</p>
+		</div>
+
+		<!-- 4 Pillars Bento Grid -->
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+			{
+				pillars.map((pillar) => (
+					<div class="group relative flex flex-col justify-between overflow-hidden rounded-card border border-white/10 bg-[#061d19] p-7 shadow-level-2 transition-all duration-300 hover:border-accent hover:shadow-level-3 md:p-8">
+						<div class="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-accent/10 blur-2xl transition-all group-hover:bg-accent/20"></div>
+
+						<div class="relative z-10">
+							<div class="mb-6 flex items-center justify-between">
+								<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-white shadow-sm">
+									<span class="material-symbols-outlined text-[24px]">{pillar.icon}</span>
+								</div>
+								<span class="font-title-md text-title-md font-bold tracking-tight text-accent">
+									{pillar.number}
+								</span>
+							</div>
+
+							<h3 class="mb-3 font-headline-sm text-headline-sm font-bold text-white">
+								{pillar.title}
+							</h3>
+							<p class="font-body-md text-body-md leading-relaxed text-white/80">
+								{pillar.text}
+							</p>
+						</div>
+
+						<div class="relative z-10 mt-6 flex items-center gap-2 border-t border-white/10 pt-4 font-label-md text-label-md font-semibold text-accent">
+							<span class="material-symbols-outlined text-[18px]">check</span>
+							<span>{pillar.tag}</span>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

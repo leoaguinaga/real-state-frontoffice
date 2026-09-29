@@ -1,0 +1,75 @@
+---
+const steps = [
+	{
+		number: '01',
+		icon: 'fact_check',
+		title: 'Revisión y Viabilidad',
+		text: 'Analizamos la propuesta de valor comercial de tu desarrollo, documentación legal, permisos correspondientes y fijamos objetivos de absorción por etapas.',
+		timing: 'Tiempo estimado: 48 horas',
+	},
+	{
+		number: '02',
+		icon: 'devices',
+		title: 'Creación del Showroom Digital',
+		text: 'Digitalizamos planos, integramos renders, configuramos el plano interactivo de unidades y diseñamos el embudo de precalificación a la medida de tu proyecto.',
+		timing: 'Despliegue: En solo 7 días',
+	},
+	{
+		number: '03',
+		icon: 'rocket_launch',
+		title: 'Lanzamiento y Tracción',
+		text: 'Publicamos el proyecto en la plataforma Montara, activamos distribución multicanal y comenzamos a canalizar prospectos listos para agendar visita o separación formal.',
+		timing: 'Comercialización continua',
+	},
+];
+---
+
+<section class="w-full bg-surface-tinted py-16 md:py-24 border-b border-outline">
+	<div class="container-page">
+		<!-- Section Header -->
+		<div class="mx-auto mb-14 max-w-[44rem] text-center">
+			<span class="mb-2 inline-block font-caption text-caption font-semibold uppercase tracking-wider text-accent">
+				Implementación Ágil
+			</span>
+			<h2 class="font-headline-lg text-headline-lg font-bold tracking-tight text-primary">
+				De los planos a la comercialización activa en 3 pasos
+			</h2>
+			<p class="mt-2 font-body-md text-body-md text-text-muted leading-relaxed">
+				Un proceso sin complicaciones técnicas para tu equipo. Nosotros asumimos el despliegue digital y la optimización.
+			</p>
+		</div>
+
+		<!-- 3 Steps Grid -->
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+			{
+				steps.map((step) => (
+					<div class="flex flex-col justify-between rounded-card border border-outline bg-surface p-8 shadow-level-1 transition-all duration-300 hover:shadow-level-2">
+						<div>
+							<div class="mb-6 flex items-center justify-between">
+								<span class="font-display text-4xl font-extrabold text-accent">
+									{step.number}
+								</span>
+								<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-tinted text-accent">
+									<span class="material-symbols-outlined text-[24px]">{step.icon}</span>
+								</div>
+							</div>
+
+							<h3 class="mb-2 font-title-lg text-title-lg font-bold text-primary">
+								{step.title}
+							</h3>
+							<p class="font-body-md text-body-md text-text-muted leading-relaxed">
+								{step.text}
+							</p>
+						</div>
+
+						<div class="mt-8 border-t border-outline/70 pt-4">
+							<span class="font-caption text-caption font-semibold uppercase tracking-wider text-accent">
+								{step.timing}
+							</span>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

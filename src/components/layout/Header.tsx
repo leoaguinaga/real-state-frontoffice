@@ -15,7 +15,7 @@ export default function Header() {
       <div className="container-page flex items-center justify-between gap-6 transition-all duration-300">
         <a href="/" className="flex items-center gap-2">
           <span className="site-header__foreground font-display text-title-lg font-bold">
-            Montara
+           <img  className="h-8 header-image-logo" src="/img/logo-white.png"/>
           </span>
         </a>
 
