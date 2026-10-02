@@ -85,8 +85,12 @@ const projects = [
 								alt={project.name}
 								class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 							/>
-							<div class="absolute bottom-3 left-3 rounded-input bg-primary/80 px-2.5 py-1 font-caption text-caption text-white backdrop-blur-md">
-								{project.badge}
+							<div class="absolute bottom-4 left-4 flex h-8">
+								<img
+									src={(project as any).logo || '/img/logo-white.png'}
+									alt={`Logo Montara - ${project.name}`}
+									class="h-full w-full object-cover"
+								/>
 							</div>
 						</div>
 
@@ -116,8 +120,8 @@ const projects = [
 									href={project.href}
 									class="inline-flex items-center gap-1 rounded-input bg-primary px-4 py-2.5 font-label-md text-label-md text-white transition-colors hover:bg-accent"
 								>
-									<span>Ver Showroom</span>
-									<span class="material-symbols-outlined text-[16px]">visibility</span>
+									<span>Ver proyecto</span>
+									<span class="material-symbols-outlined text-[16px]">chevron_right</span>
 								</a>
 							</div>
 						</div>

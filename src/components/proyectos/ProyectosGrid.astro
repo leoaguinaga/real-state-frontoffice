@@ -1,0 +1,243 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import type { Project } from '../../data/projects';
+
+interface Props {
+	projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section class="w-full bg-background py-12 md:py-16">
+	<div class="container-page">
+		<!-- Active Filter Indicators -->
+		<div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+			<div class="flex flex-wrap items-center gap-2">
+				<span class="font-caption text-caption font-semibold uppercase tracking-wider text-text-muted">
+					Mostrando:
+				</span>
+				<span
+					class="inline-flex items-center gap-1.5 rounded-pill bg-surface-tinted px-3 py-1 font-caption text-caption text-text"
+				>
+					Norte del Perú
+				</span>
+				<span
+					class="inline-flex items-center gap-1.5 rounded-pill bg-surface-tinted px-3 py-1 font-caption text-caption text-text"
+				>
+					Entrega y Preventa Activa
+				</span>
+			</div>
+			<div class="hidden items-center gap-1.5 font-caption text-caption text-text-muted sm:flex">
+				<span class="material-symbols-outlined text-[16px] text-accent">verified</span>
+				Precios auditados en dólares americanos (USD)
+			</div>
+		</div>
+
+		<!-- MAIN PROJECTS GRID -->
+		<div
+			class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+			id="projects-container"
+		>
+			{projects.map((project) => <ProjectCard project={project} />)}
+		</div>
+
+		<!-- Empty Results Fallback State -->
+		<div
+			class="hidden my-8 flex-col items-center justify-center rounded-3xl border border-outline bg-surface p-12 text-center shadow-level-1"
+			id="empty-state"
+		>
+			<div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-surface-tinted text-text-muted">
+				<span class="material-symbols-outlined text-[32px]">filter_list_off</span>
+			</div>
+			<h3 class="font-headline-sm text-headline-sm font-bold text-primary">
+				No encontramos proyectos con esos filtros
+			</h3>
+			<p class="mt-2 max-w-[28rem] font-body-md text-body-md text-text-muted">
+				Prueba ajustando los criterios de búsqueda o contacta a un asesor para conocer lanzamientos confidenciales fuera de catálogo.
+			</p>
+			<button
+				type="button"
+				class="mt-6 rounded-pill bg-accent px-6 py-3 font-label-md text-label-md font-semibold text-white shadow-level-1 transition-all hover:bg-accent-hover"
+				id="clear-filters-cta"
+			>
+				Restablecer todos los filtros
+			</button>
+		</div>
+
+		<!-- Clean Pagination Controls & Legal Caveat -->
+		<div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-outline pt-8 md:flex-row">
+			<div class="flex items-center gap-2">
+				<span class="font-caption text-caption text-text-muted">Página</span>
+				<button
+					type="button"
+					class="flex h-9 w-9 items-center justify-center rounded-input bg-primary font-label-md text-label-md font-semibold text-white shadow-sm"
+				>
+					1
+				</button>
+				<button
+					type="button"
+					class="flex h-9 w-9 items-center justify-center rounded-input border border-outline bg-surface font-label-md text-label-md text-text transition-colors hover:bg-surface-tinted"
+				>
+					2
+				</button>
+				<button
+					type="button"
+					class="inline-flex h-9 items-center gap-1 rounded-input border border-outline bg-surface px-3 font-label-md text-label-md text-text transition-colors hover:bg-surface-tinted"
+				>
+					<span>Siguiente</span>
+					<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+				</button>
+			</div>
+			<div class="flex items-center gap-2 text-center font-caption text-caption text-text-muted md:text-right">
+				<span class="material-symbols-outlined text-[16px] text-outline">info</span>
+				<span>Disponibilidad, metrajes y precios en USD sujetos a confirmación técnica y plano de lotización vigente.</span>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	function setupCatalogFilters() {
+		const typeChips = document.querySelectorAll<HTMLButtonElement>('.filter-type-chip');
+		const statusSelect = document.getElementById('filter-status') as HTMLSelectElement | null;
+		const locationSelect = document.getElementById('filter-location') as HTMLSelectElement | null;
+		const budgetSelect = document.getElementById('filter-budget') as HTMLSelectElement | null;
+		const developerSelect = document.getElementById('filter-developer') as HTMLSelectElement | null;
+		const resetBtn = document.getElementById('reset-filters');
+		const clearBtnCta = document.getElementById('clear-filters-cta');
+		const cards = document.querySelectorAll<HTMLElement>('.project-card');
+		const resultsCount = document.getElementById('results-count');
+		const emptyState = document.getElementById('empty-state');
+		const gridViewBtn = document.getElementById('grid-view-btn');
+		const listViewBtn = document.getElementById('list-view-btn');
+		const projectsContainer = document.getElementById('projects-container');
+
+		if (!projectsContainer || cards.length === 0) return;
+
+		let currentType = 'all';
+
+		function applyFilters() {
+			let visibleCount = 0;
+			const currentStatus = statusSelect?.value || 'all';
+			const currentLocation = locationSelect?.value || 'all';
+			const currentBudget = budgetSelect?.value || 'all';
+			const currentDev = developerSelect?.value || 'all';
+
+			cards.forEach((card) => {
+				const cardType = card.dataset.type;
+				const cardStatus = card.dataset.status;
+				const cardLoc = card.dataset.location;
+				const cardBudget = card.dataset.budget;
+				const cardDev = card.dataset.developer;
+
+				const typeMatch = currentType === 'all' || cardType === currentType;
+				const statusMatch = currentStatus === 'all' || cardStatus === currentStatus;
+				const locationMatch = currentLocation === 'all' || cardLoc === currentLocation;
+				const budgetMatch = currentBudget === 'all' || cardBudget === currentBudget;
+				const devMatch = currentDev === 'all' || cardDev === currentDev;
+
+				if (typeMatch && statusMatch && locationMatch && budgetMatch && devMatch) {
+					card.style.display = '';
+					visibleCount++;
+				} else {
+					card.style.display = 'none';
+				}
+			});
+
+			if (resultsCount) {
+				resultsCount.textContent = String(visibleCount);
+			}
+
+			if (emptyState) {
+				if (visibleCount === 0) {
+					emptyState.classList.remove('hidden');
+					emptyState.classList.add('flex');
+				} else {
+					emptyState.classList.add('hidden');
+					emptyState.classList.remove('flex');
+				}
+			}
+		}
+
+		typeChips.forEach((chip) => {
+			chip.addEventListener('click', () => {
+				typeChips.forEach((c) => {
+					c.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+					c.classList.add('bg-surface-tinted', 'text-text');
+				});
+				chip.classList.add('bg-primary', 'text-white', 'shadow-sm');
+				chip.classList.remove('bg-surface-tinted', 'text-text');
+
+				currentType = chip.dataset.type || 'all';
+				applyFilters();
+			});
+		});
+
+		[statusSelect, locationSelect, budgetSelect, developerSelect].forEach((select) => {
+			select?.addEventListener('change', applyFilters);
+		});
+
+		function resetAll() {
+			currentType = 'all';
+			typeChips.forEach((c, index) => {
+				if (index === 0) {
+					c.classList.add('bg-primary', 'text-white', 'shadow-sm');
+					c.classList.remove('bg-surface-tinted', 'text-text');
+				} else {
+					c.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+					c.classList.add('bg-surface-tinted', 'text-text');
+				}
+			});
+
+			if (statusSelect) statusSelect.value = 'all';
+			if (locationSelect) locationSelect.value = 'all';
+			if (budgetSelect) budgetSelect.value = 'all';
+			if (developerSelect) developerSelect.value = 'all';
+			applyFilters();
+		}
+
+		resetBtn?.addEventListener('click', resetAll);
+		clearBtnCta?.addEventListener('click', resetAll);
+
+		// Grid / List Toggle
+		if (listViewBtn && gridViewBtn && projectsContainer) {
+			listViewBtn.addEventListener('click', () => {
+				projectsContainer.classList.remove('lg:grid-cols-3', 'md:grid-cols-2');
+				projectsContainer.classList.add('grid-cols-1');
+				listViewBtn.classList.add('bg-surface', 'text-accent', 'shadow-sm');
+				listViewBtn.classList.remove('text-text-muted');
+				gridViewBtn.classList.remove('bg-surface', 'text-accent', 'shadow-sm');
+				gridViewBtn.classList.add('text-text-muted');
+			});
+
+			gridViewBtn.addEventListener('click', () => {
+				projectsContainer.classList.add('lg:grid-cols-3', 'md:grid-cols-2');
+				projectsContainer.classList.remove('grid-cols-1');
+				gridViewBtn.classList.add('bg-surface', 'text-accent', 'shadow-sm');
+				gridViewBtn.classList.remove('text-text-muted');
+				listViewBtn.classList.remove('bg-surface', 'text-accent', 'shadow-sm');
+				listViewBtn.classList.add('text-text-muted');
+			});
+		}
+
+		// Favorite bookmark micro-interaction
+		document.querySelectorAll('.favorite-btn').forEach((fav) => {
+			fav.addEventListener('click', (e) => {
+				e.preventDefault();
+				const icon = fav.querySelector('.material-symbols-outlined');
+				if (!icon) return;
+				if (icon.textContent === 'favorite_border') {
+					icon.textContent = 'favorite';
+					fav.classList.add('text-error');
+				} else {
+					icon.textContent = 'favorite_border';
+					fav.classList.remove('text-error');
+				}
+			});
+		});
+	}
+
+	// Run on initial load and view transitions
+	document.addEventListener('DOMContentLoaded', setupCatalogFilters);
+</script>

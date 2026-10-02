@@ -160,6 +160,75 @@
   }
 }
 
+@layer components {
+  .site-header {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline: 0;
+    z-index: 50;
+    padding-block: 1.25rem;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, rgb(0 0 0 / 0.75), rgb(0 0 0 / 0.3), transparent);
+    box-shadow: none;
+    transition: color 200ms ease-out;
+  }
+
+  .header-image-logo {
+    filter: brightness(0) invert(1);
+    transition: filter 200ms ease-out;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .header-image-logo {
+      animation: header-logo-color linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 48px;
+    }
+  }
+
+  .site-header__foreground {
+    color: rgba(226, 225, 225, 0.9);
+    transition: color 200ms ease-out;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .site-header {
+      animation: header-surface linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 48px;
+    }
+
+    .site-header__foreground {
+      animation: header-foreground linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 48px;
+    }
+  }
+
+  @keyframes header-surface {
+    to {
+      padding-block: 0.875rem;
+      border-color: var(--color-outline);
+      background-color: rgb(255 255 255 / 0.9);
+      background-image: linear-gradient(to bottom, transparent, transparent);
+      box-shadow: var(--shadow-level-1);
+      backdrop-filter: blur(12px);
+    }
+  }
+
+  @keyframes header-foreground {
+    to {
+      color: var(--color-text);
+    }
+  }
+
+  @keyframes header-logo-color {
+    to {
+      filter: brightness(0);
+    }
+  }
+}
+
 /* Container matching the 1440px editorial grid + responsive outer margins. */
 @utility container-page {
   width: 100%;

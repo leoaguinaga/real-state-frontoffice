@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/layout/Header';
+import Footer from '../../components/layout/Footer.astro';
+import WhatsAppButton from '../../components/layout/WhatsAppButton.astro';
+import DesarrolladoresHero from '../../components/desarrolladores/DesarrolladoresHero.astro';
+import ProblemasVenta from '../../components/desarrolladores/ProblemasVenta.astro';
+import PropuestaMontara from '../../components/desarrolladores/PropuestaMontara.astro';
+import CasosEstudio from '../../components/desarrolladores/CasosEstudio.astro';
+import ProcesoPasos from '../../components/desarrolladores/ProcesoPasos.astro';
+import ContactoB2B from '../../components/desarrolladores/ContactoB2B.astro';
+import CtaTerrenos from '../../components/desarrolladores/CtaTerrenos.astro';
+---
+
+<Layout
+	title="Para Desarrolladores y Promotores Inmobiliarios | Montara"
+	description="Transformamos proyectos inmobiliarios en showrooms digitales interactivos y conectamos tu desarrollo con compradores e inversionistas calificados en el norte del Perú."
+>
+	<Header />
+	<main class="min-h-screen w-full bg-background">
+		<DesarrolladoresHero />
+		<ProblemasVenta />
+		<PropuestaMontara />
+		<CasosEstudio />
+		<ProcesoPasos />
+		<ContactoB2B />
+		<CtaTerrenos />
+	</main>
+	<WhatsAppButton />
+	<Footer />
+</Layout>

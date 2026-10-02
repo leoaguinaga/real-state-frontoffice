@@ -1,103 +1,859 @@
 ---
-const locations = [
+import 'leaflet/dist/leaflet.css';
+
+interface MapPoint {
+	id: string;
+	title: string;
+	zone: string;
+	zoneCategory: 'todos' | 'pimentel' | 'chiclayo' | 'reque';
+	lat: number;
+	lng: number;
+	type: string;
+	price: string;
+	status: string;
+	statusVariant: 'available' | 'upcoming' | 'sold';
+	description: string;
+	image: string;
+	link: string;
+}
+
+const mapPoints: MapPoint[] = [
 	{
-		name: 'Pimentel',
-		activeTag: '3 Proyectos Activos',
-		text: 'El balneario residencial por excelencia. Brisa marina, malecón histórico y constante valorización por alta demanda residencial y casas de playa.',
-		project: 'Mirador de la Costa',
-		status: 'En venta',
+		id: 'mirador-costa',
+		title: 'Mirador de la Costa',
+		zone: 'Pimentel · Balneario',
+		zoneCategory: 'pimentel',
+		lat: -6.8367,
+		lng: -79.9342,
+		type: 'Playa & Balneario',
+		price: 'Desde $95,000 USD',
+		status: 'En comercialización',
+		statusVariant: 'available',
+		description: 'Casas de playa y condominios panorámicos con vista directa al mar.',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuBCncwBkp19FpKbs6buCjbgwecUulgbSxzZufye8O5Q0ZZsBJA47-uA75IEHftfMCty2cRiqLJ4upXycivj9OJWAdg-qcjajlJzTSYNJp54o1IP6h1YZxFM5Uu8Wm-O4aGAPQb5-bIDOgSsNye4gmFSvHnVO9wZQ6QROr_Orpt37HNfV1lKqU1RCkO1lE-lNVzz18aAtCZSyl0ZdcqOQTyy1UxrgiZFRco-0Z5MRQ4ZuaVrNIyCUUMLHw',
+		link: '/proyectos',
 	},
 	{
-		name: 'Chiclayo Urbano',
-		activeTag: '4 Proyectos Activos',
-		text: 'Conectividad total, cercanía a centros comerciales, colegios y clínicas de prestigio. Edificios residenciales de alta valorización y confort urbano.',
-		project: 'Altos del Bosque · Los Álamos',
-		status: 'Departamentos',
+		id: 'los-alamos',
+		title: 'Residencial Los Álamos',
+		zone: 'Chiclayo Urbano · Santa Victoria',
+		zoneCategory: 'chiclayo',
+		lat: -6.7714,
+		lng: -79.8409,
+		type: 'Departamentos Urbanos',
+		price: 'Desde $78,500 USD',
+		status: 'En comercialización',
+		statusVariant: 'available',
+		description: 'Edificio multifamiliar boutique con terrazas privadas y certificación eco-eficiente.',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuDj-rOvcSJnfwhUJaezruaEjV_Ia8dwCzDkGNgtK97KA2_a6L2MdQ7YqxF1h1RRCMS7qCFDKcDdLTxMgiAW_Ek_69aTIPYcK5eWipCEO1Uu7yFg0pzYbPW_d3iMXDZJACa1Gm34Rp-yDwfl5hgP74jFpl409xg9vRRNTYx-S188ml7auxRZduELF4vghW-KaY-14bzqD6tyG3a_el9s6waR8Zt6z1iduBK0O9xPZeH5zJ4rGlccrd8ptg',
+		link: '/proyectos',
 	},
 	{
-		name: 'Reque & Eje Sur',
-		activeTag: '2 Proyectos Activos',
-		text: 'Tranquilidad campestre, sol todo el año y microclima cálido. La mejor zona para casas de campo, huertos y quintas familiares con masterplan.',
-		project: 'Finca Sevilla (En Comercialización)',
-		status: 'Campo',
+		id: 'finca-sevilla',
+		title: 'Finca Sevilla',
+		zone: 'Reque & Eje Sur',
+		zoneCategory: 'reque',
+		lat: -6.8656,
+		lng: -79.8178,
+		type: 'Lotes Campestres',
+		price: 'Desde $38,000 USD',
+		status: 'En comercialización',
+		statusVariant: 'available',
+		description: 'Exclusivo condominio campestre con bulevares, agua de riego y club house ecológico.',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuAotft0VEIc0C88FbFkOctXKf8D4KyxYLrbAu-pJOr-VJjCHVKTmxuNnrFzJrWsWNWhgbphF9LOqAxxdnUlZinV7sEz--vuR8ZjaYcjvMYysQeDgfcF5U10Z3IcXwryDZLUkUX_fGUWLZU4JYpvasZSwjzsKgDLG0FEwk3r7-un60LWJ7KZO-OJNgvJ-iTcNhvUlsXM1meLN3vkv0V3Yj9OCWqJ5oSnp1NsQvAadgZxkPdMEd5_huNSyA',
+		link: '/proyectos',
 	},
 	{
-		name: 'Monsefú / Lambayeque',
-		activeTag: '2 Proyectos Activos',
-		text: 'Corredores de crecimiento planificado, amplios lotes y proyectos agro-residenciales con titulación verificada y proyección de plusvalía.',
-		project: 'Condominio El Roble',
-		status: 'Preventa',
+		id: 'el-roble',
+		title: 'Condominio Campestre El Roble',
+		zone: 'Monsefú · Eje Suroeste',
+		zoneCategory: 'reque',
+		lat: -6.8812,
+		lng: -79.8685,
+		type: 'Lotes Campestres',
+		price: 'Preventa $42,000 USD',
+		status: 'Próxima preventa',
+		statusVariant: 'upcoming',
+		description: 'Lotes de 600 m² con clima campestre privilegiado todo el año y laguna interna.',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuDOyb2LacFiTKU9ECGsAu-4jmDScP-yWOcSvG3szenWu5LUABugfIdbY8RbxsJqY92HWngnhugO2XFqV-VuZg6btCzJ7o72rKc4d8l8TOuHayMX6pKWcjbIFXlxKGqWs-9dGcKX3XkE5N01Jm5k76IvccN0d0cwnQNxqR2IoHEh5hOC5tC9RmttHRnoAndWpB1aSalGi_hGtf8LJg5KjIOkMBYMIXTGf6pP7HIEomcm2wPldjPgqkrvRw',
+		link: '/proyectos',
+	},
+	{
+		id: 'altos-huerto',
+		title: 'Altos del Huerto',
+		zone: 'Reque · Valle Fértil',
+		zoneCategory: 'reque',
+		lat: -6.872,
+		lng: -79.824,
+		type: 'Lotes Campestres',
+		price: 'Desde $34,000 USD',
+		status: 'En comercialización',
+		statusVariant: 'available',
+		description: 'Espacios ecológicos rodeados de naturaleza y huertos frutales familiares.',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuDk6MfucV2j-YVaDvYhT98D-bIH5JOoYV7c6TvNP3kKoYcHMrt0rjM625jBTg0zTzwZ0zKhQOPstmyVTYcqJ0iKfDODiHNKfKLkEJd_a1Lusxc6_c5PHNZ9BbdUsQAf1K1GiHZujRDI6j1OM3PY1bifPMlByrqx22lj4TheMOFkYCPlwH-8NIWSKHTGLbJsrf4nRqMJQnijZd0KQcmIxG9DeDSphFK01zdv2kqviu_BD_iIHodce0f3dA',
+		link: '/proyectos',
+	},
+	{
+		id: 'villas-valle',
+		title: 'Villas del Valle',
+		zone: 'La Victoria · Lambayeque',
+		zoneCategory: 'chiclayo',
+		lat: -6.795,
+		lng: -79.845,
+		type: 'Lotes Campestres',
+		price: '100% Vendido',
+		status: 'Proyecto Entregado',
+		statusVariant: 'sold',
+		description: '120 lotes campestres comercializados con títulos inscritos en Sunarp.',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuC_sVLNHGsD0pMTMeMkWfdXPbp6l_zJLtLB9EpguM9ReJZTDd1Ftxg6VyZY5qEuknhDsuBAzAqwjhHHYB-5rCaRxh0DcQmSZw81b4WC-t21eYGi2iy3kcoaHueIsRhmeMp52wUDIWgqw8aFeDF13yHvC5WESZHZnLtvxJTxSGHbVDqZOlpSPmywR7b7gQBN-RNff1iZPDs9jjflGlF99lt9JhSIeGflLLoG2ep4KLW3_C6fcI02wuobog',
+		link: '/proyectos',
 	},
 ];
 ---
 
-<section class="w-full border-y border-outline bg-surface-tinted py-3xl">
+<section class="w-full border-y border-outline bg-surface-tinted py-16 md:py-24" id="ubicaciones">
 	<div class="container-page">
-		<div class="mb-2xl flex flex-col justify-between gap-4 md:flex-row md:items-end">
+		<!-- Section Header -->
+		<div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
 			<div>
-				<h2 class="mt-1 font-headline-lg text-headline-lg text-text">
-					Ubicaciones Estratégicas en el Norte
+				<span class="mb-2 inline-block font-caption text-caption font-semibold uppercase tracking-wider text-accent">
+					Territorio & Plusvalía
+				</span>
+				<h2 class="font-headline-lg text-headline-lg font-bold tracking-tight text-primary">
+					Ubicaciones Estratégicas y Mapa de Proyectos
 				</h2>
-				<p class="mt-2 max-w-[42rem] font-body-md text-body-md text-text-muted">
-					Zonas de máxima plusvalía en Chiclayo, Pimentel y corredores en expansión urbana
-					auditada.
+				<p class="mt-2 max-w-[42rem] font-body-md text-body-md text-text-muted leading-relaxed">
+					Explora todos nuestros desarrollos activos geolocalizados en el corredor inmobiliario del norte. Puedes hacer clic en los proyectos o marcar tus propios puntos de interés en el mapa.
 				</p>
+			</div>
+
+			<!-- Toggle Mark Mode Button -->
+			<div class="shrink-0">
+				<button
+					type="button"
+					id="btn-toggle-pin-mode"
+					class="inline-flex items-center gap-2 rounded-pill border border-accent/40 bg-accent/10 px-4 py-2 font-label-sm text-xs font-semibold text-accent transition-all hover:bg-accent hover:text-white shadow-sm"
+					title="Haz clic para activar el modo de colocar marcadores personalizados"
+				>
+					<span class="material-symbols-outlined text-[18px]">add_location_alt</span>
+					<span id="pin-mode-text">Marcar punto en el mapa</span>
+				</button>
 			</div>
 		</div>
 
-		<div class="grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-4">
-			{
-				locations.map((loc) => (
-					<div class="group flex flex-col justify-between overflow-hidden rounded-card border border-outline bg-surface transition-all duration-300 hover:border-accent hover:shadow-level-2">
-						<div class="relative h-40 w-full overflow-hidden bg-primary">
-							<div class="absolute inset-0 bg-gradient-to-br from-primary-elevated via-primary to-[#08201b] opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
-							<div class="absolute top-3 left-3 right-3 flex items-center justify-between">
-								<span class="rounded-pill bg-accent/90 px-2 py-0.5 font-caption text-[11px] font-semibold text-white shadow-sm">
-									{loc.activeTag}
-								</span>
-							</div>
-							<div class="absolute bottom-3 left-3 flex items-center gap-1.5">
-								<span class="relative flex h-3 w-3">
-									<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-									<span class="relative inline-flex h-3 w-3 rounded-full border-2 border-white bg-accent" />
-								</span>
-								<span class="rounded border border-white/20 bg-black/85 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-md">
-									{loc.project}
-								</span>
-							</div>
+		<!-- Main Interactive Master Map & Side Explorer -->
+		<div class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+			<!-- Big Master Map Column (8 cols) -->
+			<div class="relative overflow-hidden rounded-card border border-outline bg-surface-tinted shadow-level-1 lg:col-span-8 flex flex-col h-full min-h-[560px]">
+				<!-- Notification Banner when Marking Mode is Active -->
+				<div
+					id="marking-banner"
+					class="hidden items-center justify-between border-b border-accent/30 bg-accent/15 px-4 py-2.5 font-label-sm text-xs font-semibold text-primary transition-all"
+				>
+					<div class="flex items-center gap-2">
+						<span class="relative flex h-2.5 w-2.5">
+							<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"></span>
+							<span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent"></span>
+						</span>
+						<span>Modo Marcador Activo: Haz clic en cualquier lugar del mapa para fijar un punto</span>
+					</div>
+					<button
+						type="button"
+						id="btn-cancel-pin-mode"
+						class="text-xs text-text-muted hover:text-primary underline ml-2"
+					>
+						Finalizar
+					</button>
+				</div>
+
+				<!-- Map Viewport (Takes 100% flex height of card) -->
+				<div class="relative flex-1 min-h-[520px] w-full bg-surface-tinted">
+					<div
+						id="master-map"
+						class="absolute inset-0 z-0 h-full w-full"
+						data-points={JSON.stringify(mapPoints)}
+						data-map-state="loading"
+						role="img"
+						aria-label="Mapa maestro interactivo con múltiples desarrollos en Lambayeque"
+					/>
+
+					<!-- Top Floating Controls: Zoom Controls and Counter Badge cleanly separated side-by-side -->
+					<div class="pointer-events-none absolute top-4 left-4 z-20 flex flex-wrap items-center gap-3">
+						<!-- Custom Zoom In / Zoom Out Controls -->
+						<div class="pointer-events-auto flex overflow-hidden rounded-xl border border-outline bg-surface/95 shadow-level-1 backdrop-blur-md">
+							<button
+								type="button"
+								id="btn-zoom-in"
+								class="flex h-9 w-9 items-center justify-center text-primary hover:bg-surface-tinted hover:text-accent border-r border-outline/70 transition-colors"
+								title="Acercar mapa (+)"
+								aria-label="Acercar mapa"
+							>
+								<span class="material-symbols-outlined text-[20px]">add</span>
+							</button>
+							<button
+								type="button"
+								id="btn-zoom-out"
+								class="flex h-9 w-9 items-center justify-center text-primary hover:bg-surface-tinted hover:text-accent transition-colors"
+								title="Alejar mapa (-)"
+								aria-label="Alejar mapa"
+							>
+								<span class="material-symbols-outlined text-[20px]">remove</span>
+							</button>
 						</div>
 
-						<div class="flex flex-1 flex-col justify-between p-5">
-							<div>
-								<h3 class="mb-1 font-title-lg text-title-lg font-bold text-text transition-colors group-hover:text-accent">
-									{loc.name}
-								</h3>
-								<p class="font-body-sm text-body-sm leading-relaxed text-text-muted">{loc.text}</p>
-
-								<div class="mt-3.5 flex items-center justify-between rounded-input border border-outline bg-surface-tinted p-2.5 text-[12px]">
-									<div class="flex items-center gap-2 overflow-hidden">
-										<span class="material-symbols-outlined shrink-0 text-[16px] text-accent">stars</span>
-										<span class="truncate font-medium text-text">{loc.project}</span>
-									</div>
-									<span class="shrink-0 rounded bg-accent/20 px-1.5 py-0.5 font-caption text-[10px] font-bold uppercase text-accent">
-										{loc.status}
-									</span>
-								</div>
-							</div>
-
-							<div class="mt-5 flex items-center justify-between border-t border-outline pt-3 text-[13px] font-semibold text-accent">
-								<a
-									href="#proyectos-destacados"
-									class="flex items-center gap-1 transition-all hover:gap-2 hover:underline"
-								>
-									<span>Explorar proyectos en {loc.name.split(' ')[0]}</span>
-									<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-								</a>
-							</div>
+						<!-- Separated Project Counter Badge -->
+						<div class="pointer-events-auto flex items-center gap-2 rounded-pill border border-outline bg-surface/95 px-3 py-1.5 font-caption text-xs font-semibold text-primary shadow-level-1 backdrop-blur-md">
+							<span class="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
+							<span id="active-points-counter">{mapPoints.length} Proyectos marcados</span>
 						</div>
 					</div>
-				))
-			}
+
+					<!-- Bottom Right Floating Actions: Quick close zoom and reset -->
+					<div class="pointer-events-none absolute bottom-4 right-4 z-20 flex items-center gap-2">
+						<button
+							type="button"
+							id="btn-zoom-closer"
+							class="pointer-events-auto inline-flex items-center gap-1.5 rounded-pill border border-accent/40 bg-surface/95 px-3 py-1.5 font-label-sm text-xs font-semibold text-accent shadow-level-1 backdrop-blur-md hover:bg-accent hover:text-white transition-all"
+							title="Ver los desarrollos de cerca con zoom detallado"
+						>
+							<span class="material-symbols-outlined text-[16px]">zoom_in</span>
+							<span>Ver de cerca</span>
+						</button>
+
+						<button
+							type="button"
+							id="btn-fit-bounds"
+							class="pointer-events-auto inline-flex items-center gap-1.5 rounded-pill border border-outline bg-surface/95 px-3 py-1.5 font-label-sm text-xs font-semibold text-primary shadow-level-1 backdrop-blur-md hover:bg-surface hover:text-accent transition-all"
+							title="Ajustar vista para ver todos los puntos"
+						>
+							<span class="material-symbols-outlined text-[16px]">center_focus_strong</span>
+							<span>Ver todos</span>
+						</button>
+					</div>
+
+					<!-- Loading Overlay -->
+					<div
+						id="map-loading-state"
+						class="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center bg-surface-tinted text-text-muted"
+					>
+						<div class="flex items-center gap-2 rounded-pill bg-surface/90 px-3 py-1.5 font-label-sm shadow-level-1 backdrop-blur-sm">
+							<span class="h-3.5 w-3.5 animate-spin rounded-full border-2 border-outline border-t-accent"></span>
+							<span class="text-xs">Cargando mapa interactivo...</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- User Custom Markers Drawer (if user added points) -->
+				<div
+					id="user-markers-drawer"
+					class="hidden border-t border-outline bg-surface p-4 text-xs"
+				>
+					<div class="flex items-center justify-between mb-2">
+						<span class="font-bold text-primary flex items-center gap-1.5">
+							<span class="material-symbols-outlined text-[16px] text-accent">push_pin</span>
+							<span>Tus Puntos Marcados en el Mapa</span>
+						</span>
+						<button
+							type="button"
+							id="btn-clear-user-markers"
+							class="text-status-sold-text hover:underline text-xs"
+						>
+							Borrar mis marcas
+						</button>
+					</div>
+					<div id="user-markers-list" class="flex flex-wrap gap-2">
+						<!-- Dynamically populated -->
+					</div>
+				</div>
+			</div>
+
+			<!-- Side Explorer Column (4 cols) -->
+			<div class="flex flex-col gap-3 lg:col-span-4">
+				<div class="flex items-center justify-between px-1">
+					<span class="font-label-md text-label-md font-bold text-primary">
+						Directorio de Desarrollos
+					</span>
+					<a href="/proyectos" class="font-label-sm text-xs font-semibold text-accent hover:underline">
+						Ver catálogo &rarr;
+					</a>
+				</div>
+
+				<!-- Quick Zone Filter Chips directly controlling the directory and map -->
+				<div class="flex flex-wrap items-center gap-1.5 pb-1">
+					<button
+						type="button"
+						data-filter="todos"
+						class="map-filter-btn active rounded-pill border border-primary bg-primary px-3 py-1 font-label-sm text-xs font-semibold text-white transition-all shadow-sm"
+					>
+						Todos ({mapPoints.length})
+					</button>
+					<button
+						type="button"
+						data-filter="pimentel"
+						class="map-filter-btn rounded-pill border border-outline bg-surface px-3 py-1 font-label-sm text-xs font-semibold text-text-muted hover:border-accent hover:text-accent transition-all"
+					>
+						Pimentel
+					</button>
+					<button
+						type="button"
+						data-filter="chiclayo"
+						class="map-filter-btn rounded-pill border border-outline bg-surface px-3 py-1 font-label-sm text-xs font-semibold text-text-muted hover:border-accent hover:text-accent transition-all"
+					>
+						Chiclayo Urbano
+					</button>
+					<button
+						type="button"
+						data-filter="reque"
+						class="map-filter-btn rounded-pill border border-outline bg-surface px-3 py-1 font-label-sm text-xs font-semibold text-text-muted hover:border-accent hover:text-accent transition-all"
+					>
+						Reque & Eje Sur
+					</button>
+				</div>
+
+				<!-- Scrollable Project List -->
+				<div
+					id="projects-list-container"
+					class="flex max-h-[600px] flex-col gap-3 overflow-y-auto pr-1"
+				>
+					{
+						mapPoints.map((item) => (
+							<div
+								data-project-id={item.id}
+								data-zone-category={item.zoneCategory}
+								data-lat={item.lat}
+								data-lng={item.lng}
+								class="project-item-card group cursor-pointer rounded-card border border-outline bg-surface p-3.5 transition-all duration-200 hover:border-accent hover:shadow-level-2"
+							>
+								<div class="flex gap-3">
+									<img
+										src={item.image}
+										alt={item.title}
+										class="h-20 w-24 shrink-0 rounded-input object-cover border border-outline/50 group-hover:scale-[1.02] transition-transform duration-300"
+										loading="lazy"
+									/>
+									<div class="flex flex-1 flex-col justify-between overflow-hidden">
+										<div>
+											<div class="flex items-center justify-between gap-1">
+												<span class="truncate font-caption text-[11px] font-semibold text-accent uppercase tracking-wide">
+													{item.zone.split('·')[0]}
+												</span>
+												<span
+													class:list={[
+														'rounded-pill px-2 py-0.5 font-caption text-[9px] font-bold uppercase shrink-0',
+														item.statusVariant === 'available' && 'bg-status-available-bg text-status-available-text border border-status-available-border',
+														item.statusVariant === 'upcoming' && 'bg-status-upcoming-bg text-status-upcoming-text border border-status-upcoming-border',
+														item.statusVariant === 'sold' && 'bg-status-sold-bg text-status-sold-text border border-status-sold-border',
+													]}
+												>
+													{item.status}
+												</span>
+											</div>
+											<h4 class="truncate font-title-sm text-sm font-bold text-primary transition-colors group-hover:text-accent">
+												{item.title}
+											</h4>
+											<p class="truncate font-body-sm text-[11px] text-text-muted mt-0.5">
+												{item.type}
+											</p>
+										</div>
+										<div class="mt-2 flex items-center justify-between pt-1 border-t border-outline/60">
+											<span class="font-bold text-primary text-xs">{item.price}</span>
+											<span class="inline-flex items-center gap-0.5 font-label-sm text-[11px] font-semibold text-accent group-hover:underline">
+												<span>Ubicar</span>
+												<span class="material-symbols-outlined text-[14px]">my_location</span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						))
+					}
+				</div>
+
+				<!-- Strategic Territory Note -->
+				<div class="rounded-card border border-outline bg-surface p-4 text-xs text-text-muted">
+					<div class="flex items-center gap-2 font-bold text-primary mb-1">
+						<span class="material-symbols-outlined text-[18px] text-accent">verified</span>
+						<span>Corredor Chiclayo – Pimentel – Reque</span>
+					</div>
+					<p class="leading-relaxed">
+						Proyectos auditados con factibilidad de servicios, zonificación aprobada e inscripción en Sunarp.
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
+
+<script>
+	import L from 'leaflet';
+
+	interface MapPoint {
+		id: string;
+		title: string;
+		zone: string;
+		zoneCategory: 'todos' | 'pimentel' | 'chiclayo' | 'reque';
+		lat: number;
+		lng: number;
+		type: string;
+		price: string;
+		status: string;
+		statusVariant: 'available' | 'upcoming' | 'sold';
+		description: string;
+		image: string;
+		link: string;
+	}
+
+	interface UserPin {
+		id: string;
+		name: string;
+		lat: number;
+		lng: number;
+		marker: L.Marker;
+	}
+
+	let map: L.Map | null = null;
+	const markersMap = new Map<string, L.Marker>();
+	const userPins: UserPin[] = [];
+	let isPinModeActive = false;
+
+	const initMasterMap = () => {
+		const mapEl = document.getElementById('master-map') as HTMLElement | null;
+		if (!mapEl || map) return;
+
+		let points: MapPoint[] = [];
+		try {
+			points = JSON.parse(mapEl.dataset.points || '[]');
+		} catch (err) {
+			console.error('Error parsing map points', err);
+			return;
+		}
+
+		if (points.length === 0) return;
+
+		// Calculate bounds or center
+		const lats = points.map((p) => p.lat);
+		const lngs = points.map((p) => p.lng);
+		const minLat = Math.min(...lats);
+		const maxLat = Math.max(...lats);
+		const minLng = Math.min(...lngs);
+		const maxLng = Math.max(...lngs);
+
+		const centerLat = (minLat + maxLat) / 2;
+		const centerLng = (minLng + maxLng) / 2;
+
+		map = L.map(mapEl, {
+			center: [centerLat, centerLng],
+			zoom: 12,
+			zoomSnap: 0.5,
+			zoomControl: false,
+			attributionControl: false,
+			scrollWheelZoom: true,
+			doubleClickZoom: true,
+		});
+
+		// Free, clean OpenStreetMap tiles
+		const tileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; OpenStreetMap contributors',
+			crossOrigin: true,
+		});
+
+		const loadingStateEl = document.getElementById('map-loading-state');
+		tileLayer.once('load', () => {
+			if (loadingStateEl) {
+				loadingStateEl.style.opacity = '0';
+				loadingStateEl.style.pointerEvents = 'none';
+				window.setTimeout(() => loadingStateEl.remove(), 300);
+			}
+		});
+
+		tileLayer.addTo(map);
+
+		// Custom emerald radar icon factory
+		const createEmeraldIcon = (title: string) => {
+			return L.divIcon({
+				className: 'custom-master-marker',
+				html: `
+					<div class="marker-wrapper relative flex flex-col items-center cursor-pointer group">
+						<div class="marker-pill rounded-full bg-[#0b2824] border border-white/40 px-2.5 py-0.5 text-[10px] font-bold text-white shadow-md transition-transform group-hover:scale-110 whitespace-nowrap mb-1">
+							${title}
+						</div>
+						<div class="relative flex items-center justify-center">
+							<span class="absolute inline-flex h-8 w-8 animate-ping rounded-full bg-[#0ca65d]/40 opacity-75"></span>
+							<span class="relative flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-[#0ca65d] shadow-lg">
+								<span class="h-2 w-2 rounded-full bg-white"></span>
+							</span>
+						</div>
+					</div>
+				`,
+				iconSize: [120, 60],
+				iconAnchor: [60, 52],
+				popupAnchor: [0, -50],
+			});
+		};
+
+		// Create user custom marker icon
+		const createUserPinIcon = (name: string) => {
+			return L.divIcon({
+				className: 'custom-user-marker',
+				html: `
+					<div class="marker-wrapper relative flex flex-col items-center cursor-pointer group">
+						<div class="marker-pill rounded-full bg-[#1e40af] border border-white px-2 py-0.5 text-[10px] font-bold text-white shadow-md whitespace-nowrap mb-1">
+							📍 ${name}
+						</div>
+						<div class="relative flex items-center justify-center">
+							<span class="relative flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-[#2563eb] shadow-lg">
+								<span class="h-1.5 w-1.5 rounded-full bg-white"></span>
+							</span>
+						</div>
+					</div>
+				`,
+				iconSize: [100, 50],
+				iconAnchor: [50, 44],
+				popupAnchor: [0, -42],
+			});
+		};
+
+		// Add all project markers to the map
+		const bounds = L.latLngBounds([]);
+
+		points.forEach((point) => {
+			const latLng: [number, number] = [point.lat, point.lng];
+			bounds.extend(latLng);
+
+			const marker = L.marker(latLng, {
+				icon: createEmeraldIcon(point.title),
+				title: point.title,
+			}).addTo(map!);
+
+			// Rich Popup HTML
+			const popupContent = `
+				<div class="custom-map-popup" style="width: 220px; font-family: inherit;">
+					<img src="${point.image}" alt="${point.title}" style="width: 100%; height: 110px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;" />
+					<div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: #0ca65d; letter-spacing: 0.04em;">${point.zone}</div>
+					<div style="font-size: 14px; font-weight: 700; color: #0b2824; line-height: 1.2; margin-top: 2px;">${point.title}</div>
+					<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 11px;">
+						<span style="font-weight: 700; color: #0b2824;">${point.price}</span>
+						<span style="background: #eef7f2; color: #0ca65d; border-radius: 999px; padding: 2px 6px; font-weight: 700; font-size: 9px; text-transform: uppercase;">${point.status}</span>
+					</div>
+					<a href="${point.link}" style="display: block; text-align: center; margin-top: 10px; background: #0ca65d; color: #ffffff; text-decoration: none; padding: 6px 12px; border-radius: 6px; font-weight: 600; font-size: 12px;">
+						Ver detalles del proyecto &rarr;
+					</a>
+				</div>
+			`;
+
+			marker.bindPopup(popupContent, { maxWidth: 260 });
+			markersMap.set(point.id, marker);
+
+			marker.on('click', () => {
+				highlightProjectCard(point.id);
+			});
+		});
+
+		// Fit map to points with padding
+		map.fitBounds(bounds, { padding: [40, 40] });
+
+		// Zoom & View Action Controls
+		const btnZoomIn = document.getElementById('btn-zoom-in');
+		const btnZoomOut = document.getElementById('btn-zoom-out');
+		const btnZoomCloser = document.getElementById('btn-zoom-closer');
+		const btnFitBounds = document.getElementById('btn-fit-bounds');
+
+		if (btnZoomIn) {
+			btnZoomIn.addEventListener('click', () => {
+				map?.zoomIn(1);
+			});
+		}
+		if (btnZoomOut) {
+			btnZoomOut.addEventListener('click', () => {
+				map?.zoomOut(1);
+			});
+		}
+		if (btnZoomCloser) {
+			btnZoomCloser.addEventListener('click', () => {
+				if (!map) return;
+				const targetZoom = Math.min(map.getZoom() + 2.5, 16.5);
+				map.setZoom(targetZoom, { animate: true });
+			});
+		}
+		if (btnFitBounds) {
+			btnFitBounds.addEventListener('click', () => {
+				if (!map) return;
+				map.fitBounds(bounds, { padding: [40, 40] });
+			});
+		}
+
+		// Zone filter buttons
+		const filterButtons = document.querySelectorAll<HTMLButtonElement>('.map-filter-btn');
+		const projectCards = document.querySelectorAll<HTMLElement>('.project-item-card');
+		const pointsCounter = document.getElementById('active-points-counter');
+
+		filterButtons.forEach((btn) => {
+			btn.addEventListener('click', () => {
+				filterButtons.forEach((b) => {
+					b.classList.remove('active', 'border-primary', 'bg-primary', 'text-white');
+					b.classList.add('border-outline', 'bg-surface', 'text-text-muted');
+				});
+				btn.classList.add('active', 'border-primary', 'bg-primary', 'text-white');
+				btn.classList.remove('border-outline', 'bg-surface', 'text-text-muted');
+
+				const selectedZone = btn.dataset.filter;
+				let visibleCount = 0;
+				const currentBounds = L.latLngBounds([]);
+
+				points.forEach((point) => {
+					const marker = markersMap.get(point.id);
+					const isVisible = selectedZone === 'todos' || point.zoneCategory === selectedZone;
+
+					if (marker) {
+						if (isVisible) {
+							if (!map!.hasLayer(marker)) marker.addTo(map!);
+							currentBounds.extend([point.lat, point.lng]);
+							visibleCount++;
+						} else {
+							if (map!.hasLayer(marker)) map!.removeLayer(marker);
+						}
+					}
+				});
+
+				projectCards.forEach((card) => {
+					const cardZone = card.dataset.zoneCategory;
+					if (selectedZone === 'todos' || cardZone === selectedZone) {
+						card.style.display = 'block';
+					} else {
+						card.style.display = 'none';
+					}
+				});
+
+				if (pointsCounter) {
+					pointsCounter.textContent = `${visibleCount} Proyectos en el mapa`;
+				}
+
+				if (currentBounds.isValid()) {
+					map!.fitBounds(currentBounds, { padding: [50, 50], maxZoom: 14 });
+				}
+			});
+		});
+
+		// Clicking a project card flies to marker and opens popup
+		projectCards.forEach((card) => {
+			card.addEventListener('click', () => {
+				const id = card.dataset.projectId;
+				const lat = Number(card.dataset.lat);
+				const lng = Number(card.dataset.lng);
+
+				if (!id || !Number.isFinite(lat) || !Number.isFinite(lng) || !map) return;
+
+				map.flyTo([lat, lng], 15, {
+					duration: 1.2,
+				});
+
+				const marker = markersMap.get(id);
+				if (marker) {
+					window.setTimeout(() => {
+						marker.openPopup();
+					}, 800);
+				}
+
+				highlightProjectCard(id);
+			});
+		});
+
+		// User Interactive Pin Marking Mode
+		const btnTogglePinMode = document.getElementById('btn-toggle-pin-mode');
+		const btnCancelPinMode = document.getElementById('btn-cancel-pin-mode');
+		const markingBanner = document.getElementById('marking-banner');
+		const pinModeText = document.getElementById('pin-mode-text');
+		const userMarkersDrawer = document.getElementById('user-markers-drawer');
+		const userMarkersList = document.getElementById('user-markers-list');
+		const btnClearUserMarkers = document.getElementById('btn-clear-user-markers');
+
+		const togglePinMode = (active: boolean) => {
+			isPinModeActive = active;
+			if (mapEl) {
+				mapEl.style.cursor = active ? 'crosshair' : 'default';
+			}
+
+			if (markingBanner) {
+				if (active) markingBanner.classList.remove('hidden');
+				else markingBanner.classList.add('hidden');
+			}
+
+			if (pinModeText) {
+				pinModeText.textContent = active ? 'Modo activo (haz clic)' : 'Marcar punto en el mapa';
+			}
+
+			if (btnTogglePinMode) {
+				if (active) {
+					btnTogglePinMode.classList.add('bg-accent', 'text-white');
+				} else {
+					btnTogglePinMode.classList.remove('bg-accent', 'text-white');
+				}
+			}
+		};
+
+		if (btnTogglePinMode) {
+			btnTogglePinMode.addEventListener('click', () => {
+				togglePinMode(!isPinModeActive);
+			});
+		}
+
+		if (btnCancelPinMode) {
+			btnCancelPinMode.addEventListener('click', () => {
+				togglePinMode(false);
+			});
+		}
+
+		// Click on map to drop a point
+		map.on('click', (e: L.LeafletMouseEvent) => {
+			if (!isPinModeActive || !map) return;
+
+			const lat = Number(e.latlng.lat.toFixed(5));
+			const lng = Number(e.latlng.lng.toFixed(5));
+			const pinIndex = userPins.length + 1;
+			const pinName = `Punto #${pinIndex}`;
+
+			const userMarker = L.marker([lat, lng], {
+				icon: createUserPinIcon(pinName),
+			}).addTo(map);
+
+			const pinId = `custom-pin-${Date.now()}`;
+
+			const userPopupContent = `
+				<div style="font-family: inherit; width: 190px;">
+					<span style="font-size: 10px; font-weight: 700; color: #2563eb; text-transform: uppercase;">Punto marcado por ti</span>
+					<div style="font-size: 13px; font-weight: 700; color: #0b2824; margin-top: 2px;">${pinName}</div>
+					<div style="font-size: 11px; color: #5f756f; margin-top: 4px;">Lat: ${lat}<br/>Lng: ${lng}</div>
+					<button type="button" class="btn-delete-this-pin" style="margin-top: 8px; width: 100%; border: 1px solid #fee2e2; background: #fef2f2; color: #b91c1c; font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 6px; cursor: pointer;">
+						Eliminar marcador
+					</button>
+				</div>
+			`;
+
+			userMarker.bindPopup(userPopupContent).openPopup();
+
+			userMarker.on('popupopen', () => {
+				const deleteBtn = document.querySelector('.btn-delete-this-pin');
+				if (deleteBtn) {
+					deleteBtn.addEventListener('click', () => {
+						map?.removeLayer(userMarker);
+						const idx = userPins.findIndex((p) => p.id === pinId);
+						if (idx !== -1) userPins.splice(idx, 1);
+						updateUserMarkersDrawer();
+					});
+				}
+			});
+
+			userPins.push({
+				id: pinId,
+				name: pinName,
+				lat,
+				lng,
+				marker: userMarker,
+			});
+
+			updateUserMarkersDrawer();
+		});
+
+		const updateUserMarkersDrawer = () => {
+			if (!userMarkersDrawer || !userMarkersList) return;
+			if (userPins.length === 0) {
+				userMarkersDrawer.classList.add('hidden');
+				return;
+			}
+
+			userMarkersDrawer.classList.remove('hidden');
+			userMarkersList.innerHTML = '';
+
+			userPins.forEach((pin) => {
+				const tag = document.createElement('button');
+				tag.type = 'button';
+				tag.className =
+					'inline-flex items-center gap-1 rounded-pill bg-blue-50 border border-blue-200 px-2.5 py-1 text-xs font-semibold text-blue-800 hover:bg-blue-100 transition-all';
+				tag.innerHTML = `<span>📍 ${pin.name} (${pin.lat}, ${pin.lng})</span>`;
+				tag.addEventListener('click', () => {
+					map?.flyTo([pin.lat, pin.lng], 15);
+					pin.marker.openPopup();
+				});
+				userMarkersList.appendChild(tag);
+			});
+		};
+
+		if (btnClearUserMarkers) {
+			btnClearUserMarkers.addEventListener('click', () => {
+				userPins.forEach((p) => {
+					if (map && map.hasLayer(p.marker)) map.removeLayer(p.marker);
+				});
+				userPins.length = 0;
+				updateUserMarkersDrawer();
+			});
+		}
+
+		// Automatically invalidate Leaflet size when container flexes
+		if (window.ResizeObserver && mapEl) {
+			const resizeObserver = new ResizeObserver(() => {
+				map?.invalidateSize({ animate: false });
+			});
+			resizeObserver.observe(mapEl);
+		}
+
+		requestAnimationFrame(() => {
+			map?.invalidateSize({ animate: false });
+		});
+	};
+
+	const highlightProjectCard = (id: string) => {
+		const cards = document.querySelectorAll<HTMLElement>('.project-item-card');
+		cards.forEach((card) => {
+			if (card.dataset.projectId === id) {
+				card.classList.add('border-accent', 'ring-2', 'ring-accent/20', 'bg-accent/5');
+				card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+			} else {
+				card.classList.remove('border-accent', 'ring-2', 'ring-accent/20', 'bg-accent/5');
+			}
+		});
+	};
+
+	document.addEventListener('astro:page-load', initMasterMap);
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initMasterMap);
+	} else {
+		initMasterMap();
+	}
+</script>
+
+<style is:global>
+	.leaflet-container {
+		background-color: #eef3f0 !important;
+		font-family: inherit;
+		cursor: default;
+	}
+	.leaflet-tile-pane {
+		filter: saturate(0.85) contrast(1.02);
+	}
+	.leaflet-popup-content-wrapper {
+		background: #ffffff;
+		color: #10231f;
+		border: 1px solid #e1e8e5;
+		border-radius: 12px;
+		box-shadow: 0 12px 28px -6px rgba(11, 40, 36, 0.15);
+		padding: 4px 6px;
+	}
+	.leaflet-popup-tip {
+		background: #ffffff;
+	}
+	.custom-master-marker,
+	.custom-user-marker {
+		background: transparent !important;
+		border: none !important;
+	}
+	.leaflet-control-zoom {
+		display: none !important;
+	}
+</style>

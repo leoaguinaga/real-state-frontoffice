@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/layout/Header';
+import WhatsAppButton from '../../components/layout/WhatsAppButton.astro';
+import Footer from '../../components/layout/Footer.astro';
+import ProyectosHero from '../../components/proyectos/ProyectosHero.astro';
+import ProjectFilters from '../../components/proyectos/ProjectFilters.astro';
+import ProyectosGrid from '../../components/proyectos/ProyectosGrid.astro';
+import ConsultoriaBanner from '../../components/proyectos/ConsultoriaBanner.astro';
+import { PROJECTS } from '../../data/projects';
+
+const counts = {
+	all: PROJECTS.length,
+	lotes: PROJECTS.filter((p) => p.type === 'lotes').length,
+	dptos: PROJECTS.filter((p) => p.type === 'dptos').length,
+	casas: PROJECTS.filter((p) => p.type === 'casas').length,
+};
+---
+
+<Layout
+	title="Catálogo de Proyectos Inmobiliarios | Montara"
+	description="Explora lotes campestres, departamentos urbanos y casas de playa en Chiclayo, Pimentel y el norte del Perú con viabilidad técnica y legal certificada."
+>
+	<Header />
+	<main class="min-h-screen w-full bg-background">
+		<ProyectosHero totalCount={counts.all} />
+		<ProjectFilters counts={counts} />
+		<ProyectosGrid projects={PROJECTS} />
+		<ConsultoriaBanner />
+	</main>
+	<WhatsAppButton />
+	<Footer />
+</Layout>

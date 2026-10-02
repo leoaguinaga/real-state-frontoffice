@@ -1,0 +1,180 @@
+---
+interface Props {
+	counts: {
+		all: number;
+		lotes: number;
+		dptos: number;
+		casas: number;
+	};
+}
+
+const { counts } = Astro.props;
+---
+
+<section
+	class="sticky top-16 z-40 w-full border-b border-outline bg-surface/95 py-4 backdrop-blur-md shadow-sm transition-all"
+	id="catalogo-filtros"
+>
+	<div class="container-page flex flex-col gap-4">
+		<!-- Primary Filter Chips Row -->
+		<div class="flex flex-wrap items-center justify-between gap-4">
+			<!-- Type Segmented Filter Chips -->
+			<div class="flex max-w-full items-center gap-2 overflow-x-auto pb-1" role="tablist">
+				<span class="mr-1 hidden font-caption text-caption font-semibold uppercase tracking-wider text-text-muted sm:inline-block">
+					Tipo:
+				</span>
+				<button
+					type="button"
+					class="filter-type-chip whitespace-nowrap rounded-pill bg-primary px-4 py-1.5 font-label-md text-label-md font-semibold text-white shadow-sm transition-all"
+					data-type="all"
+				>
+					Todos ({counts.all})
+				</button>
+				<button
+					type="button"
+					class="filter-type-chip whitespace-nowrap rounded-pill bg-surface-tinted px-4 py-1.5 font-label-md text-label-md font-medium text-text transition-all hover:bg-outline"
+					data-type="lotes"
+				>
+					Terrenos ({counts.lotes})
+				</button>
+				<button
+					type="button"
+					class="filter-type-chip whitespace-nowrap rounded-pill bg-surface-tinted px-4 py-1.5 font-label-md text-label-md font-medium text-text transition-all hover:bg-outline"
+					data-type="dptos"
+				>
+					Departamentos ({counts.dptos})
+				</button>
+				<button
+					type="button"
+					class="filter-type-chip whitespace-nowrap rounded-pill bg-surface-tinted px-4 py-1.5 font-label-md text-label-md font-medium text-text transition-all hover:bg-outline"
+					data-type="casas"
+				>
+					Casas ({counts.casas})
+				</button>
+			</div>
+
+			<!-- View Controls & Quick Reset -->
+			<div class="ml-auto flex items-center gap-3">
+				<button
+					type="button"
+					class="inline-flex items-center gap-1 rounded-input px-2.5 py-1 font-label-md text-label-md text-text-muted transition-colors hover:text-accent"
+					id="reset-filters"
+				>
+					<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+					<span>Limpiar filtros</span>
+				</button>
+
+				<div class="h-5 w-px bg-outline"></div>
+
+				<!-- Layout Toggle Switch -->
+				<div class="flex items-center rounded-xl bg-surface-tinted p-1">
+					<button
+						type="button"
+						class="rounded-lg bg-surface p-1.5 text-accent shadow-sm transition-colors"
+						id="grid-view-btn"
+						title="Vista en cuadrícula"
+						aria-label="Vista en cuadrícula"
+					>
+						<span class="material-symbols-outlined text-[20px]">grid_view</span>
+					</button>
+					<button
+						type="button"
+						class="rounded-lg p-1.5 text-text-muted transition-colors hover:text-text"
+						id="list-view-btn"
+						title="Vista en lista compacta"
+						aria-label="Vista en lista compacta"
+					>
+						<span class="material-symbols-outlined text-[20px]">view_list</span>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Secondary Detailed Filter Dropdowns -->
+		<div class="grid grid-cols-2 gap-3 pt-1 md:grid-cols-4">
+			<!-- Filter: Estado -->
+			<div class="relative">
+				<label class="mb-1 block font-caption text-caption font-semibold uppercase tracking-wider text-text-muted">
+					Estado de Proyecto
+				</label>
+				<div class="relative">
+					<select
+						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all focus:border-accent focus:outline-none"
+						id="filter-status"
+					>
+						<option value="all">Todos los estados</option>
+						<option value="comercializacion">En comercialización</option>
+						<option value="preventa">Próximamente / Preventa</option>
+						<option value="comercializado">Comercializados (Histórico)</option>
+					</select>
+					<span class="material-symbols-outlined pointer-events-none absolute right-3 top-3 text-[18px] text-text-muted">
+						expand_more
+					</span>
+				</div>
+			</div>
+
+			<!-- Filter: Ubicación -->
+			<div class="relative">
+				<label class="mb-1 block font-caption text-caption font-semibold uppercase tracking-wider text-text-muted">
+					Ubicación
+				</label>
+				<div class="relative">
+					<select
+						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all focus:border-accent focus:outline-none"
+						id="filter-location"
+					>
+						<option value="all">Todas las ciudades</option>
+						<option value="chiclayo">Chiclayo y distritos</option>
+						<option value="trujillo">Trujillo</option>
+						<option value="lima">Lima</option>
+						<option value="piura">Piura</option>
+					</select>
+					<span class="material-symbols-outlined pointer-events-none absolute right-3 top-3 text-[18px] text-text-muted">
+						location_on
+					</span>
+				</div>
+			</div>
+
+			<!-- Filter: Rango Inversión -->
+			<div class="relative">
+				<label class="mb-1 block font-caption text-caption font-semibold uppercase tracking-wider text-text-muted">
+					Rango de Inversión
+				</label>
+				<div class="relative">
+					<select
+						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all focus:border-accent focus:outline-none"
+						id="filter-budget"
+					>
+						<option value="all">Cualquier monto</option>
+						<option value="under50">Hasta $50,000 USD</option>
+						<option value="50to100">$50,000 - $100,000 USD</option>
+						<option value="above100">Más de $100,000 USD</option>
+					</select>
+					<span class="material-symbols-outlined pointer-events-none absolute right-3 top-3 text-[18px] text-text-muted">
+						payments
+					</span>
+				</div>
+			</div>
+
+			<!-- Filter: Modalidad -->
+			<div class="relative">
+				<label class="mb-1 block font-caption text-caption font-semibold uppercase tracking-wider text-text-muted">
+					Modalidad de Proyecto
+				</label>
+				<div class="relative">
+					<select
+						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all focus:border-accent focus:outline-none"
+						id="filter-developer"
+					>
+						<option value="all">Todos los desarrollos</option>
+						<option value="montara">Proyectos Montara</option>
+						<option value="aliado">Proyectos Aliados</option>
+					</select>
+					<span class="material-symbols-outlined pointer-events-none absolute right-3 top-3 text-[18px] text-text-muted">
+						corporate_fare
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
