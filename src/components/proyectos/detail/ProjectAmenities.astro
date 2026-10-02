@@ -1,0 +1,96 @@
+---
+const amenitiesList = [
+	{
+		title: 'Pórtico Controlado 24/7',
+		desc: 'Acceso vehicular automatizado, cabina de vigilancia permanente y cerco perimétrico consolidado.',
+		icon: 'shield',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuA0-tFRPBWN7hDsm-c9ES0Aa2lvOOcrQra_B1j6FTJQojYucEvhIX0wASpRw9-99tuK0PPuntt2CNW27YhwA7_5yKkTnw1WnYFUp6ezozhABCqY7YFhxueKqGWdNdr6oaPLPjJ6CHTblmg06IFHkQG1-I3D8RgxUtt8FQhVVXJlW4Fc5pSILIW7Sfl_xnvvifPtk2Qyg8S1QHhhaYe0GDAoxkm7r5_RZcuU_i8TVlUaZptON8YSzyqKlw',
+	},
+	{
+		title: 'Club House & Piscina',
+		desc: 'Espacio de esparcimiento con piscina de nado, terrazas de parrilla y salones sociales abiertos a la brisa.',
+		icon: 'pool',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuD1ltbxaeC8gh1nqWDqZq1F8BtP2b-yLkZDFQg1UNcUI36A7ALApJheD-4j1i98a-Qtp2QR3F6XdZuAH5HmPzYooQKdB9sYyN8ApfBjlyDIqhlNcYkCQHSgc_Uzk7uMOC_KC2HIB_TvG7UNLQJy4RBm3tldUAL2MBsZsRrK4ex-KfnQ4cOYaXZVDyhdX72UhZ88B-aHtWE3stoyp5UczhuFXYe1t9UuRQzR7KS_bZjUKN6zpWUhIYIiXA',
+	},
+	{
+		title: 'Vías Amplias y Arborización',
+		desc: 'Trazados de 12 metros de sección con senderos peatonales y plan de paisajismo con algarrobos y poncianas.',
+		icon: 'park',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuBEdweIuevD8PBIvGga4cIsfGYQd2ViwKTupybelRoyNZuj03gqUGJcOQLr2Xty8RjFSHrgQURPj4aov44Ce5WXbX8X0yWNOmedJfIJr-9Pmq62nrFPl72NXF_MRxb_Z-k5mFMtwhBJkMDkTRBkMzMKq9jUiqBjidMCUC2GfSYOnub3KltxKW66z1hvb8jVPxRUfewStEf6rIwtqtZYfyp1dW8F6dpWMLy-ANnGq8L1UOuBNgI061wsng',
+	},
+	{
+		title: 'Servicios & Factibilidad',
+		desc: 'Red proyectada de agua para riego tecnificado y punto de energía eléctrica independiente por lote.',
+		icon: 'water_drop',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuDNzUPBywBHLvCM1d3qkengFcdpv_9KLp7IWYh7bjVS2Y003--t6q49dZYmS32hubGhw2Cf7ykaZ_99ydYpOod1lWjmospa_Cq_tvPSm7bNcdbYyvRUNHqliJ6D2ubnNWrg09XC4I3bCwQE24mCoAL1FIW30NHIkFTVnezorS_QhpR6Cd95sQDUYp73ubvE7ec4-pDZepVjaxnEeTzRw9fyW7WI1Xrx9gH4zGUT2tXfX07ndugheWYo2A',
+	},
+	{
+		title: 'Circuito de Caminata & Juegos',
+		desc: 'Pista de trote perimetral, áreas recreativas infantiles construidas en madera tratada y zonas pet-friendly.',
+		icon: 'directions_run',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuA4BeXNacbIGCaDWr3Q4Pw1x5md8flUBmONVOSDWOSOzDnyb6ZZaSisi3DQcH1LbQbeodrNbcbrTjV1RvJibpGY1tUnJLZDawpogoSgg7d4fhNDUygH7YhayJvVWPXD71eIJA1JgGUyxgt1SkbwkLsDbOYprM8iNILCK16w3X9PzIhcYMSFfUzhIlB4n8BvunuukUcu9jUoXAw2otuVDl_X_3Nj0U1ITlN5eCEaySEI-LUhfx83Zyj3nQ',
+	},
+];
+---
+
+<section class="w-full bg-background py-20 lg:py-28 border-b border-outline">
+	<div class="container-page">
+		<div class="mx-auto mb-16 flex max-w-[48rem] flex-col gap-3 text-center">
+			<span class="font-caption text-caption uppercase font-semibold text-accent tracking-wider">
+				Equipamiento Residencial
+			</span>
+			<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary tracking-tight">
+				Amenidades Proyectadas con Sentido Arquitectónico
+			</h2>
+			<p class="font-body-md text-body-md text-text-muted">
+				Infraestructura campestre diseñada para promover bienestar integral, privacidad absoluta y una experiencia residencial de alto estándar.
+			</p>
+		</div>
+
+		<!-- Amenities Grid -->
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+			{
+				amenitiesList.map((item) => (
+					<div class="group flex flex-col rounded-card border border-outline/80 bg-surface shadow-level-1 overflow-hidden transition-all duration-300 hover:shadow-level-2 hover:border-accent/40">
+						<div class="relative h-52 w-full overflow-hidden bg-surface-tinted">
+							<img
+								class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+								alt={item.title}
+								src={item.image}
+							/>
+							<div class="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-surface/90 text-accent backdrop-blur-md border border-outline shadow-sm">
+								<span class="material-symbols-outlined text-[22px]">{item.icon}</span>
+							</div>
+						</div>
+						<div class="flex flex-col gap-2 p-6">
+							<h3 class="font-title-lg text-title-lg font-bold text-primary">{item.title}</h3>
+							<p class="font-body-md text-body-md text-text-muted leading-relaxed">{item.desc}</p>
+						</div>
+					</div>
+				))
+			}
+
+			<!-- Amenity 6: Montara Trust Badge Card -->
+			<div class="flex flex-col justify-between rounded-card border border-primary-elevated bg-primary p-8 text-white shadow-level-2">
+				<div>
+					<div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/20 text-accent border border-accent/30">
+						<span class="material-symbols-outlined text-[28px]">verified_user</span>
+					</div>
+					<h3 class="mb-2 font-title-lg text-title-lg font-bold text-white">Comercializado bajo estándar Montara</h3>
+					<p class="font-body-md text-body-md text-white/80 leading-relaxed">
+						Evaluamos exhaustivamente la titulación, permisos y viabilidad física de cada proyecto antes de presentarlo a nuestra comunidad inversora.
+					</p>
+				</div>
+				<div class="mt-8 flex items-center gap-2 pt-4 font-label-md text-label-md font-semibold text-accent border-t border-primary-elevated">
+					<span>Seguridad patrimonial transparente</span>
+					<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

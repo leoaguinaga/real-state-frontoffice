@@ -1,0 +1,151 @@
+---
+import type { Project } from '../../../data/projects';
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<section class="w-full bg-background relative overflow-hidden pb-12 border-b border-outline">
+	<div class="container-page pt-6 md:pt-10">
+		<!-- Top Breadcrumb -->
+		<div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+			<nav class="flex items-center gap-2 font-caption text-caption text-text-muted uppercase tracking-widest">
+				<a class="hover:text-accent transition-colors" href="/proyectos">Proyectos</a>
+				<span class="text-outline">/</span>
+				<a class="hover:text-accent transition-colors" href="/proyectos">{project.locationDetail || 'Chiclayo'}</a>
+				<span class="text-outline">/</span>
+				<span class="text-primary font-semibold">{project.title}</span>
+			</nav>
+		</div>
+
+		<!-- Hero Titles & Valuation Header -->
+		<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop items-end mb-10">
+			<div class="lg:col-span-8 flex flex-col gap-3">
+				<div class="flex items-center gap-2 text-accent font-label-md text-label-md font-semibold">
+					<span class="material-symbols-outlined text-[18px]">nature_people</span>
+					<span>{project.typeLabel || 'Desarrollo Campestre Residencial & Patrimonial'}</span>
+				</div>
+				<h1 class="font-display text-display-mobile md:text-display text-primary tracking-tight font-bold">
+					{project.title}
+				</h1>
+				<p class="font-body-lg text-body-lg text-text-muted max-w-[44rem] leading-relaxed">
+					{project.description}
+				</p>
+				<div class="flex items-center gap-2 text-primary font-label-md text-label-md pt-1">
+					<span class="material-symbols-outlined text-accent text-[20px]">location_on</span>
+					<span>{project.locationDetail || 'A 25 minutos de Real Plaza Chiclayo | Lambayeque, Perú'}</span>
+				</div>
+			</div>
+
+			<div class="lg:col-span-4 flex flex-col items-start lg:items-end justify-end">
+				<div class="bg-surface p-6 rounded-card border border-outline shadow-level-1 flex flex-col w-full lg:max-w-[20rem]">
+					<span class="font-caption text-caption text-text-muted uppercase tracking-wider">Inversión referencial</span>
+					<div class="font-headline-md text-headline-md text-primary font-bold my-2">
+						Desde {project.price || '$38,000 USD'}
+					</div>
+					<p class="font-body-sm text-body-sm text-text-muted mb-5">
+						{project.priceBadge || 'Opciones de financiamiento directo y facilidades de pago inicial.'}
+					</p>
+					<a
+						class="w-full text-center py-3.5 px-6 rounded-pill bg-accent text-white font-label-md text-label-md font-semibold hover:bg-accent-hover shadow-sm transition-all"
+						href="#cotizador-funnel"
+					>
+						Calificar para este proyecto
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Cinematic Media Gallery Mosaic -->
+		<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+			<!-- Main Hero Panorama -->
+			<div class="md:col-span-8 group relative rounded-card border border-outline overflow-hidden shadow-level-2 h-[440px] md:h-[540px] bg-surface-tinted">
+				<img
+					class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+					alt={project.imageAlt || project.title}
+					src={project.image}
+				/>
+				<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent"></div>
+				<div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+					<div class="text-white max-w-[28rem]">
+						<span class="inline-block px-3 py-1 rounded-pill bg-surface/20 backdrop-blur-md font-caption text-caption uppercase tracking-wider text-white border border-white/20 mb-2">
+							Entorno &amp; Paisajismo
+						</span>
+						<h3 class="font-title-lg text-title-lg font-semibold text-white">Valles de Reque con sol permanente todo el año</h3>
+						<p class="font-body-sm text-body-sm text-white/85 mt-1">Concepción arquitectónica que integra especies arbóreas nativas y topografía plana ideal.</p>
+					</div>
+					<button
+						class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface/90 backdrop-blur-md font-label-sm text-label-sm font-semibold text-primary shadow-md hover:bg-surface border border-outline transition-all"
+						onclick="document.getElementById('modal-gallery')?.classList.remove('hidden')"
+						type="button"
+					>
+						<span class="material-symbols-outlined text-[16px]">photo_library</span>
+						<span>Ver 18 renders</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- Secondary Side Renders -->
+			<div class="md:col-span-4 flex flex-col gap-4 h-[440px] md:h-[540px]">
+				<!-- Thumbnail 1: Portico -->
+				<div class="relative flex-1 rounded-card border border-outline overflow-hidden shadow-level-1 group bg-surface-tinted">
+					<img
+						class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+						alt="Pórtico de Control 24/7"
+						src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5nE1RXK6ppas1FqgZNklcPs1sunfoam5_u4SzqYAUU594DQzRLL0PjSkCHhng3FOXsBXgtrGUAjqSRChwG9GSFnGr8bjExX4SRccFP5XP_XYJX1clIiW7SUnEiv2scnvlh94V9UnQupNgxs2JoxPN63fJ_OxW10kYDZ5rdSudEckPMy0VcAFZ6vG_ju6A3g5KKIfODH8-eeGTCpMgUqN4CfUoMbrNa4RbQV6OtTysEFMkhlEsL4H9JQ"
+					/>
+					<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
+					<div class="absolute bottom-4 left-4 text-white">
+						<span class="font-caption text-caption uppercase tracking-wider text-accent font-semibold">Master Access</span>
+						<p class="font-title-md text-title-md font-semibold text-white">Pórtico de Control 24/7</p>
+					</div>
+				</div>
+
+				<!-- Thumbnail 2: Clubhouse -->
+				<div class="relative flex-1 rounded-card border border-outline overflow-hidden shadow-level-1 group bg-surface-tinted">
+					<img
+						class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+						alt="Club House & Piscina"
+						src="https://lh3.googleusercontent.com/aida-public/AB6AXuBd75lgj7coooi05Eolc-wtd7yfLxgMfs-eYrhKkIBAksy4chMUEZ7q7mMaQaJvikbmyk_ylGx6Intpb-eSL8Fz5N_VuQaUQFSViUOBHhtDfHWxkAJ93QmF8oWrDZ6_O8P9a3rkeOK8H4H5cUWLesCHfGgS1fbjRkzVTRdW97ff8DXTligFLLo2juF6EJwDUIMX6yebenDvP0LNAyy1baZZ29iN106VTxBSjCXIFQjcAkX-si3BMjdH-Q"
+					/>
+					<div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
+					<div class="absolute bottom-4 left-4 text-white">
+						<span class="font-caption text-caption uppercase tracking-wider text-accent font-semibold">Vida Social</span>
+						<p class="font-title-md text-title-md font-semibold text-white">Club House &amp; Piscina</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Action Buttons Bar Below Hero -->
+		<div class="flex flex-wrap items-center justify-between gap-4 mt-8 pt-4 border-t border-outline/50">
+			<div class="flex flex-wrap items-center gap-4">
+				<a
+					class="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-accent text-white font-label-md text-label-md font-semibold hover:bg-accent-hover shadow-sm transition-all"
+					href="#cotizador-funnel"
+				>
+					<span class="material-symbols-outlined text-[18px]">verified</span>
+					<span>Calificar para este proyecto</span>
+				</a>
+				<button
+					class="inline-flex items-center gap-2 px-6 py-3 rounded-pill bg-surface-tinted border border-outline text-primary font-label-md text-label-md font-medium hover:bg-surface transition-colors"
+					onclick="document.getElementById('modal-visita')?.classList.remove('hidden')"
+					type="button"
+				>
+					<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+					<span>Agendar visita guiada</span>
+				</button>
+				<a
+					class="inline-flex items-center gap-2 px-4 py-3 rounded-pill text-text-muted font-label-md text-label-md font-medium hover:text-primary transition-colors"
+					href="#cotizador-funnel"
+				>
+					<span class="material-symbols-outlined text-[18px]">download</span>
+					<span>Descargar brochure referencial (PDF)</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>

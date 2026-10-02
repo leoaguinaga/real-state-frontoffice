@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/layout/Header';
+import Footer from '../../components/layout/Footer.astro';
+import WhatsAppButton from '../../components/layout/WhatsAppButton.astro';
+import { PROJECTS, type Project } from '../../data/projects';
+
+import ProjectDetailHero from '../../components/proyectos/detail/ProjectDetailHero.astro';
+import ProjectSpecBar from '../../components/proyectos/detail/ProjectSpecBar.astro';
+import ProjectMasterplan from '../../components/proyectos/detail/ProjectMasterplan.astro';
+import ProjectConnectivity from '../../components/proyectos/detail/ProjectConnectivity.astro';
+import ProjectAmenities from '../../components/proyectos/detail/ProjectAmenities.astro';
+import ProjectFunnel from '../../components/proyectos/detail/ProjectFunnel.astro';
+import ProjectStickyBar from '../../components/proyectos/detail/ProjectStickyBar.astro';
+import ProjectModals from '../../components/proyectos/detail/ProjectModals.astro';
+
+export async function getStaticPaths() {
+	return PROJECTS.map((project) => ({
+		params: { id: project.id },
+		props: { project },
+	}));
+}
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<Layout
+	title={`${project.title} | Montara Inmobiliaria`}
+	description={project.description}
+>
+	<Header />
+	<main class="min-h-screen w-full bg-background pt-20">
+		<ProjectDetailHero project={project} />
+		<ProjectSpecBar project={project} />
+		<ProjectMasterplan />
+		<ProjectConnectivity />
+		<ProjectAmenities />
+		<ProjectFunnel project={project} />
+	</main>
+	<ProjectStickyBar project={project} />
+	<ProjectModals project={project} />
+	<WhatsAppButton />
+	<Footer />
+</Layout>

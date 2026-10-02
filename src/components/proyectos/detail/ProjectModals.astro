@@ -1,0 +1,122 @@
+---
+import type { Project } from '../../../data/projects';
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+
+const galleryRenders = [
+	'https://lh3.googleusercontent.com/aida-public/AB6AXuA27XATPpuNIL-Wrq3njhsNijFbgyEK2eok5oRrHP_8ELs-0Jdqej4au5Zrh3S93qHq6ZZB1Z1m7I5fKHCGSMq2XqNO91romN1jlpHDkHAynghl4vL8lD_2uBrEfsUhLHh6E8jttmaW4x2foLlo2TP6L9LylHSq7eKawVusShalVvH4jP0s_8TAJ1vE8G6XUWDmIQda_uRn7HG-dUveKUI56Hh6LQvLdffA0b47QdMnR0GSMlznpiKnIA',
+	'https://lh3.googleusercontent.com/aida-public/AB6AXuAz7qX-7HXgwlHMQ-OV7OBokMgTSU-XsTNqfmYqRzLqj3H1ICs_l7Duj5jJkpjwOfTd9J-BWN3QWa2xTmMcuoV0LiHIUKFGFcRqphYg1bieZs8WWC1RsocOuo1YptmWWLDwjShinENoa2hIaz7fhbSfL4iEP4JEZm-q1jfPEXMk8pk5ABhqUFj8Cc5rxVAgwJg8z1MzUI1Y6Pdq5TCxRSuwfaZ__dOxli16TQ_G2-aEH9mqiRVA01n1cg',
+	'https://lh3.googleusercontent.com/aida-public/AB6AXuCvNweW7BjIOApiNqn8umJA8U80Ae9dU7D8Yz3Nxt4_D0fQHpywat_qTPYkPQ8LrBngPuvTDWSml8H88HrF9X4ZSifhnHnRJMT55dX7Fndyz0hT2ZbSCp4cGWxlfcfIEX8fofHKferSbWwazckfSfWt9Iu2l1pt2E9-btAvbkTXLVyH6MaeFtVgp-ytsOvL0pTqdQ8vAzz1enBNsp-Q8Xtc5qpW29dpUlpY1yKA8R4B2tH2VCuUMwgVVA',
+	'https://lh3.googleusercontent.com/aida-public/AB6AXuDYgoTHcDn09cs_zL4Tqy5me-CvKb_5SAKp7nmljpTUNIEpp3r2rIOB0ZooDWtQXkEuXJ7CyjYEPIB_Baev73gTc87fOU6JOqmbheLE0E6Pr8yftCLVwC8xU0UyyDSoM9gTiHzAogV9TXf_3JlHMEg2S1Zd2p4n9rIXLywpE9RPxiZUfD6bgXTnHCiVlWVSfMnRJCsrvpGcP9oDM0a_Tf8E8X-AdGlgElRjtgf4TEMN6nkUIl0GHithqA',
+	'https://lh3.googleusercontent.com/aida-public/AB6AXuBuyBtjVUgGOxsqQs5FBFtLIVUHhu0x61uwnpRVeYNN-_E64F1BW2HMptB-cApgLjp2pKsAGIYelNNH8URbIIErsBaP8ZdoD_jKboKk1op12StC8cuoBhr_UiSjqFx_wT2ABInaIZEZ4y2ykPtFWBAbUm5asRBUdgk6vfFzbPy2NFvOW4TkQjVAr8LxnR9MuRZ78o67pSgRYjmBivaVVwBN6rn6oTBM1nfl6BNuLXBIXWXiNm1OdvdjDQ',
+	'https://lh3.googleusercontent.com/aida-public/AB6AXuBE_NtYNKsvHMXGNu-Go3zOAUxxFveVW7QtjDy3qY3Lz6RG9bnT2ehC3Pw-kBRvAK_t60WIq86qMpUkZqiueVaSVVC9wz4hErXmYlcGfOOeoqmSdyONFW11ONlsGZhm0Ey7sRON6nfYn5E8MaNVglcsRRPkGJQ_b7N8sUhX400st2O0wAuBnVQglAM_vDoMcM-XDIwhFOHwBJksgBBJKCbklio6uJbEGOWywPBdd-r769P8s0wTQY6FvA',
+];
+---
+
+<!-- MODAL: AGENDAR VISITA GUIADA -->
+<div id="modal-visita" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/80 backdrop-blur-sm">
+	<div class="relative w-full max-w-md rounded-card border border-outline bg-surface p-6 md:p-8 shadow-level-3">
+		<button
+			class="absolute top-4 right-4 text-text-muted transition-colors hover:text-primary"
+			onclick="document.getElementById('modal-visita')?.classList.add('hidden')"
+			type="button"
+		>
+			<span class="material-symbols-outlined text-[24px]">close</span>
+		</button>
+		<div class="mb-1 flex items-center gap-2 font-label-sm text-label-sm font-semibold text-accent">
+			<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+			<span>Visita en Campo</span>
+		</div>
+		<h3 class="mb-2 font-title-lg text-title-lg font-bold text-primary">Agendar visita guiada a {project.title}</h3>
+		<p class="mb-6 font-body-sm text-body-sm text-text-muted">
+			Contamos con movilidad desde Chiclayo centro los días sábados y domingos para conocer el predio in situ.
+		</p>
+		<form class="space-y-4" id="visita-form">
+			<div>
+				<label class="mb-1 block font-label-sm text-label-sm font-semibold text-primary">Tu Nombre Completo</label>
+				<input
+					type="text"
+					required
+					placeholder="Carlos Mendoza"
+					class="h-11 w-full rounded-xl border border-outline bg-surface-tinted px-3 font-body-md text-primary outline-none focus:border-accent"
+				/>
+			</div>
+			<div>
+				<label class="mb-1 block font-label-sm text-label-sm font-semibold text-primary">Teléfono WhatsApp</label>
+				<input
+					type="tel"
+					required
+					placeholder="+51 987 654 321"
+					class="h-11 w-full rounded-xl border border-outline bg-surface-tinted px-3 font-body-md text-primary outline-none focus:border-accent"
+				/>
+			</div>
+			<div>
+				<label class="mb-1 block font-label-sm text-label-sm font-semibold text-primary">Día de preferencia</label>
+				<select class="h-11 w-full rounded-xl border border-outline bg-surface-tinted px-3 font-body-md text-primary outline-none focus:border-accent">
+					<option>Sábado mañana (10:00 AM)</option>
+					<option>Sábado tarde (3:30 PM)</option>
+					<option>Domingo mañana (10:00 AM)</option>
+					<option>Día de semana (Coordinar privado)</option>
+				</select>
+			</div>
+			<button
+				type="submit"
+				class="mt-4 w-full rounded-pill bg-accent py-3 font-label-md text-label-md font-semibold text-white shadow-sm transition-all hover:bg-accent-hover"
+			>
+				Confirmar Solicitud de Visita
+			</button>
+		</form>
+	</div>
+</div>
+
+<!-- MODAL: GALERÍA AMPLIADA -->
+<div id="modal-gallery" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/85 backdrop-blur-md">
+	<div class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-card border border-outline bg-surface p-6 md:p-8 shadow-level-3">
+		<div class="mb-6 flex items-center justify-between border-b border-outline pb-4">
+			<h3 class="font-title-lg text-title-lg font-bold text-primary">Renders Arquitectónicos &amp; Avances de {project.title}</h3>
+			<button
+				class="text-text-muted transition-colors hover:text-primary"
+				onclick="document.getElementById('modal-gallery')?.classList.add('hidden')"
+				type="button"
+			>
+				<span class="material-symbols-outlined text-[24px]">close</span>
+			</button>
+		</div>
+		<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+			{
+				galleryRenders.map((img, idx) => (
+					<div class="h-48 overflow-hidden rounded-xl bg-surface-tinted border border-outline">
+						<img
+							class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+							alt={`Render ${idx + 1} de ${project.title}`}
+							src={img}
+						/>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</div>
+
+<script>
+	function initModals() {
+		const visitaForm = document.getElementById('visita-form');
+		if (visitaForm) {
+			visitaForm.addEventListener('submit', (e) => {
+				e.preventDefault();
+				alert('Visita agendada. Nuestro asesor te contactará para confirmar el horario.');
+				document.getElementById('modal-visita')?.classList.add('hidden');
+			});
+		}
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initModals);
+	} else {
+		initModals();
+	}
+</script>

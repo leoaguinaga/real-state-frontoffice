@@ -1,0 +1,189 @@
+---
+---
+
+<section class="w-full bg-background py-20 lg:py-28 border-b border-outline" id="masterplan-section">
+	<div class="container-page">
+		<!-- Section Title & Narrative -->
+		<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+			<div class="flex max-w-[44rem] flex-col gap-2">
+				<span class="font-caption text-caption uppercase font-semibold text-accent tracking-wider">Planificación Urbana</span>
+				<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary tracking-tight">
+					Masterplan &amp; Croquis de Distribución
+				</h2>
+				<p class="font-body-md text-body-md text-text-muted mt-1">
+					Explora de manera interactiva la disposición de las manzanas de la Etapa 1 y el avance de asignación de lotes con orientación este-oeste óptima.
+				</p>
+			</div>
+		</div>
+
+		<!-- Masterplan Interactive Display Container -->
+		<div class="bg-surface rounded-card border border-outline shadow-level-2 p-6 md:p-10 overflow-hidden relative">
+			<!-- Interactive Masterplan Controls & Legend -->
+			<div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-outline/60">
+				<div class="flex items-center gap-2">
+					<button class="px-4 py-2 rounded-pill bg-primary text-white font-label-sm text-label-sm font-semibold shadow-sm">
+						Etapa 1 (Venta Activa)
+					</button>
+					<button class="px-4 py-2 rounded-pill bg-surface-tinted border border-outline text-text-muted font-label-sm text-label-sm hover:text-primary transition-colors">
+						Etapa 2 (Próximo lanzamiento)
+					</button>
+				</div>
+				<!-- Color Legend -->
+				<div class="flex flex-wrap items-center gap-6 font-label-sm text-label-sm text-text-muted">
+					<div class="flex items-center gap-2">
+						<span class="w-3.5 h-3.5 rounded bg-accent"></span>
+						<span>Disponible</span>
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="w-3.5 h-3.5 rounded bg-amber-500"></span>
+						<span>En consulta / Reserva preliminar</span>
+					</div>
+					<div class="flex items-center gap-2">
+						<span class="w-3.5 h-3.5 rounded bg-outline"></span>
+						<span>No disponible / Vendido</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Schematic Masterplan SVG Visualizer -->
+			<div class="relative w-full bg-surface-tinted border border-outline rounded-2xl p-4 md:p-6 overflow-x-auto">
+				<div class="min-w-[760px] relative">
+					<!-- Context Labels in SVG Graphic -->
+					<div class="absolute top-2 left-4 text-text-muted font-caption text-caption uppercase font-semibold">
+						← Acceso Principal / Carretera Reque
+					</div>
+					<div class="absolute top-2 right-4 text-text-muted font-caption text-caption uppercase font-semibold">
+						Vista a la Campiña y Cordillera Este →
+					</div>
+
+					<!-- SVG Layout Rendering -->
+					<svg class="w-full h-auto select-none" viewBox="0 0 880 440" xmlns="http://www.w3.org/2000/svg">
+						<!-- Background Grid Pattern -->
+						<defs>
+							<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+								<path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e1e8e5" stroke-width="1"></path>
+							</pattern>
+						</defs>
+						<rect fill="url(#grid)" width="880" height="440"></rect>
+
+						<!-- Main Boulevard Road -->
+						<path d="M 40 220 Q 440 210 840 220" fill="none" stroke="#c1c8c5" stroke-linecap="round" stroke-width="28"></path>
+						<path d="M 40 220 Q 440 210 840 220" fill="none" stroke="#ffffff" stroke-dasharray="6,6" stroke-width="2"></path>
+						<text fill="#65736f" font-family="Inter" font-size="9" font-weight="600" letter-spacing="1" text-anchor="middle" x="440" y="224">AVENIDA CENTRAL DE LOS ALGARROBOS</text>
+
+						<!-- Central Park & Clubhouse Amenity Zone -->
+						<rect fill="#d7e6e1" height="110" rx="12" width="160" x="360" y="70"></rect>
+						<circle cx="440" cy="115" fill="#0ca65d" fill-opacity="0.25" r="28"></circle>
+						<text fill="#0b2824" font-family="Plus Jakarta Sans" font-size="11" font-weight="bold" text-anchor="middle" x="440" y="112">PARQUE CENTRAL</text>
+						<text fill="#0ca65d" font-family="Inter" font-size="9" text-anchor="middle" x="440" y="126">Y CLUB HOUSE</text>
+
+						<!-- MANZANA A (Top Left) -->
+						<g class="cursor-pointer">
+							<text fill="#0b2824" font-family="Plus Jakarta Sans" font-size="12" font-weight="700" x="170" y="55">MANZANA A</text>
+							<!-- Lot A-01 (Sold) -->
+							<rect class="transition-opacity hover:opacity-80" fill="#727876" height="60" rx="4" width="55" x="70" y="70"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="97" y="105">A-01</text>
+							<!-- Lot A-02 (Available) -->
+							<rect class="transition-all hover:opacity-90 hover:scale-105 origin-center" fill="#0ca65d" height="60" onclick="showLotDetails('A-02', 540, 'Frente a alameda', 'Disponible', '$39,500 USD')" rx="4" width="55" x="130" y="70"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="157" y="105">A-02</text>
+							<!-- Lot A-03 (Reserved) -->
+							<rect class="transition-all hover:opacity-90" fill="#f59e0b" height="60" onclick="showLotDetails('A-03', 510, 'Vista a jardines', 'En consulta', '$38,000 USD')" rx="4" width="55" x="190" y="70"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="217" y="105">A-03</text>
+							<!-- Lot A-04 (Available) -->
+							<rect class="transition-all hover:opacity-90 hover:scale-105 origin-center" fill="#0ca65d" height="60" onclick="showLotDetails('A-04', 580, 'Esquina preferencial', 'Disponible', '$42,000 USD')" rx="4" width="55" x="250" y="70"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="277" y="105">A-04</text>
+						</g>
+
+						<!-- MANZANA B (Top Right - Near Club) -->
+						<g class="cursor-pointer">
+							<text fill="#0b2824" font-family="Plus Jakarta Sans" font-size="12" font-weight="700" x="680" y="55">MANZANA B</text>
+							<!-- Lot B-12 (Available) -->
+							<rect class="transition-all hover:opacity-90 hover:scale-105 origin-center" fill="#0ca65d" height="60" onclick="showLotDetails('B-12', 620, 'Frente a Club House', 'Disponible', '$46,000 USD')" rx="4" width="60" x="580" y="70"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="610" y="105">B-12</text>
+							<!-- Lot B-13 (Reserved) -->
+							<rect class="transition-all hover:opacity-90" fill="#f59e0b" height="60" onclick="showLotDetails('B-13', 590, 'Vista a Club House', 'En consulta', '$44,000 USD')" rx="4" width="60" x="645" y="70"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="675" y="105">B-13</text>
+							<!-- Lot B-14 (Featured Available) -->
+							<rect class="transition-all hover:opacity-90 hover:scale-105 origin-center" fill="#0ca65d" height="60" onclick="showLotDetails('B-14', 520, 'Frente a Parque Central', 'Disponible', '$39,800 USD')" rx="4" stroke="#a3e5c4" stroke-width="2" width="60" x="710" y="70"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="700" text-anchor="middle" x="740" y="105">B-14</text>
+							<!-- Lot B-15 (Sold) -->
+							<rect fill="#727876" height="60" rx="4" width="60" x="775" y="70"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="805" y="105">B-15</text>
+						</g>
+
+						<!-- MANZANA C (Bottom Left) -->
+						<g class="cursor-pointer">
+							<text fill="#0b2824" font-family="Plus Jakarta Sans" font-size="12" font-weight="700" x="170" y="270">MANZANA C</text>
+							<rect class="transition-all hover:opacity-90 hover:scale-105 origin-center" fill="#0ca65d" height="70" onclick="showLotDetails('C-01', 500, 'Lote regular plano', 'Disponible', '$38,000 USD')" rx="4" width="55" x="70" y="285"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="97" y="325">C-01</text>
+							<rect class="transition-all hover:opacity-90 hover:scale-105 origin-center" fill="#0ca65d" height="70" onclick="showLotDetails('C-02', 500, 'Lote regular plano', 'Disponible', '$38,000 USD')" rx="4" width="55" x="130" y="285"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="157" y="325">C-02</text>
+							<rect fill="#727876" height="70" rx="4" width="55" x="190" y="285"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="217" y="325">C-03</text>
+							<rect class="transition-all hover:opacity-90 hover:scale-105 origin-center" fill="#0ca65d" height="70" onclick="showLotDetails('C-04', 540, 'Esquina sur', 'Disponible', '$40,500 USD')" rx="4" width="55" x="250" y="285"></rect>
+							<text fill="#ffffff" font-family="Inter" font-size="9" font-weight="600" text-anchor="middle" x="277" y="325">C-04</text>
+						</g>
+
+						<!-- MANZANA D & E (Bottom Right - Etapa 2 Reserve) -->
+						<g class="cursor-pointer opacity-75">
+							<text fill="#65736f" font-family="Plus Jakarta Sans" font-size="12" font-weight="600" x="680" y="270">MANZANAS D &amp; E (ETAPA 2)</text>
+							<rect fill="#e2f1ec" height="70" rx="6" stroke="#c1c8c5" stroke-dasharray="4,4" width="130" x="540" y="285"></rect>
+							<text fill="#65736f" font-family="Inter" font-size="10" text-anchor="middle" x="605" y="325">Próxima Liberación</text>
+							<rect fill="#e2f1ec" height="70" rx="6" stroke="#c1c8c5" stroke-dasharray="4,4" width="150" x="685" y="285"></rect>
+							<text fill="#65736f" font-family="Inter" font-size="10" text-anchor="middle" x="760" y="325">Lotes de 1,000 m²</text>
+						</g>
+					</svg>
+
+					<!-- Floating Lot Info Card Preview -->
+					<div id="lot-info-card" class="mt-6 p-5 rounded-2xl bg-surface border border-outline shadow-level-1 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+						<div class="flex items-center gap-4">
+							<div class="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center shrink-0 text-accent border border-accent/20">
+								<span class="material-symbols-outlined text-[24px]">grid_view</span>
+							</div>
+							<div>
+								<div class="flex items-center gap-2">
+									<span id="lot-title" class="font-title-lg text-title-lg font-bold text-primary">Lote B-14</span>
+									<span id="lot-badge" class="px-2.5 py-0.5 rounded-pill bg-accent/15 text-accent font-caption text-caption font-semibold border border-accent/20">Disponible</span>
+								</div>
+								<p id="lot-details" class="font-body-sm text-body-sm text-text-muted">520 m² | Frente a Parque Central | Orientación preferencial</p>
+							</div>
+						</div>
+						<div class="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
+							<div class="text-right">
+								<span class="font-caption text-caption text-text-muted">Precio referencial de lista</span>
+								<p id="lot-price" class="font-title-lg text-title-lg font-bold text-primary">$39,800 USD</p>
+							</div>
+							<a class="px-5 py-2.5 rounded-xl bg-primary text-white font-label-md text-label-md font-semibold hover:bg-primary-elevated transition-colors shadow-sm" href="#cotizador-funnel">
+								Consultar este lote
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+	function showLotDetails(id, area, note, status, price) {
+		var titleElem = document.getElementById('lot-title');
+		var detailsElem = document.getElementById('lot-details');
+		var priceElem = document.getElementById('lot-price');
+		var badgeElem = document.getElementById('lot-badge');
+
+		if (titleElem) titleElem.innerText = 'Lote ' + id;
+		if (detailsElem) detailsElem.innerText = area + ' m² | ' + note + ' | Orientación preferencial';
+		if (priceElem) priceElem.innerText = price;
+
+		if (badgeElem) {
+			badgeElem.innerText = status;
+			if (status === 'Disponible') {
+				badgeElem.className = 'px-2.5 py-0.5 rounded-pill bg-accent/15 text-accent font-caption text-caption font-semibold border border-accent/20';
+			} else if (status === 'En consulta') {
+				badgeElem.className = 'px-2.5 py-0.5 rounded-pill bg-amber-500/15 text-amber-600 font-caption text-caption font-semibold border border-amber-500/20';
+			} else {
+				badgeElem.className = 'px-2.5 py-0.5 rounded-pill bg-outline/20 text-text-muted font-caption text-caption font-semibold';
+			}
+		}
+	}
+</script>
