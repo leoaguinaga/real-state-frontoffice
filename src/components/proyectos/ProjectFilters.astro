@@ -12,49 +12,65 @@ const { counts } = Astro.props;
 ---
 
 <section
-	class="sticky top-16 z-40 w-full border-b border-outline bg-surface/95 py-4 backdrop-blur-md shadow-sm transition-all"
+	class="sticky top-[68px] z-40 w-full border-b border-outline bg-surface/95 py-2.5 backdrop-blur-md shadow-sm transition-all md:top-16 md:py-4"
 	id="catalogo-filtros"
 >
-	<div class="container-page flex flex-col gap-4">
+	<div class="container-page flex flex-col gap-3 md:gap-4">
 		<!-- Primary Filter Chips Row -->
-		<div class="flex flex-wrap items-center justify-between gap-4">
+		<div class="flex items-center gap-2 md:flex-wrap md:justify-between md:gap-4">
 			<!-- Type Segmented Filter Chips -->
-			<div class="flex max-w-full items-center gap-2 overflow-x-auto pb-1" role="tablist">
+			<div class="flex min-w-0 flex-1 items-center gap-2 overflow-x-auto py-0.5 pr-6 [scrollbar-width:none] [mask-image:linear-gradient(to_right,#000_calc(100%-1.5rem),transparent)] md:flex-none md:pr-0 md:[mask-image:none] [&::-webkit-scrollbar]:hidden" role="tablist">
 				<span class="mr-1 hidden font-caption text-caption font-semibold uppercase tracking-wider text-text-muted sm:inline-block">
 					Tipo:
 				</span>
 				<button
 					type="button"
-					class="filter-type-chip whitespace-nowrap rounded-pill bg-primary px-4 py-1.5 font-label-md text-label-md font-semibold text-white shadow-sm transition-all"
+					class="filter-type-chip whitespace-nowrap rounded-pill bg-primary px-4 py-2 font-label-md text-label-md font-semibold text-white shadow-sm transition-all"
 					data-type="all"
 				>
 					Todos ({counts.all})
 				</button>
 				<button
 					type="button"
-					class="filter-type-chip whitespace-nowrap rounded-pill bg-surface-tinted px-4 py-1.5 font-label-md text-label-md font-medium text-text transition-all hover:bg-outline"
+					class="filter-type-chip whitespace-nowrap rounded-pill bg-surface-tinted px-4 py-2 font-label-md text-label-md font-medium text-text transition-all hover:bg-outline"
 					data-type="lotes"
 				>
 					Terrenos ({counts.lotes})
 				</button>
 				<button
 					type="button"
-					class="filter-type-chip whitespace-nowrap rounded-pill bg-surface-tinted px-4 py-1.5 font-label-md text-label-md font-medium text-text transition-all hover:bg-outline"
+					class="filter-type-chip whitespace-nowrap rounded-pill bg-surface-tinted px-4 py-2 font-label-md text-label-md font-medium text-text transition-all hover:bg-outline"
 					data-type="dptos"
 				>
 					Departamentos ({counts.dptos})
 				</button>
 				<button
 					type="button"
-					class="filter-type-chip whitespace-nowrap rounded-pill bg-surface-tinted px-4 py-1.5 font-label-md text-label-md font-medium text-text transition-all hover:bg-outline"
+					class="filter-type-chip whitespace-nowrap rounded-pill bg-surface-tinted px-4 py-2 font-label-md text-label-md font-medium text-text transition-all hover:bg-outline"
 					data-type="casas"
 				>
 					Casas ({counts.casas})
 				</button>
 			</div>
 
+			<!-- Mobile: opens the detailed filter panel -->
+			<button
+				type="button"
+				class="relative inline-flex h-10 shrink-0 items-center gap-1.5 rounded-pill border border-outline bg-surface px-3.5 font-label-md text-label-md font-semibold text-primary transition-colors aria-expanded:border-primary aria-expanded:bg-primary aria-expanded:text-white md:hidden"
+				id="filters-toggle"
+				aria-expanded="false"
+				aria-controls="filter-panel"
+			>
+				<span class="material-symbols-outlined text-[18px]">tune</span>
+				<span>Filtros</span>
+				<span
+					class="hidden h-[18px] min-w-[18px] items-center justify-center rounded-full bg-accent px-1 font-caption text-caption font-bold text-white"
+					id="filters-badge"
+				></span>
+			</button>
+
 			<!-- View Controls & Quick Reset -->
-			<div class="ml-auto flex items-center gap-3">
+			<div class="ml-auto hidden items-center gap-3 md:flex">
 				<button
 					type="button"
 					class="inline-flex items-center gap-1 rounded-input px-2.5 py-1 font-label-md text-label-md text-text-muted transition-colors hover:text-accent"
@@ -90,8 +106,9 @@ const { counts } = Astro.props;
 			</div>
 		</div>
 
-		<!-- Secondary Detailed Filter Dropdowns -->
-		<div class="grid grid-cols-2 gap-3 pt-1 md:grid-cols-4">
+		<!-- Secondary Detailed Filter Dropdowns (collapsible on mobile) -->
+		<div id="filter-panel" class="hidden max-h-[calc(100svh-9rem)] overflow-y-auto md:block md:max-h-none md:overflow-visible">
+		<div class="grid grid-cols-2 gap-x-3 gap-y-2.5 pb-1 md:grid-cols-4 md:pt-1">
 			<!-- Filter: Estado -->
 			<div class="relative">
 				<label class="mb-1 block font-caption text-caption font-semibold uppercase tracking-wider text-text-muted">
@@ -99,7 +116,7 @@ const { counts } = Astro.props;
 				</label>
 				<div class="relative">
 					<select
-						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all focus:border-accent focus:outline-none"
+						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all max-md:text-[16px] focus:border-accent focus:outline-none"
 						id="filter-status"
 					>
 						<option value="all">Todos los estados</option>
@@ -120,7 +137,7 @@ const { counts } = Astro.props;
 				</label>
 				<div class="relative">
 					<select
-						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all focus:border-accent focus:outline-none"
+						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all max-md:text-[16px] focus:border-accent focus:outline-none"
 						id="filter-location"
 					>
 						<option value="all">Todas las ciudades</option>
@@ -142,7 +159,7 @@ const { counts } = Astro.props;
 				</label>
 				<div class="relative">
 					<select
-						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all focus:border-accent focus:outline-none"
+						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all max-md:text-[16px] focus:border-accent focus:outline-none"
 						id="filter-budget"
 					>
 						<option value="all">Cualquier monto</option>
@@ -163,7 +180,7 @@ const { counts } = Astro.props;
 				</label>
 				<div class="relative">
 					<select
-						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all focus:border-accent focus:outline-none"
+						class="h-11 w-full cursor-pointer appearance-none rounded-input border border-outline bg-surface pl-3 pr-9 font-body-sm text-body-sm text-text transition-all max-md:text-[16px] focus:border-accent focus:outline-none"
 						id="filter-developer"
 					>
 						<option value="all">Todos los desarrollos</option>
@@ -176,5 +193,51 @@ const { counts } = Astro.props;
 				</div>
 			</div>
 		</div>
+
+		<button
+			type="button"
+			class="mt-2 inline-flex items-center gap-1 rounded-input py-2 font-label-md text-label-md text-text-muted transition-colors hover:text-accent md:hidden"
+			id="reset-filters-mobile"
+		>
+			<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+			<span>Limpiar filtros</span>
+		</button>
+		</div>
 	</div>
 </section>
+
+<script>
+	function setupFilterPanel() {
+		const toggle = document.getElementById('filters-toggle');
+		const panel = document.getElementById('filter-panel');
+		const badge = document.getElementById('filters-badge');
+		if (!toggle || !panel) return;
+
+		const selects = panel.querySelectorAll<HTMLSelectElement>('select');
+
+		function updateBadge() {
+			const active = Array.from(selects).filter((s) => s.value !== 'all').length;
+			if (!badge) return;
+			badge.textContent = String(active);
+			badge.classList.toggle('hidden', active === 0);
+			badge.classList.toggle('inline-flex', active > 0);
+		}
+
+		function setOpen(open: boolean) {
+			panel!.classList.toggle('hidden', !open);
+			toggle!.setAttribute('aria-expanded', String(open));
+		}
+
+		toggle.addEventListener('click', () => {
+			setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+		});
+
+		selects.forEach((s) => s.addEventListener('change', updateBadge));
+		// Resets run in the grid script; read the selects after it has applied them.
+		document
+			.querySelectorAll('#reset-filters, #reset-filters-mobile, #clear-filters-cta')
+			.forEach((b) => b.addEventListener('click', () => setTimeout(updateBadge, 0)));
+	}
+
+	document.addEventListener('DOMContentLoaded', setupFilterPanel);
+</script>

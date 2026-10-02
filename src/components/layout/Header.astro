@@ -77,3 +77,12 @@ const NAV_LINKS = [
 		</div>
 	</div>
 </header>
+
+<script>
+	const header = document.querySelector<HTMLElement>('.site-header');
+	if (header) {
+		const sync = () => header.toggleAttribute('data-scrolled', window.scrollY > 24);
+		sync();
+		window.addEventListener('scroll', sync, { passive: true });
+	}
+</script>

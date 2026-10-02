@@ -172,7 +172,7 @@
   }
 }
 
-/* Animated by the header's scroll-driven animation (see .site-header below). */
+/* Transitioned by the header's scrolled state (see .site-header below). */
 @property --header-fg {
   syntax: '<color>';
   inherits: true;
@@ -189,7 +189,7 @@
 
   /*
    * Navbar: transparent on top, frosted white once the page scrolls.
-   * Driven by the root scroll position (no JS). Colors flow through
+   * data-scrolled is toggled from Header.astro. Colors flow through
    * --header-fg / --header-invert so hover states on links still win.
    */
   .site-header {
@@ -204,6 +204,13 @@
     z-index: 50;
     padding-block: 1.25rem;
     background-color: transparent;
+    transition:
+      --header-fg 0.3s ease,
+      --header-invert 0.3s ease,
+      padding-block 0.3s ease,
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      backdrop-filter 0.3s ease;
   }
 
   /* Dark hero behind the bar: start light, end dark. */
@@ -217,59 +224,28 @@
   }
 
   .site-header__logo {
-    height: 2rem;
+    height: 1.5rem;
+    width: auto;
+    max-width: none;
+    flex-shrink: 0;
     filter: brightness(0) invert(var(--header-invert));
   }
 
-  @supports (animation-timeline: scroll()) {
-    .site-header {
-      animation: header-scroll linear both;
-      animation-timeline: scroll(root block);
-      animation-range: 0 48px;
+  @media (min-width: 640px) {
+    .site-header__logo {
+      height: 2rem;
     }
   }
 
-  /* No scroll-driven animations: show the scrolled look so it stays legible. */
-  @supports not (animation-timeline: scroll()) {
-    .site-header {
-      --header-fg: var(--color-text);
-      --header-invert: 0;
-      padding-block: 0.875rem;
-      background-color: rgb(255 255 255 / 0.8);
-      box-shadow: var(--shadow-level-1);
-      backdrop-filter: blur(12px);
-    }
-  }
-
-  /* Mobile menu open: pin the solid look so bar and panel read as one. */
+  /* Scrolled (or mobile menu open): frosted white bar with dark foreground. */
+  .site-header[data-scrolled],
   .site-header:has(.site-header__menu[open]) {
-    animation: none;
     --header-fg: var(--color-text);
     --header-invert: 0;
     padding-block: 0.875rem;
-    background-color: rgb(255 255 255 / 0.8);
+    background-color: rgb(255 255 255 / 0.92);
     box-shadow: var(--shadow-level-1);
     backdrop-filter: blur(12px);
-  }
-
-  @keyframes header-scroll {
-    from {
-      --header-fg: var(--header-fg-start);
-      --header-invert: var(--header-invert-start);
-      padding-block: 1.25rem;
-      background-color: rgb(255 255 255 / 0);
-      box-shadow: 0 0 0 0 transparent;
-      backdrop-filter: blur(0);
-    }
-
-    to {
-      --header-fg: var(--color-text);
-      --header-invert: 0;
-      padding-block: 0.875rem;
-      background-color: rgb(255 255 255 / 0.92);
-      box-shadow: var(--shadow-level-1);
-      backdrop-filter: blur(12px);
-    }
   }
 }
 

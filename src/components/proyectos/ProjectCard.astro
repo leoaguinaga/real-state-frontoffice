@@ -26,7 +26,7 @@ const statusBadgeClasses = {
 		>
 			<div class="flex h-full flex-col lg:flex-row">
 				<!-- Visual Architectural Image -->
-				<div class="relative h-72 w-full overflow-hidden bg-primary lg:h-full lg:w-3/5">
+				<div class="relative h-52 w-full overflow-hidden bg-primary sm:h-72 lg:h-full lg:w-3/5">
 					<img
 						src={project.image}
 						alt={project.imageAlt}
@@ -34,7 +34,7 @@ const statusBadgeClasses = {
 						loading="lazy"
 					/>
 					<!-- Badges overlay -->
-					<div class="absolute left-4 top-4 flex flex-wrap items-center gap-2">
+					<div class="absolute left-3 top-3 flex flex-wrap items-center gap-1.5 md:left-4 md:top-4 md:gap-2">
 						<span
 							class={`inline-flex items-center gap-1.5 rounded-pill px-3 py-1 font-caption text-caption font-semibold uppercase tracking-wider shadow-sm ${statusBadgeClasses}`}
 						>
@@ -50,14 +50,14 @@ const statusBadgeClasses = {
 					<button
 						type="button"
 						aria-label="Guardar favorito"
-						class="favorite-btn absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-text shadow-sm backdrop-blur-md transition-all hover:bg-white hover:text-accent"
+						class="favorite-btn absolute right-3 top-3 flex h-10 w-10 md:right-4 md:top-4 items-center justify-center rounded-full bg-white/80 text-text shadow-sm backdrop-blur-md transition-all hover:bg-white hover:text-accent"
 					>
 						<span class="material-symbols-outlined text-[20px]">favorite_border</span>
 					</button>
 
 					<!-- Availability Flag -->
 					{project.badgeExtra && (
-						<div class="absolute bottom-4 left-4 flex items-center gap-2 rounded-input bg-white/95 px-3 py-1.5 shadow-sm backdrop-blur-md">
+						<div class="absolute bottom-3 left-3 flex items-center gap-2 rounded-input md:bottom-4 md:left-4 bg-white/95 px-3 py-1.5 shadow-sm backdrop-blur-md">
 							<span class="h-2.5 w-2.5 rounded-full bg-accent" />
 							<span class="font-caption text-caption font-semibold text-primary">
 								{project.badgeExtra}
@@ -67,7 +67,7 @@ const statusBadgeClasses = {
 				</div>
 
 				<!-- Card Content Body -->
-				<div class="flex flex-col justify-between bg-surface p-6 lg:w-2/5 lg:p-8">
+				<div class="flex flex-col justify-between bg-surface p-4 md:p-6 lg:w-2/5 lg:p-8">
 					<div>
 						<div class="mb-1 flex items-center gap-1 font-caption text-caption font-semibold uppercase tracking-wider text-accent">
 							<span class="material-symbols-outlined text-[16px]">pin_drop</span>
@@ -83,7 +83,7 @@ const statusBadgeClasses = {
 						</p>
 
 						<!-- Key Specs -->
-						<div class="my-4 grid grid-cols-2 gap-2 rounded-xl bg-surface-tinted p-3">
+						<div class="my-3 grid grid-cols-2 gap-2 rounded-xl bg-surface-tinted p-3 md:my-4">
 							{project.specs.map((spec) => (
 								<div>
 									<span class="block font-caption text-caption text-text-muted">{spec.label}</span>
@@ -107,7 +107,7 @@ const statusBadgeClasses = {
 						</div>
 
 						<!-- Amenidades Grid -->
-						<div class="mb-4 space-y-1">
+						<div class="mb-4 hidden space-y-1 sm:block">
 							<span class="mb-1 block font-caption text-caption uppercase tracking-wider text-text-muted">
 								Amenidades del proyecto
 							</span>
@@ -125,7 +125,7 @@ const statusBadgeClasses = {
 					</div>
 
 					<!-- Card Bottom Action -->
-					<div class="pt-2">
+					<div class="pt-1 md:pt-2">
 						<a
 							class="inline-flex w-full items-center justify-center gap-2 rounded-input bg-accent px-6 py-3 font-label-md text-label-md font-semibold text-white shadow-level-1 transition-all duration-200 hover:bg-accent-hover hover:shadow-cta-hover"
 							href={project.ctaLink}
@@ -150,7 +150,7 @@ const statusBadgeClasses = {
 		>
 			<div>
 				<!-- Visual Media -->
-				<div class="relative h-56 w-full overflow-hidden bg-primary">
+				<div class="relative h-44 w-full overflow-hidden bg-primary sm:h-56">
 					<img
 						src={project.image}
 						alt={project.imageAlt}
@@ -193,7 +193,7 @@ const statusBadgeClasses = {
 				</div>
 
 				<!-- Content Body -->
-				<div class="p-6">
+				<div class="p-4 md:p-6">
 					<div class="mb-1 flex items-center gap-1 font-caption text-caption font-semibold uppercase tracking-wider text-text-muted">
 						<span class="material-symbols-outlined text-[14px] text-accent">location_on</span>
 						{project.locationDetail}
@@ -207,7 +207,7 @@ const statusBadgeClasses = {
 						{project.description}
 					</p>
 
-					<div class="mt-4 flex items-center justify-between rounded-xl bg-surface-tinted p-3">
+					<div class="mt-3 flex items-center justify-between rounded-xl md:mt-4 bg-surface-tinted p-3">
 						{project.specs.map((spec) => (
 							<div class={spec.highlight ? 'text-right' : ''}>
 								<span class="block font-caption text-caption text-text-muted">{spec.label}</span>
@@ -226,7 +226,7 @@ const statusBadgeClasses = {
 					</div>
 
 					<!-- Mini Amenidades -->
-					<div class="mt-4 flex items-center gap-3 font-caption text-caption text-text-muted">
+					<div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-caption text-caption text-text-muted">
 						{project.amenities.map((amenity) => (
 							<span class="inline-flex items-center gap-1">
 								<span class="material-symbols-outlined text-[16px] text-accent">
@@ -239,7 +239,7 @@ const statusBadgeClasses = {
 				</div>
 			</div>
 
-			<div class="p-6 pt-0">
+			<div class="p-4 pt-0 md:p-6 md:pt-0">
 				<a
 					class={`inline-flex w-full items-center justify-center gap-1.5 rounded-input px-4 py-2.5 font-label-md text-label-md font-semibold transition-all ${
 						project.soldOut

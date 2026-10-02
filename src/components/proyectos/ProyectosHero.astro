@@ -6,37 +6,37 @@ interface Props {
 const { totalCount = 6 } = Astro.props;
 ---
 
-<section class="relative w-full overflow-hidden bg-background pt-24 pb-8 border-b border-outline">
+<section class="relative w-full overflow-hidden bg-background pt-20 pb-5 md:pt-24 md:pb-8 border-b border-outline">
 	<!-- Top Ambient Glow -->
 	<div class="pointer-events-none absolute -top-24 right-1/4 h-96 w-96 rounded-full bg-accent/15 blur-3xl"></div>
 	<div class="pointer-events-none absolute top-12 left-10 h-72 w-72 rounded-full bg-primary/10 blur-2xl"></div>
 
 	<div class="container-page relative z-10">
 		<!-- Breadcrumbs -->
-		<nav class="mb-4 flex items-center gap-1.5 text-text-muted" aria-label="Ruta de navegación">
+		<nav class="mb-2 hidden md:mb-4 md:flex items-center gap-1.5 text-text-muted" aria-label="Ruta de navegación">
 			<a class="font-body-sm text-body-sm hover:text-accent transition-colors" href="/">Inicio</a>
 			<span class="material-symbols-outlined text-[16px] text-outline">chevron_right</span>
 			<span class="font-body-sm text-body-sm text-text font-semibold">Catálogo de Proyectos</span>
 		</nav>
 
 		<!-- Section Title & Dynamic Metas -->
-		<div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+		<div class="flex flex-col justify-between gap-3 md:gap-6 lg:flex-row lg:items-end">
 			<div class="max-w-[52rem]">
-				<h1 class="font-headline-lg text-headline-lg font-bold tracking-tight text-primary">
+				<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold tracking-tight text-primary">
 					Explora Proyectos Inmobiliarios
 				</h1>
-				<p class="mt-2 max-w-[42rem] font-body-lg text-body-lg text-text-muted leading-relaxed">
+				<p class="mt-2 line-clamp-2 max-w-[42rem] md:line-clamp-none font-body-md text-body-md text-text-muted leading-relaxed md:font-body-lg md:text-body-lg">
 					Descubre desarrollos propios y proyectos aliados seleccionados con showrooms digitales interactivos y disponibilidad referencial en tiempo real.
 				</p>
 			</div>
 
 			<!-- Dynamic Counter Badge & Meta Stats -->
-			<div class="flex items-center gap-4 rounded-2xl border border-outline bg-surface p-4 shadow-level-1 shrink-0">
-				<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-tinted text-accent">
+			<div class="flex items-center gap-4 shrink-0 md:rounded-2xl md:border md:border-outline md:bg-surface md:p-4 md:shadow-level-1">
+				<div class="hidden h-12 w-12 items-center md:flex justify-center rounded-xl bg-surface-tinted text-accent">
 					<span class="material-symbols-outlined text-[26px]">apartment</span>
 				</div>
 				<div>
-					<span class="block font-caption text-caption font-semibold uppercase tracking-wider text-text-muted">
+					<span class="hidden font-caption text-caption font-semibold uppercase tracking-wider text-text-muted md:block">
 						Catálogo Activo
 					</span>
 					<div class="flex items-baseline gap-1.5">
