@@ -1,0 +1,79 @@
+---
+interface Props {
+	/** Page opens on a dark hero: light text and logo until the user scrolls. */
+	overHero?: boolean;
+}
+
+const { overHero = false } = Astro.props;
+
+const NAV_LINKS = [
+	{ label: 'Inicio', href: '/' },
+	{ label: 'Proyectos', href: '/proyectos' },
+	{ label: 'Para Desarrolladores', href: '/para-desarrolladores' },
+	{ label: 'Nosotros', href: '/nosotros' },
+];
+---
+
+<header class="site-header" data-over-hero={overHero || undefined}>
+	<div class="container-page flex items-center justify-between gap-6">
+		<a href="/" class="flex items-center gap-2" aria-label="Montara Inmobiliaria">
+			<img class="site-header__logo" src="/img/logo-white.png" alt="Montara" />
+		</a>
+
+		<div class="flex items-center gap-3">
+			<nav class="mr-3 hidden items-center gap-8 lg:flex">
+				{
+					NAV_LINKS.map((link) => (
+						<a
+							href={link.href}
+							class="site-header__foreground font-label-md text-label-md font-medium hover:text-accent"
+						>
+							{link.label}
+						</a>
+					))
+				}
+			</nav>
+			<a
+				href="https://wa.me/"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="hidden items-center gap-2 rounded-input bg-primary px-4 py-2 font-label-md text-label-md font-semibold text-white shadow-level-1 transition-all hover:bg-primary/80 sm:inline-flex"
+			>
+				Explorar proyectos
+			</a>
+
+			<details class="site-header__menu group lg:hidden">
+				<summary
+					aria-label="Menú"
+					class="site-header__foreground inline-flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-input [&::-webkit-details-marker]:hidden"
+				>
+					<span class="material-symbols-outlined group-open:hidden!">menu</span>
+					<span class="material-symbols-outlined hidden! group-open:inline-block!">close</span>
+				</summary>
+
+				<nav class="absolute inset-x-0 top-full bg-surface">
+					<div class="container-page flex flex-col gap-1 py-4">
+						{
+							NAV_LINKS.map((link) => (
+								<a
+									href={link.href}
+									class="rounded-input px-3 py-2.5 font-label-md text-label-md font-medium text-text transition-colors hover:bg-surface-tinted"
+								>
+									{link.label}
+								</a>
+							))
+						}
+						<a
+							href="https://wa.me/"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="mt-2 inline-flex items-center justify-center gap-2 rounded-input bg-accent px-4 py-2.5 font-label-md text-label-md font-semibold text-white"
+						>
+							Hablar con un asesor
+						</a>
+					</div>
+				</nav>
+			</details>
+		</div>
+	</div>
+</header>

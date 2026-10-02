@@ -138,30 +138,15 @@
   --spacing-margin-mobile: 1.25rem;
   --spacing-margin-desktop: 5rem;
 
-  /* ---- Max Widths / Containers (Tailwind v4 max-w scale) ---- */
-  --container-xs: 20rem;
-  --container-sm: 24rem;
-  --container-md: 28rem;
-  --container-lg: 32rem;
-  --container-xl: 36rem;
-  --container-2xl: 42rem;
-  --container-3xl: 48rem;
-  --container-4xl: 56rem;
-  --container-5xl: 64rem;
-  --container-6xl: 72rem;
-  --container-7xl: 80rem;
-
-  --width-xs: 20rem;
-  --width-sm: 24rem;
-  --width-md: 28rem;
-  --width-lg: 32rem;
-  --width-xl: 36rem;
-  --width-2xl: 42rem;
-  --width-3xl: 48rem;
-  --width-4xl: 56rem;
-  --width-5xl: 64rem;
-  --width-6xl: 72rem;
-  --width-7xl: 80rem;
+  /* ---- Max Widths / Containers ----
+   * CUIDADO: los tokens --spacing-* de arriba (xs..4xl) ganan sobre la escala
+   * --container-* en las utilidades de ancho. Es decir, `max-w-4xl` NO vale
+   * 56rem aquí: vale --spacing-4xl (7.5rem). Por eso NO se usan max-w-xs..4xl
+   * en este proyecto; para anchos con nombre usar los tokens semánticos de
+   * abajo, o max-w-5xl/6xl/7xl (sin colisión), o un valor arbitrario.
+   */
+  --container-modal-sm: 28rem;
+  --container-modal-lg: 56rem;
 
   /* ---- Elevation ---- */
   --shadow-level-1: 0 2px 8px -2px rgba(11, 40, 36, 0.04), 0 1px 3px -1px rgba(11, 40, 36, 0.02);
@@ -187,71 +172,103 @@
   }
 }
 
+/* Animated by the header's scroll-driven animation (see .site-header below). */
+@property --header-fg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #10231f;
+}
+
+@property --header-invert {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
 @layer components {
+
+  /*
+   * Navbar: transparent on top, frosted white once the page scrolls.
+   * Driven by the root scroll position (no JS). Colors flow through
+   * --header-fg / --header-invert so hover states on links still win.
+   */
   .site-header {
+    --header-fg-start: var(--color-text);
+    --header-invert-start: 0;
+    --header-fg: var(--header-fg-start);
+    --header-invert: var(--header-invert-start);
+
     position: fixed;
     inset-block-start: 0;
     inset-inline: 0;
     z-index: 50;
     padding-block: 1.25rem;
     background-color: transparent;
-    background-image: linear-gradient(to bottom, rgb(0 0 0 / 0.75), rgb(0 0 0 / 0.3), transparent);
-    box-shadow: none;
-    transition: color 200ms ease-out;
   }
 
-  .header-image-logo {
-    filter: brightness(0) invert(1);
-    transition: filter 200ms ease-out;
-  }
-
-  @supports (animation-timeline: scroll()) {
-    .header-image-logo {
-      animation: header-logo-color linear both;
-      animation-timeline: scroll(root block);
-      animation-range: 0 48px;
-    }
+  /* Dark hero behind the bar: start light, end dark. */
+  .site-header[data-over-hero] {
+    --header-fg-start: rgb(255 255 255 / 0.9);
+    --header-invert-start: 1;
   }
 
   .site-header__foreground {
-    color: rgba(226, 225, 225, 0.9);
-    transition: color 200ms ease-out;
+    color: var(--header-fg);
+  }
+
+  .site-header__logo {
+    height: 2rem;
+    filter: brightness(0) invert(var(--header-invert));
   }
 
   @supports (animation-timeline: scroll()) {
     .site-header {
-      animation: header-surface linear both;
-      animation-timeline: scroll(root block);
-      animation-range: 0 48px;
-    }
-
-    .site-header__foreground {
-      animation: header-foreground linear both;
+      animation: header-scroll linear both;
       animation-timeline: scroll(root block);
       animation-range: 0 48px;
     }
   }
 
-  @keyframes header-surface {
-    to {
+  /* No scroll-driven animations: show the scrolled look so it stays legible. */
+  @supports not (animation-timeline: scroll()) {
+    .site-header {
+      --header-fg: var(--color-text);
+      --header-invert: 0;
       padding-block: 0.875rem;
-      border-color: var(--color-outline);
-      background-color: rgb(255 255 255 / 0.9);
-      background-image: linear-gradient(to bottom, transparent, transparent);
+      background-color: rgb(255 255 255 / 0.8);
       box-shadow: var(--shadow-level-1);
       backdrop-filter: blur(12px);
     }
   }
 
-  @keyframes header-foreground {
-    to {
-      color: var(--color-text);
-    }
+  /* Mobile menu open: pin the solid look so bar and panel read as one. */
+  .site-header:has(.site-header__menu[open]) {
+    animation: none;
+    --header-fg: var(--color-text);
+    --header-invert: 0;
+    padding-block: 0.875rem;
+    background-color: rgb(255 255 255 / 0.8);
+    box-shadow: var(--shadow-level-1);
+    backdrop-filter: blur(12px);
   }
 
-  @keyframes header-logo-color {
+  @keyframes header-scroll {
+    from {
+      --header-fg: var(--header-fg-start);
+      --header-invert: var(--header-invert-start);
+      padding-block: 1.25rem;
+      background-color: rgb(255 255 255 / 0);
+      box-shadow: 0 0 0 0 transparent;
+      backdrop-filter: blur(0);
+    }
+
     to {
-      filter: brightness(0);
+      --header-fg: var(--color-text);
+      --header-invert: 0;
+      padding-block: 0.875rem;
+      background-color: rgb(255 255 255 / 0.92);
+      box-shadow: var(--shadow-level-1);
+      backdrop-filter: blur(12px);
     }
   }
 }

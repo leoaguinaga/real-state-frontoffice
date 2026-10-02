@@ -319,7 +319,8 @@ const { project } = Astro.props;
 					<button
 						type="submit"
 						id="btn-funnel-submit"
-						class="inline-flex items-center gap-2 rounded-pill bg-accent px-8 py-2.5 font-label-md text-label-md font-semibold text-white shadow-md transition-all hover:bg-accent-hover hidden"
+						class="inline-flex items-center gap-2 rounded-pill bg-accent px-8 py-2.5 font-label-md text-label-md font-semibold text-white shadow-md transition-all hover:bg-accent-hover"
+						style="display: none;"
 					>
 						<span class="material-symbols-outlined text-[18px]">send</span>
 						<span>Solicitar cotización</span>
@@ -366,13 +367,9 @@ const { project } = Astro.props;
 				else prevBtn.classList.remove('invisible');
 			}
 
-			if (currentStep === totalSteps) {
-				if (nextBtn) nextBtn.classList.add('hidden');
-				if (submitBtn) submitBtn.classList.remove('hidden');
-			} else {
-				if (nextBtn) nextBtn.classList.remove('hidden');
-				if (submitBtn) submitBtn.classList.add('hidden');
-			}
+			var isLastStep = currentStep === totalSteps;
+			if (nextBtn) nextBtn.style.display = isLastStep ? 'none' : '';
+			if (submitBtn) submitBtn.style.display = isLastStep ? '' : 'none';
 		}
 
 		var nextBtn = document.getElementById('btn-funnel-next');
