@@ -1,0 +1,92 @@
+---
+const team = [
+	{
+		name: 'Carlos Santisteban',
+		role: 'Director General & Finanzas',
+		area: 'Estrategia',
+		desc: 'Ex-banca de inversión y desarrollo urbano. Más de 12 años estructurando carteras y fideicomisos inmobiliarios en el Perú.',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuBbFudCh-ALDVsXfKdEHrKqGUwEMDarLejwpy_IL0etp2JUohq1frRm70ZZD1AzRlxGleae1AanBNhRuQao_NiOil0Ap9geyga2Wslsz9G_Mx-Qw_NWZ-egCpubU8pevEDSJ-GJnCr8OMmtzQa_L75qUpoMotDubILDkLvQKMlJjFL-EwdVwpjOmSzs66UhPW1xokYEEcc0f50cDkLRe374NVl6ZMqfKxGQrh_-SacNziqEGbbRAZY3Gw',
+	},
+	{
+		name: 'Arq. Mariana Falconí',
+		role: 'Dir. Arquitectura & Curaduría',
+		area: 'Diseño & Curaduría',
+		desc: 'Especialista en masterplans residenciales y diseño bioclimático sostenible adaptado a entornos costeros y campestres.',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuDlhwCL5Z-jbyDmIkDith8iKrqQ-XmNaYjT3SbNzEn3B23CP9JQnb0SpV1COXEPwPi63ZFWhWh5hT2R6vPkU54B5AetmLase9v9m9xcJXRgQm8Wsx_OpjGLaXjjjSHMdDIq75em02MTZp48hdE535uhof0sdxliyIsfBI0KbGD7a8uLSW1b94LpgcPw8_e4mKSxG8dWkS9pCrbcBVSM2dMDIEWRVab4QKFO2urJc7FJTqBo0pcLKwh-TQ',
+	},
+	{
+		name: 'Diego Benavides',
+		role: 'Head de Tecnología Inmersiva',
+		area: 'Proptech',
+		desc: 'Ingeniero de software con foco en visualización interactiva de lotes, mapas georreferenciados y modelos 3D en tiempo real.',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuASKJwP78Nqi5rUALgEWc8T3WQPggdOj4oLqyyVgBZzKk6H7AJGU0CJpZQTTanbftGOhgzUmwzbt1j8RKqEOqHIcT3kXIjnlJ5xmik1OW_mswAQy0ivEdYZW1q9ql2Akd4zumhdeG4dqd6wWhCXRpK4HJpcN65tL1E7ewVgvu-odCZEiZTbGB5y5rjCpuj8qopogXM2fYoCAren-yHcpGcqSuVH0kA90wIM_uIwRi1FwLkdXKeRygyDyQ',
+	},
+	{
+		name: 'Abg. Valeria Alarcón',
+		role: 'Debida Diligencia & Legal',
+		area: 'Legal & Títulos',
+		desc: 'Especialista en derecho registral, saneamiento físico-legal de predios rústicos y urbanos, y estructuración fiduciaria.',
+		image:
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuD0ZQNdCXR9QxeaSi6LRS7AcEIGydB-LwNz94ZuvcXlItLzc9qKacDSJ65TUrW8fwtMwtePWHxpww9CKkQz_OOk1gWU1UatFYuIP3CZGwMM_ajs8oIbytpMxkRV23D4XotQu249e8vQh5_Yu8lPNF4-jCGx5hdlNKA6KMsvw5ZKz6kdLLKpDEhl6D8lEPcM_D0jNkbIiM14T-Sf9X6WVKYGoZKCyzmOgMZBD60srhQrH4u3GWM1wnZqyw',
+	},
+];
+---
+
+<section class="w-full bg-background py-20 lg:py-28 border-b border-outline">
+	<div class="container-page">
+		<div class="mx-auto mb-14 flex max-w-[48rem] flex-col gap-3 text-center">
+			<span class="font-caption text-caption font-semibold uppercase tracking-wider text-accent">
+				Nuestra Liderazgo
+			</span>
+			<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary">
+				Un equipo multidisciplinario con rigor técnico y visión patrimonial.
+			</h2>
+			<p class="font-body-md text-body-md text-text-muted">
+				La intersección exacta entre finanzas inmobiliarias de grado institucional, diseño arquitectónico contemporáneo y tecnología digital.
+			</p>
+		</div>
+
+		<!-- Team Cards Grid -->
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+			{
+				team.map((member) => (
+					<div class="flex flex-col rounded-card bg-surface border border-outline/80 shadow-level-1 overflow-hidden hover:shadow-level-2 hover:border-accent/40 transition-all duration-300">
+						<div class="aspect-[4/5] bg-surface-tinted relative overflow-hidden">
+							<img
+								class="w-full h-full object-cover"
+								alt={member.name}
+								src={member.image}
+							/>
+							<div class="absolute bottom-3 right-3 px-2.5 py-1 rounded-pill bg-surface/90 backdrop-blur-sm text-primary font-caption text-caption font-semibold border border-outline/50 shadow-sm">
+								{member.area}
+							</div>
+						</div>
+						<div class="p-6 flex flex-col gap-2">
+							<h3 class="font-title-lg text-title-lg font-bold text-primary">
+								{member.name}
+							</h3>
+							<span class="font-label-md text-label-md font-medium text-accent">{member.role}</span>
+							<p class="font-body-sm text-body-sm text-text-muted mt-2">{member.desc}</p>
+						</div>
+					</div>
+				))
+			}
+		</div>
+
+		<!-- Leadership Quote Banner -->
+		<div class="mt-14 p-8 lg:p-12 rounded-card border border-outline bg-surface-tinted flex flex-col md:flex-row items-center gap-8 shadow-level-1">
+			<div class="w-14 h-14 rounded-2xl bg-primary text-white flex items-center justify-center shrink-0 shadow-sm">
+				<span class="material-symbols-outlined text-[28px] text-accent">format_quote</span>
+			</div>
+			<div class="flex flex-col gap-2">
+				<blockquote class="font-headline-sm text-headline-sm font-semibold italic text-primary leading-snug">
+					"Nuestra visión para los próximos 10 años es simple pero exigente: que nadie en el norte del Perú deba arriesgar los ahorros de su vida en proyectos sin respaldo legal o promesas sobre maquetas vacías."
+				</blockquote>
+				<span class="font-label-md text-label-md font-bold text-accent">Dirección General, Montara Inmobiliaria</span>
+			</div>
+		</div>
+	</div>
+</section>

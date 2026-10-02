@@ -1,0 +1,62 @@
+---
+const steps = [
+	{
+		step: '01',
+		title: 'Registro Sunarp',
+		icon: 'description',
+		desc: 'Comprobación de titularidad registral, gravámenes, hipotecas previas e independización de lotes debidamente inscrita.',
+	},
+	{
+		step: '02',
+		title: 'Factibilidad de Servicios',
+		icon: 'water_drop',
+		desc: 'Documentación vigente de empresas prestadoras de agua potable, energía eléctrica y saneamiento definitivo.',
+	},
+	{
+		step: '03',
+		title: 'Permisos Municipales',
+		icon: 'architecture',
+		desc: 'Resolución de habilitación urbana y licencias de edificación aprobadas por las municipalidades distritales competentes.',
+	},
+	{
+		step: '04',
+		title: 'Contratos Sin Letra Chica',
+		icon: 'verified_user',
+		desc: 'Estructuras contractuales claras, con plazos de entrega garantizados, penalidades simétricas y cuentas fiduciarias.',
+	},
+];
+---
+
+<section class="w-full bg-surface py-20 lg:py-28 border-b border-outline">
+	<div class="container-page">
+		<div class="mx-auto mb-14 flex max-w-[48rem] flex-col gap-3 text-center">
+			<span class="font-caption text-caption uppercase font-semibold text-accent tracking-wider">
+				Transparencia Patrimonial
+			</span>
+			<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary">
+				El Sello de Certeza Montara
+			</h2>
+			<p class="font-body-md text-body-md text-text-muted leading-relaxed max-w-[40rem] mx-auto">
+				Todo proyecto que ingresa a nuestro ecosistema debe superar con éxito las siguientes 4 fases de validación técnica independiente.
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+			{
+				steps.map((item) => (
+					<div class="flex flex-col gap-4 rounded-card border border-outline/80 bg-surface p-6 shadow-level-1 transition-all duration-300 hover:border-accent hover:shadow-level-2">
+						<div class="flex items-center gap-3">
+							<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent border border-accent/20">
+								<span class="material-symbols-outlined text-[20px]">{item.icon}</span>
+							</div>
+							<span class="font-title-md text-title-md font-bold text-primary">{item.step}. {item.title}</span>
+						</div>
+						<p class="font-body-sm text-body-sm leading-relaxed text-text-muted">
+							{item.desc}
+						</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

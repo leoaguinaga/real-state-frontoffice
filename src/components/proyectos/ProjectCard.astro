@@ -74,7 +74,9 @@ const statusBadgeClasses = {
 							{project.locationDetail}
 						</div>
 						<h2 class="font-headline-sm text-headline-sm font-bold tracking-tight text-primary transition-colors group-hover:text-accent">
-							{project.title}
+							<a href={project.ctaLink} class="hover:underline">
+								{project.title}
+							</a>
 						</h2>
 						<p class="mt-2 line-clamp-2 font-body-sm text-body-sm text-text-muted">
 							{project.description}
@@ -197,7 +199,9 @@ const statusBadgeClasses = {
 						{project.locationDetail}
 					</div>
 					<h3 class="font-title-lg text-title-lg font-bold tracking-tight text-primary transition-colors group-hover:text-accent">
-						{project.title}
+						<a href={project.ctaLink} class="hover:underline">
+							{project.title}
+						</a>
 					</h3>
 					<p class="mt-1 line-clamp-2 font-body-sm text-body-sm text-text-muted">
 						{project.description}

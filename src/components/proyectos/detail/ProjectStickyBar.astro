@@ -1,0 +1,56 @@
+---
+import type { Project } from '../../../data/projects';
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<aside class="fixed bottom-4 left-4 right-4 z-40 max-w-[1280px] mx-auto">
+	<div class="p-3 md:p-4 rounded-2xl bg-surface/95 backdrop-blur-md border border-outline shadow-level-3 flex items-center justify-between gap-4">
+		<!-- Project Quick Identity -->
+		<div class="flex items-center gap-3">
+			<div class="w-12 h-12 rounded-xl overflow-hidden border border-outline shrink-0 hidden sm:block">
+				<img
+					class="w-full h-full object-cover"
+					alt={project.title}
+					src={project.image}
+				/>
+			</div>
+			<div>
+				<div class="flex items-center gap-2">
+					<h4 class="font-title-md text-title-md font-bold text-primary">{project.title}</h4>
+					<span class="hidden md:inline-block px-2.5 py-0.5 rounded-pill bg-accent/10 text-accent font-caption text-caption font-semibold">
+						{project.locationDetail || 'Chiclayo'}
+					</span>
+				</div>
+				<p class="font-body-sm text-body-sm text-text-muted hidden xs:block">
+					Lotes campestres <span class="font-bold text-primary">desde {project.price || '$38,000 USD'}</span>
+				</p>
+			</div>
+		</div>
+
+		<!-- Action Trigger Buttons -->
+		<div class="flex items-center gap-3">
+			<a
+				class="inline-flex items-center gap-2 px-4 py-2.5 rounded-pill bg-surface-tinted border border-outline text-primary font-label-md text-label-md font-medium hover:bg-surface transition-colors"
+				href="https://wa.me/51999999999?text=Hola%20Montara,%20deseo%20información%20sobre%20Finca%20Sevilla"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<span class="material-symbols-outlined text-accent text-[20px]">chat</span>
+				<span class="hidden sm:inline">Escribir por WhatsApp</span>
+				<span class="sm:hidden">WhatsApp</span>
+			</a>
+			<a
+				class="inline-flex items-center gap-2 px-6 py-2.5 rounded-pill bg-accent text-white font-label-md text-label-md font-semibold hover:bg-accent-hover shadow-md transition-all"
+				href="#cotizador-funnel"
+			>
+				<span class="material-symbols-outlined text-[18px]">request_quote</span>
+				<span>Cotizar Proyecto</span>
+			</a>
+		</div>
+	</div>
+</aside>

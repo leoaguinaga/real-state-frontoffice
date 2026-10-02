@@ -57,7 +57,7 @@ export const PROJECTS: Project[] = [
 		priceBadge: 'Financiamiento directo disponible',
 		badgeExtra: 'Etapa I: 68% reservado',
 		description:
-			'Exclusivo condominio campestre diseñado con amplios bulevares, reservorios de riego tecnificado y club house ecológico con alta plusvalía patrimonial.',
+			'Exclusivos terrenos campestres desde 500 m² diseñados con armonía paisajística para vivir en calma, rodeado de naturaleza, o consolidar una inversión con sólida plusvalía en el norte peruano.',
 		specs: [
 			{ label: 'Metrajes', value: 'Desde 500 m²' },
 			{ label: 'Precio base', value: '$38,000 USD', highlight: true },
@@ -69,11 +69,11 @@ export const PROJECTS: Project[] = [
 			{ icon: 'water_drop', label: 'Agua de riego' },
 		],
 		image:
-			'https://lh3.googleusercontent.com/aida-public/AB6AXuAotft0VEIc0C88FbFkOctXKf8D4KyxYLrbAu-pJOr-VJjCHVKTmxuNnrFzJrWsWNWhgbphF9LOqAxxdnUlZinV7sEz--vuR8ZjaYcjvMYysQeDgfcF5U10Z3IcXwryDZLUkUX_fGUWLZU4JYpvasZSwjzsKgDLG0FEwk3r7-un60LWJ7KZO-OJNgvJ-iTcNhvUlsXM1meLN3vkv0V3Yj9OCWqJ5oSnp1NsQvAadgZxkPdMEd5_huNSyA',
+			'https://lh3.googleusercontent.com/aida-public/AB6AXuCLYYT2RKUTzkBc3tGnOmo110AqEWJqcRr6OtJjD9vWX1SfhzYHgCujFno5n2ZWKIDBVj4joHbATAZK3qlpJwm2WU_phaTo-CeLuL2_h0921bBuvvvlJK_qLgzEdaVmGVGP7VRke_7cY6qxK8_sU6p0JvmEo9Ej4snbNeHqRW7Nk6Ijcb9quwLCfWL1P8LYYS8rsZVG84w4CcjEBGpLeNJfj_cSlCBJFV8CM0sFnBRXixNG78VFev-OnA',
 		imageAlt: 'Condominio campestre Finca Sevilla en Chiclayo',
 		featured: true,
 		ctaText: 'Ver Showroom Digital',
-		ctaLink: '/#showroom-demo',
+		ctaLink: '/proyectos/finca-sevilla',
 	},
 	{
 		id: 'los-alamos',
@@ -106,7 +106,7 @@ export const PROJECTS: Project[] = [
 			'https://lh3.googleusercontent.com/aida-public/AB6AXuDj-rOvcSJnfwhUJaezruaEjV_Ia8dwCzDkGNgtK97KA2_a6L2MdQ7YqxF1h1RRCMS7qCFDKcDdLTxMgiAW_Ek_69aTIPYcK5eWipCEO1Uu7yFg0pzYbPW_d3iMXDZJACa1Gm34Rp-yDwfl5hgP74jFpl409xg9vRRNTYx-S188ml7auxRZduELF4vghW-KaY-14bzqD6tyG3a_el9s6waR8Zt6z1iduBK0O9xPZeH5zJ4rGlccrd8ptg',
 		imageAlt: 'Edificio Residencial Los Álamos en Chiclayo',
 		ctaText: 'Ver Showroom Digital',
-		ctaLink: '#',
+		ctaLink: '/proyectos/los-alamos',
 	},
 	{
 		id: 'el-roble',
@@ -139,7 +139,7 @@ export const PROJECTS: Project[] = [
 			'https://lh3.googleusercontent.com/aida-public/AB6AXuDOyb2LacFiTKU9ECGsAu-4jmDScP-yWOcSvG3szenWu5LUABugfIdbY8RbxsJqY92HWngnhugO2XFqV-VuZg6btCzJ7o72rKc4d8l8TOuHayMX6pKWcjbIFXlxKGqWs-9dGcKX3XkE5N01Jm5k76IvccN0d0cwnQNxqR2IoHEh5hOC5tC9RmttHRnoAndWpB1aSalGi_hGtf8LJg5KjIOkMBYMIXTGf6pP7HIEomcm2wPldjPgqkrvRw',
 		imageAlt: 'Condominio Campestre El Roble en Monsefú',
 		ctaText: 'Ver Showroom Digital',
-		ctaLink: '#',
+		ctaLink: '/proyectos/el-roble',
 	},
 	{
 		id: 'mirador-costa',
@@ -172,7 +172,7 @@ export const PROJECTS: Project[] = [
 			'https://lh3.googleusercontent.com/aida-public/AB6AXuBCncwBkp19FpKbs6buCjbgwecUulgbSxzZufye8O5Q0ZZsBJA47-uA75IEHftfMCty2cRiqLJ4upXycivj9OJWAdg-qcjajlJzTSYNJp54o1IP6h1YZxFM5Uu8Wm-O4aGAPQb5-bIDOgSsNye4gmFSvHnVO9wZQ6QROr_Orpt37HNfV1lKqU1RCkO1lE-lNVzz18aAtCZSyl0ZdcqOQTyy1UxrgiZFRco-0Z5MRQ4ZuaVrNIyCUUMLHw',
 		imageAlt: 'Mirador de la Costa en Pimentel',
 		ctaText: 'Ver Showroom Digital',
-		ctaLink: '#',
+		ctaLink: '/proyectos/mirador-costa',
 	},
 	{
 		id: 'villas-del-valle',
@@ -205,7 +205,7 @@ export const PROJECTS: Project[] = [
 		imageAlt: 'Proyecto entregado Villas del Valle',
 		soldOut: true,
 		ctaText: 'Ver caso de éxito',
-		ctaLink: '#',
+		ctaLink: '/proyectos/villas-del-valle',
 	},
 	{
 		id: 'altos-del-huerto',
@@ -238,6 +238,6 @@ export const PROJECTS: Project[] = [
 			'https://lh3.googleusercontent.com/aida-public/AB6AXuDk6MfucV2j-YVaDvYhT98D-bIH5JOoYV7c6TvNP3kKoYcHMrt0rjM625jBTg0zTzwZ0zKhQOPstmyVTYcqJ0iKfDODiHNKfKLkEJd_a1Lusxc6_c5PHNZ9BbdUsQAf1K1GiHZujRDI6j1OM3PY1bifPMlByrqx22lj4TheMOFkYCPlwH-8NIWSKHTGLbJsrf4nRqMJQnijZd0KQcmIxG9DeDSphFK01zdv2kqviu_BD_iIHodce0f3dA',
 		imageAlt: 'Altos del Huerto en Reque',
 		ctaText: 'Ver Showroom Digital',
-		ctaLink: '#',
+		ctaLink: '/proyectos/altos-del-huerto',
 	},
 ];

@@ -1,0 +1,80 @@
+---
+const pilares = [
+	{
+		number: '01',
+		icon: 'gavel',
+		title: 'Curaduría Rigurosa y Viabilidad Legal',
+		desc: 'Evaluamos partida registral Sunarp, permisos de habilitación urbana y solidez financiera antes de considerar cualquier proyecto en vitrina.',
+		tag: 'Partida independizada',
+		tagIcon: 'done_all',
+	},
+	{
+		number: '02',
+		icon: 'view_in_ar',
+		title: 'Tecnología de Exhibición Inmersiva',
+		desc: 'Reemplazamos folletos PDF estáticos con planos interactivos, disponibilidad en tiempo real, cotizador instantáneo y análisis bioclimático de cada lote.',
+		tag: 'Showrooms interactivos',
+		tagIcon: 'touch_app',
+	},
+	{
+		number: '03',
+		icon: 'handshake',
+		title: 'Asesoría Directa sin Presión',
+		desc: 'Acompañamos tu inversión con proyecciones numéricas objetivas, alternativas de crédito directo o bancario, y un servicio 100% gratuito para el comprador.',
+		tag: '0% comisión al adquirente',
+		tagIcon: 'price_check',
+	},
+	{
+		number: '04',
+		icon: 'domain_add',
+		title: 'Impulso a Desarrolladores Aliados',
+		desc: 'Potenciamos el ciclo de comercialización de promotores serios mediante infraestructura proptech, calificación predictiva de leads y aceleración de absorción.',
+		tag: 'Absorción acelerada',
+		tagIcon: 'trending_up',
+	},
+];
+---
+
+<section class="w-full bg-background py-20 lg:py-28 border-b border-outline">
+	<div class="container-page">
+		<div class="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+			<div class="flex max-w-[44rem] flex-col gap-3">
+				<span class="font-caption text-caption font-semibold uppercase tracking-wider text-accent">
+					Nuestros Pilares Operativos
+				</span>
+				<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary">
+					Los 4 pilares que rigen cada proyecto en Montara.
+				</h2>
+			</div>
+			<p class="max-w-[24rem] font-body-md text-body-md text-text-muted">
+				Construimos una experiencia de compra fundamentada en información verificada y arquitectura de permanencia.
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+			{
+				pilares.map((pilar) => (
+					<div class="flex flex-col justify-between p-6 md:p-8 rounded-card bg-surface border border-outline/80 shadow-level-1 hover:shadow-level-2 hover:border-accent/50 transition-all duration-300">
+						<div>
+							<div class="mb-8 flex items-center justify-between">
+								<span class="font-headline-md text-headline-md font-bold text-accent">{pilar.number}</span>
+								<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-tinted border border-outline text-primary">
+									<span class="material-symbols-outlined text-[24px]">{pilar.icon}</span>
+								</div>
+							</div>
+							<h3 class="mb-3 font-title-lg text-title-lg font-bold text-primary">
+								{pilar.title}
+							</h3>
+							<p class="font-body-sm text-body-sm leading-relaxed text-text-muted">{pilar.desc}</p>
+						</div>
+
+						<div class="mt-8 flex items-center gap-2 border-t border-outline/60 pt-4 font-label-sm text-label-sm font-semibold text-accent">
+							<span>{pilar.tag}</span>
+							<span class="material-symbols-outlined text-[16px]">{pilar.tagIcon}</span>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

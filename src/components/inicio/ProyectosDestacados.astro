@@ -1,6 +1,7 @@
 ---
 const projects = [
 	{
+		id: 'finca-sevilla',
 		name: 'Finca Sevilla',
 		image:
 			'https://lh3.googleusercontent.com/aida-public/AB6AXuCJgxIqbA4HBCwl7tUG8WcSJjcLeTkPRHbeqvv6XZ_pPhh72KgToVRnY4M8YRCXZZQ9cTyMLcy0XWCeXBCwtjpXtKqaBf-Yb-wTMCI9HiJkaXDudVbMPC75JmhgILyYvx0bi25N-LdwCH_rx_A8Sp6bCjFIIaPb-r_TQvlnz2I3pgt285pC2kny3nG16lNrg3Vs4np-6gbXCsrVkQCGxqZdJVhP_mwiJOPlsb6TAB2z0KtnqtTDWoq_jw',
@@ -12,9 +13,10 @@ const projects = [
 			{ icon: 'bolt', label: 'Red Eléctrica' },
 		],
 		price: '$38,000 USD',
-		href: '#showroom-demo',
+		href: '/proyectos/finca-sevilla',
 	},
 	{
+		id: 'altos-del-bosque',
 		name: 'Altos del Bosque',
 		image:
 			'https://lh3.googleusercontent.com/aida-public/AB6AXuA3YWp2Ya01OBxeWWj349rGmRpt9HGjr5XhiRWUAIp1u3J5LXd0awD6H9u2RS4qY_waqwaRxfrpLJLesmtNMwU167r0J5grGFCvfe7tbGaHPDLz61mldiUPJRRabur-XKtrcMrchGxZPaT7E1qLG8RIGoLtvMmOWNg-SEdT6U8EuT7wa6kEV0oiLrBoUVvpc8CNqXUQRaJ-ND7sEzu7_uTMlrihS70oUY5mHDR85BDXq9oQge5Geq7lQA',
@@ -26,9 +28,10 @@ const projects = [
 			{ icon: 'fitness_center', label: 'Gimnasio' },
 		],
 		price: '$115,000 USD',
-		href: '#',
+		href: '/proyectos/altos-del-huerto',
 	},
 	{
+		id: 'praderas-del-sol',
 		name: 'Praderas del Sol',
 		image:
 			'https://lh3.googleusercontent.com/aida-public/AB6AXuBQAgKzqVr5uB63bBiaRszXolAajA2RjbqHc31cplng5f1kAmvT3WNMznIwG8InIbK2UCjFryf-iirtkzTY-Ew-ybE6hDGE5-UOocjCA25-PNYMbOG1PyiodC6jbaVyu4f6PCzQXg7W9TiZfUhUgErpUH4uHn0vlODYnzpxi1-sBwn3NhP6ir1D_p90S-nbiycu51jLc9fR077jSEvpVhTMXhL61HI8-5C13f6KxtE-QLUGjYWFddHrJQ',
@@ -40,7 +43,7 @@ const projects = [
 			{ icon: 'solar_power', label: 'Eco-Sostenible' },
 		],
 		price: '$55,000 USD',
-		href: '#',
+		href: '/proyectos/el-roble',
 	},
 ];
 ---
@@ -79,7 +82,7 @@ const projects = [
 			{
 				projects.map((project) => (
 					<article class="group flex flex-col overflow-hidden rounded-card border border-outline bg-surface shadow-level-1 transition-all duration-300 hover:shadow-level-3">
-						<div class="relative h-64 w-full overflow-hidden bg-primary">
+						<a href={project.href} class="relative h-64 w-full overflow-hidden bg-primary block">
 							<img
 								src={project.image}
 								alt={project.name}
@@ -92,12 +95,14 @@ const projects = [
 									class="h-full w-full object-cover"
 								/>
 							</div>
-						</div>
+						</a>
 
 						<div class="flex flex-1 flex-col justify-between gap-md p-lg">
 							<div>
 								<h3 class="font-title-lg text-title-lg font-semibold text-text transition-colors group-hover:text-accent">
-									{project.name}
+									<a href={project.href} class="hover:underline">
+										{project.name}
+									</a>
 								</h3>
 								<p class="mt-1 font-body-sm text-body-sm text-text-muted">{project.text}</p>
 

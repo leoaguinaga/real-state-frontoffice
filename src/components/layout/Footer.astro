@@ -3,19 +3,19 @@ const columns = [
 	{
 		title: 'Proyectos',
 		links: [
-			{ label: 'Terrenos y lotes campestres', href: '/#categorias' },
-			{ label: 'Departamentos urbanos', href: '/#categorias' },
-			{ label: 'Casas de campo & playa', href: '/#categorias' },
-			{ label: 'Próximos lanzamientos', href: '/#proyectos-destacados' },
+			{ label: 'Terrenos y lotes campestres', href: '/proyectos' },
+			{ label: 'Departamentos urbanos', href: '/proyectos' },
+			{ label: 'Casas de campo & playa', href: '/proyectos' },
+			{ label: 'Próximos lanzamientos', href: '/proyectos' },
 		],
 	},
 	{
 		title: 'Para Desarrolladores',
 		links: [
-			{ label: 'Showrooms digitales inmersivos', href: '/#showroom-demo' },
+			{ label: 'Showrooms digitales inmersivos', href: '/para-desarrolladores' },
 			{ label: 'Comercialización integral', href: '/para-desarrolladores' },
 			{ label: 'Calificación y gestión de leads', href: '/para-desarrolladores' },
-			{ label: 'Agendar reunión B2B', href: '/#b2b-desarrolladores' },
+			{ label: 'Agendar reunión B2B', href: '/para-desarrolladores' },
 		],
 	},
 	{
@@ -28,10 +28,9 @@ const columns = [
 		],
 	},
 ];
-
-const socials = ['public', 'photo_camera', 'forum'];
 ---
 
+<<<<<<< Updated upstream
 <footer class="w-full border-t border-outline bg-surface-tinted">
 	<div class="container-page py-xl">
 		<div class="grid grid-cols-1 gap-2xl md:grid-cols-2 lg:grid-cols-12">
@@ -40,39 +39,71 @@ const socials = ['public', 'photo_camera', 'forum'];
 				<p class="max-w-[24rem] font-body-md text-body-md text-text-muted leading-relaxed">
 					Plataforma comercial para proyectos inmobiliarios de alta proyección en Chiclayo y el
 					norte del Perú. Arquitectura, seguridad patrimonial y transparencia institucional.
+=======
+<footer class="w-full bg-[#EFF2EE] text-[#2D342E]">
+	<div class="container-page py-12 lg:py-16">
+		<div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12">
+			<!-- Company Info & Icons -->
+			<div class="flex flex-col gap-4 lg:col-span-4">
+				<h3 class="font-semibold text-lg text-[#191C1A] tracking-tight">Montara</h3>
+				<p class="max-w-[22rem] text-sm text-[#536056] leading-relaxed">
+					Plataforma comercial para proyectos inmobiliarios de alta proyección en Chiclayo y el norte del Perú. Arquitectura, seguridad patrimonial y transparencia institucional.
+>>>>>>> Stashed changes
 				</p>
-				<div class="flex items-center gap-3 pt-2 text-accent">
-					{
-						socials.map((icon) => (
-							<span class="material-symbols-outlined text-[20px]">{icon}</span>
-						))
-					}
+				<div class="flex items-center gap-3 pt-1">
+					<a
+						href="#"
+						aria-label="Sitio web"
+						class="inline-flex h-8 w-8 items-center justify-center rounded-full text-[#006E3A] transition-colors hover:bg-[#E1E6DE]"
+					>
+						<span class="material-symbols-outlined text-[20px]">language</span>
+					</a>
+					<a
+						href="#"
+						aria-label="Instagram"
+						class="inline-flex h-8 w-8 items-center justify-center rounded-full text-[#006E3A] transition-colors hover:bg-[#E1E6DE]"
+					>
+						<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+					</a>
+					<a
+						href="https://wa.me/51999999999"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="WhatsApp"
+						class="inline-flex h-8 w-8 items-center justify-center rounded-full text-[#006E3A] transition-colors hover:bg-[#E1E6DE]"
+					>
+						<span class="material-symbols-outlined text-[20px]">chat</span>
+					</a>
 				</div>
 			</div>
 
-			{
-				columns.map((col) => (
-					<div class="flex flex-col gap-md lg:col-span-2 last:lg:col-span-3">
-						<h4 class="font-title-md text-title-md font-semibold tracking-tight text-text">
-							{col.title}
-						</h4>
-						<ul class="flex flex-col gap-2.5 font-body-sm text-body-sm text-text-muted">
-							{col.links.map((link) => (
-								<li>
-									<a class="block py-0.5 transition-colors hover:text-accent" href={link.href}>
-										{link.label}
-									</a>
-								</li>
-							))}
-						</ul>
-					</div>
-				))
-			}
+			<!-- Nav Columns -->
+			<div class="grid grid-cols-1 gap-8 sm:grid-cols-3 lg:col-span-8">
+				{
+					columns.map((col) => (
+						<div class="flex flex-col gap-3">
+							<h4 class="font-semibold text-sm text-[#191C1A] tracking-tight">
+								{col.title}
+							</h4>
+							<ul class="flex flex-col gap-2.5 text-xs sm:text-sm text-[#536056]">
+								{col.links.map((link) => (
+									<li>
+										<a class="transition-colors hover:text-[#191C1A]" href={link.href}>
+											{link.label}
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
 		</div>
 
-		<div class="mt-2xl flex flex-col gap-2 border-t border-outline pt-lg text-caption text-text-muted md:flex-row md:items-center md:justify-between">
-			<span>© {new Date().getFullYear()} Montara Inmobiliaria. Todos los derechos reservados.</span>
-			<span>Chiclayo · Pimentel · Lambayeque, Perú</span>
+		<!-- Footer Bottom Bar -->
+		<div class="mt-16 flex flex-col gap-3 pt-6 text-xs text-[#737973] md:flex-row md:items-center md:justify-between">
+			<span>© 2026 Montara Inmobiliaria. Todos los derechos reservados.</span>
+			<span>Chiclayo - Pimentel - Lambayeque, Perú</span>
 		</div>
 	</div>
 </footer>
