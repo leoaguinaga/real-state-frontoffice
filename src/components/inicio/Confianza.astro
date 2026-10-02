@@ -12,6 +12,9 @@ const partners = [
 	{ icon: 'domain', name: 'Grupo Hábitat Perú' },
 	{ icon: 'apartment', name: 'Arquitectura Viva' },
 	{ icon: 'real_estate_agent', name: 'Costa Norte Capital' },
+	{ icon: 'villa', name: 'Urbaniza Lambayeque' },
+	{ icon: 'business_center', name: 'Inmobiliaria Pacífico Norte' },
+	{ icon: 'location_city', name: 'Cumbres del Sol' },
 ];
 ---
 
@@ -56,19 +59,57 @@ const partners = [
 			</div>
 		</div>
 
-		<div class="text-center">
-			<p class="mb-6 font-caption text-caption font-semibold uppercase tracking-wider text-outline">
+		<div class="text-center overflow-hidden">
+			<p class="mb-8 font-caption text-xs font-semibold uppercase tracking-wider text-text-muted md:text-sm">
 				Desarrolladores y promotores inmobiliarios aliados que confían en Montara
 			</p>
-			<div class="flex flex-wrap items-center justify-center gap-8 opacity-75 grayscale transition-all duration-300 hover:grayscale-0 md:gap-14">
-				{
-					partners.map((partner) => (
-						<div class="flex items-center gap-2 font-display text-lg font-bold tracking-tight text-text">
-							<span class="material-symbols-outlined text-accent">{partner.icon}</span> {partner.name}
-						</div>
-					))
-				}
+			
+			<!-- Infinite Marquee Carousel with Fade Edge Masks -->
+			<div class="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+				<div class="logo-marquee flex w-max items-center gap-14 py-4 md:gap-20">
+					{
+						[...partners, ...partners].map((partner) => (
+							<div class="group flex shrink-0 items-center gap-3.5 transition-all duration-200 cursor-default opacity-85 hover:opacity-100">
+								<span class="material-symbols-outlined text-[32px] md:text-[38px] text-accent/80 transition-all duration-300 group-hover:scale-110 group-hover:text-accent">
+									{partner.icon}
+								</span>
+								<span class="font-display text-lg md:text-xl lg:text-[22px] font-bold tracking-tight text-primary transition-colors group-hover:text-accent whitespace-nowrap">
+									{partner.name}
+								</span>
+							</div>
+						))
+					}
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+<style>
+	@keyframes marquee {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	.logo-marquee {
+		animation: marquee 36s linear infinite;
+		will-change: transform;
+	}
+
+	.logo-marquee:hover {
+		animation-play-state: paused;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.logo-marquee {
+			animation: none;
+			flex-wrap: wrap;
+			justify-content: center;
+			width: 100%;
+		}
+	}
+</style>

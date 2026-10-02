@@ -1,34 +1,32 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/layout/Header.tsx';
-import Footer from '../components/layout/Footer.astro';
-import WhatsAppButton from '../components/layout/WhatsAppButton.astro';
-import Hero from '../components/inicio/Hero.astro';
-import ModeloMontara from '../components/inicio/ModeloMontara.astro';
-import ProjectTypes from '../components/inicio/ProjectTypes.astro';
-import Ubicaciones from '../components/inicio/Ubicaciones.astro';
-import ProyectosDestacados from '../components/inicio/ProyectosDestacados.astro';
-import ShowroomDemo from '../components/inicio/ShowroomDemo.astro';
-import Confianza from '../components/inicio/Confianza.astro';
-import HowItWorks from '../components/inicio/HowItWorks.astro';
-import CtaFinal from '../components/inicio/CtaFinal.astro';
-import DesarrolladoresCta from '../components/inicio/DesarrolladoresCta.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/inicio/Hero.astro";
+import ModeloMontara from "../components/inicio/ModeloMontara.astro";
+import ProjectTypes from "../components/inicio/ProjectTypes.astro";
+import Ubicaciones from "../components/inicio/Ubicaciones.astro";
+import ProyectosDestacados from "../components/inicio/ProyectosDestacados.astro";
+import ShowroomDemo from "../components/inicio/ShowroomDemo.astro";
+import Confianza from "../components/inicio/Confianza.astro";
+import HowItWorks from "../components/inicio/HowItWorks.astro";
+import CtaFinal from "../components/inicio/CtaFinal.astro";
+import Header from "../components/layout/Header";
+import WhatsAppButton from "../components/layout/WhatsAppButton.astro";
+import Footer from "../components/layout/Footer.astro";
 ---
 
 <Layout>
-	<Header client:load />
-	<main class="w-full bg-background">
-		<Hero />
-		<ModeloMontara />
-		<ProjectTypes />
-		<Ubicaciones />
-		<ProyectosDestacados />
-		<ShowroomDemo />
-		<Confianza />
-		<HowItWorks />
-		<CtaFinal />
-		<!-- <DesarrolladoresCta /> -->
-	</main>
-	<WhatsAppButton />
-	<Footer />
+  <Header />
+  <main class="w-full bg-background">
+    <Hero />
+    <ModeloMontara />
+    <ProjectTypes />
+    <Ubicaciones />
+    <ProyectosDestacados />
+    <ShowroomDemo />
+    <Confianza />
+    <HowItWorks />
+    <CtaFinal />
+  </main>
+  <WhatsAppButton />
+  <Footer />
 </Layout>

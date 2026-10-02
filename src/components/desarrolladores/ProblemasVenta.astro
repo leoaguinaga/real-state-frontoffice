@@ -1,0 +1,66 @@
+---
+const pains = [
+	{
+		icon: 'picture_as_pdf',
+		title: 'Presentaciones estáticas y frías',
+		text: 'Brochures en PDF de 50MB enviados por WhatsApp o flyers en redes que no transmiten la magnitud, el estilo de vida ni la escala real del desarrollo inmobiliario.',
+		impact: 'El 78% de clientes no abre PDFs pesados en el móvil.',
+	},
+	{
+		icon: 'person_cancel',
+		title: 'Avalancha de prospectos no calificados',
+		text: 'Cientos de mensajes con un simple "¿precio?" generados por campañas masivas sin filtro, donde más del 85% carece de capacidad financiera o plazo real de decisión.',
+		impact: 'Desgaste masivo del equipo de ventas y alto costo por cierre.',
+	},
+	{
+		icon: 'sync_problem',
+		title: 'Poca transparencia en disponibilidad',
+		text: 'Planos impresos desactualizados, lotes que ya fueron separados pero siguen ofreciéndose y falta de certeza técnica que generan dudas y desconfianza en el cliente final.',
+		impact: 'Pérdida de separaciones formales en las últimas 48 horas.',
+	},
+];
+---
+
+<section class="w-full bg-surface-tinted py-16 md:py-24 border-b border-outline">
+	<div class="container-page">
+		<!-- Section Header -->
+		<div class="mx-auto mb-14 max-w-[44rem] text-center">
+			<h2 class="font-headline-lg text-headline-lg font-bold tracking-tight text-primary">
+				Por qué tantos proyectos tardan meses en cerrar ventas
+			</h2>
+			<p class="mt-3 font-body-md text-body-md text-text-muted leading-relaxed">
+				El mercado de bienes raíces cambió, pero muchos promotores siguen comercializando con herramientas de hace una década.
+			</p>
+		</div>
+
+		<!-- 3 Pain Point Cards -->
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+			{
+				pains.map((pain) => (
+					<div class="flex flex-col justify-between rounded-card border border-outline bg-surface p-6 shadow-level-1 transition-all duration-300 hover:shadow-level-2 md:p-8">
+						<div>
+							<div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-error-container text-on-error-container shadow-sm">
+								<span class="material-symbols-outlined text-[26px]">{pain.icon}</span>
+							</div>
+							<h3 class="font-headline-sm text-headline-sm font-bold text-primary">
+								{pain.title}
+							</h3>
+							<p class="mt-2 font-body-md text-body-md text-text-muted leading-relaxed">
+								{pain.text}
+							</p>
+						</div>
+
+						<div class="mt-6 rounded-xl border border-outline/70 bg-surface-tinted p-3.5">
+							<span class="block font-caption text-caption font-semibold uppercase tracking-wider text-error">
+								Impacto directo
+							</span>
+							<p class="mt-1 font-body-sm text-body-sm font-semibold text-text">
+								{pain.impact}
+							</p>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
